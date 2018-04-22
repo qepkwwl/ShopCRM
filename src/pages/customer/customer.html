@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!isShowSearch">客户</ion-title>
+    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-buttons end>
+      <button (click)="isShowSearch=!isShowSearch">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button  (click)="add($event)">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let c of customers">
+    <button ion-item  (click)="selected(c);" >
+      <ion-avatar item-start>
+        <ion-icon name="contact"></ion-icon>
+      </ion-avatar>
+      <div>
+        <span class="fdName">{{c.fdName}}</span>
+        <span class="fdTel">{{c.fdTel}}</span>
+        <span class="fdCar">{{c.fdCar}}</span>
+        <span class="fdType">{{c.fdType}}</span>
+      </div>
+      <div>
+        <span class="fdConsumeLevel">{{c.fdConsumeLevel}}</span>
+        <span class="fdBuyPurpose">{{c.fdBuyPurpose}}</span>
+      </div>
+      <div *ngIf="selectCustomer==c"  class="line-right" >
+        <button>
+          <img width="25rem" height="25rem" class="checked" src="assets/imgs/checked.png" />
+        </button>
+      </div>
+      <div class="fdRemark">{{c.fdRemark}}</div>
+    </button>
+      <ion-item-options side="left">
+        <button ion-button color="primary" (click)="newFollowup(c)">
+          <ion-icon name="text"></ion-icon>
+          新建拜访
+        </button>
+        <button ion-button color="primary" (click)="newContract(c)">
+          <ion-icon name="text"></ion-icon>
+          新建合同
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="newFollowup(c)">
+          <ion-icon name="mail"></ion-icon>
+          历史拜访
+        </button>
+        <button ion-button color="primary" (click)="hisContract(c)">
+          <ion-icon name="mail"></ion-icon>
+          历史合同
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

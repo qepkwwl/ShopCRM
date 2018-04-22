@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>我的葡最</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>欢迎来到葡最酒店！</h3>
+  <ion-card>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-list-header>记念日提醒</ion-list-header>
+    <ion-item *ngFor="let p of fdRedletterDaies">
+      <span>{{p}}</span>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+  <ion-list-header>回访提醒</ion-list-header>
+    <ion-item *ngFor="let p of fdFollowups">
+      <span>{{p}}</span>
+    </ion-item>
+</ion-list>
+  <ion-list>
+    <ion-list-header>任务提醒</ion-list-header>
+    <ion-item *ngFor="let p of fdPlans">
+      <span>{{p}}</span>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

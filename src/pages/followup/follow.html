@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!isShowSearch">拜访记录</ion-title>
+    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-buttons end>
+      <button (click)="isShowSearch=!isShowSearch">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button  (click)="add($event)">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item *ngFor="let c of customers" (click)="selectCustomer=c;" >
+        <div>
+          <span class="fdName">{{c.fdCustomerName}}</span>
+          <span class="fdTel">{{c.fdTime}}</span>
+          <span class="fdCar">{{c.fdType}}</span>
+        </div>
+        <div>
+          <span class="fdBuyPurpose">{{c.fdContent}}</span>
+        </div>
+        <div class="fdRemark">{{c.c.fdGift}}</div>
+      </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="back()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
+    <ion-title >合同的产品</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form [formGroup]="myForm">
+    <ion-item>
+        <ion-label color="primary">名称</ion-label>
+        <ion-input aria-readonly="true" type="text" placeholder="名称" [(ngModel)]="product.fdName"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>数量</ion-label>
+        <ion-input  type="text" placeholder="数量" [(ngModel)]="product.fdNum" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">单价</ion-label>
+      <ion-input formControlName="fdRetailPrice" type="text" placeholder="单价" [(ngModel)]="product.fdRetailPrice" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">指导价</ion-label>
+      <ion-input aria-readonly="true" type="text" placeholder="指导价" [(ngModel)]="product.fdGuidePrice" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">折扣</ion-label>
+      <ion-input type="text" placeholder="折扣" [(ngModel)]="product.fdDiscount" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">销售类型</ion-label>
+      <ion-input type="text" placeholder="销售类型" [(ngModel)]="product.fdSaleType" ></ion-input>
+    </ion-item>
+    </form>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-navbar text-center>
+    <button ion-button round (click)="delete()">
+      <ion-icon name="close"></ion-icon>
+      删除
+    </button>
+    <button ion-button round (click)="save()">
+      <ion-icon name="create"></ion-icon>
+      保存
+    </button>
+  </ion-navbar>
+
+</ion-footer>

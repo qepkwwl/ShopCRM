@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>新客户</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>客户信息</ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label color="primary">客户名称</ion-label>
+          <ion-input placeholder="客户名称" [(ngModel)]="customer.fdName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">客户等级</ion-label>
+          <ion-select [(ngModel)]="customer.fdGrade">
+            <ion-option value="{{p}}" *ngFor="let p of fdGrades">{{p}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">消费档次</ion-label>
+          <ion-select [(ngModel)]="customer.fdConsumeLevel">
+            <ion-option value="{{p}}" *ngFor="let p of fdConsumeLevels">{{p}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">购买用途</ion-label>
+          <ion-select [(ngModel)]="customer.fdBuyPurpose">
+            <ion-option value="{{p}}" *ngFor="let p of fdBuyPurposes">{{p}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">客户类型</ion-label>
+          <ion-select [(ngModel)]="customer.fdType">
+            <ion-option value="{{p}}" *ngFor="let p of fdTypes">{{p}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">客户电话</ion-label>
+          <ion-input placeholder="客户电话" [(ngModel)]="customer.fdTel"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">客户生日</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="customer.fdBirthday"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">说明</ion-label>
+          <ion-input placeholder="其它说明" [(ngModel)]="customer.fdRemark"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">客户爱好</ion-label>
+          <ion-input placeholder="客户爱好" [(ngModel)]="customer.fdBehavior"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">客户车牌</ion-label>
+          <ion-input placeholder="客户车牌" [(ngModel)]="customer.fdNo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">家庭地址</ion-label>
+          <ion-input placeholder="家庭地址" [(ngModel)]="customer.fdHomeAddr"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">其它电话</ion-label>
+          <ion-input placeholder="其它电话" [(ngModel)]="customer.fdCompanyContact"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">公司名称</ion-label>
+          <ion-input placeholder="公司名称" [(ngModel)]="customer.fdCompanyName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">公司地址</ion-label>
+          <ion-input placeholder="公司地址" [(ngModel)]="customer.fdCompanyAddr"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-navbar >
+    <button ion-button full round (click)="save()">
+      <ion-icon name="create"></ion-icon>
+      保存
+    </button>
+  </ion-navbar>
+
+</ion-footer>

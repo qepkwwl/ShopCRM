@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>新建合同</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+      <ion-card-header>合同信息</ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary">客户名称</ion-label>
+            <ion-input placeholder="客户名称" [(ngModel)]="contract.fdName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary">客户等级</ion-label>
+            <ion-input placeholder="客户等级"  [(ngModel)]="contract.fdGrad"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary">客户电话</ion-label>
+            <ion-input placeholder="客户电话" [(ngModel)]="contract.fdTel"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary">客户生日</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="contract.fdBirthday"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary">客户车牌</ion-label>
+            <ion-input placeholder="客户车牌" [(ngModel)]="contract.fdNo"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary">家庭地址</ion-label>
+            <ion-input placeholder="家庭地址" [(ngModel)]="contract.fdHomeAddr"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary">其它电话</ion-label>
+            <ion-input placeholder="其它电话" [(ngModel)]="contract.fdCompanyContact"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary">公司名称</ion-label>
+            <ion-input placeholder="公司名称" [(ngModel)]="contract.fdCompanyName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary">公司地址</ion-label>
+            <ion-input placeholder="公司地址" [(ngModel)]="contract.fdCompanyAddr"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 >
+            <ion-title>产品信息</ion-title>
+          </ion-col>
+          <ion-col col-3 >
+            <ion-title>500</ion-title>
+          </ion-col>
+          <ion-col col-3 ><ion-fab top right >
+            <button ion-fab mini style="margin-top: 0"><ion-icon name="add"></ion-icon></button>
+          </ion-fab>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <button ion-item detail-none *ngFor="let p of contract.fdProducts" (click)="p.fdIsShowDetail=!p.fdIsShowDetail;">
+          <ion-grid>
+            <ion-row >
+              <ion-col col-6 >
+                <ion-title>{{p.fdName}}</ion-title>
+              </ion-col>
+              <ion-col col-3 >
+                <ion-title>{{p.fdNum}}</ion-title>
+              </ion-col>
+              <ion-col col-3 >
+                <ion-title>{{p.fdSubtotal}}</ion-title>
+              </ion-col>
+            </ion-row>
+            <div ion-row *ngIf="p.fdIsShowDetail">
+              <ion-col col-4 >
+                <span>单价{{p.fdUnitPrice}}</span>
+              </ion-col>
+              <ion-col col-4 >
+                <span>指导价{{p.fdGuidePrice}}</span>
+              </ion-col>
+              <ion-col col-4 >
+                <span>折扣{{p.fdDiscount}}</span>
+              </ion-col>
+            </div>
+            <div ion-row  *ngIf="p.fdIsShowDetail">
+              <ion-col col-12 >
+                <span>销售类型{{p.fdSaleType}}</span>
+              </ion-col>
+            </div>
+          </ion-grid>
+        </button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button (click)="submitForm()">
+      <ion-icon name="submit"></ion-icon>
+      提交
+    </button>
+  </ion-toolbar>
+</ion-footer>

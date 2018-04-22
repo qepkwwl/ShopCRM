@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!isShowSearch">商品</ion-title>
+    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-buttons end>
+      <button (click)="isShowSearch=!isShowSearch">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button  (click)="add($event)">
+        <ion-icon name="add"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button  ion-item detail-none *ngFor="let p of products"  (click)="selected(p)" >
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <img class="product" [src]="urlForImage(p.fdImageId)" />
+          </ion-col>
+          <ion-col col-8>
+              <div class="title" [innerText]="p.fdName"></div>
+              <div class="detail">[{{p.fdProduceArea}}]{{p.fdSpecify}}</div>
+              <div class="price">
+                <span class="strong" [innerText]="p.fdGuidePrice"></span>
+                <span class="strong-color">元</span>
+                <del></del>
+              </div>
+              <div class="line-right" >
+                <div [innerText]="p.fdProductType"></div>
+                <button *ngIf="p.fdIsChecked">
+                  <img class="checked" src="assets/imgs/checked.png" />
+                </button>
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </button>
+  </ion-list>
+</ion-content>

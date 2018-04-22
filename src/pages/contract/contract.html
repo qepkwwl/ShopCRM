@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!isShowSearch">合同</ion-title>
+    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-buttons end>
+      <button (click)="isShowSearch=!isShowSearch">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button  (click)="add($event)">
+        <ion-icon name="add"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let c of contracts">
+      <ion-avatar item-start>
+        <ion-icon name="card"></ion-icon>
+      </ion-avatar>
+      <div>
+        <span class="fdName">{{c.fdCustomer.fdName}}</span>
+        <span class="fdStartTime">{{c.fdStartTime}}</span>
+        <span class="fdTotal">{{c.fdTotal}}</span>
+      </div>
+      <div>
+        <span class="fdProducts">{{buildProductText(c.fdProducts)}}</span>
+      </div>
+    </button>
+  </ion-list>
+</ion-content>

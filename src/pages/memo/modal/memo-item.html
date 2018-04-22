@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="back()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
+    <ion-title >{{fdTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <textarea #fdContent id="fdContent" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="memoItem.fdContent"></textarea>
+</ion-content>
+<ion-footer>
+  <ion-navbar text-center>
+    <button ion-button round (click)="delete()">
+      <ion-icon name="close"></ion-icon>
+      删除
+    </button>
+    <button ion-button round (click)="save()">
+      <ion-icon name="create"></ion-icon>
+      保存
+    </button>
+  </ion-navbar>
+
+</ion-footer>

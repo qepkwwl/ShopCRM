@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!isShowSearch">日志</ion-title>
+    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-buttons end>
+      <button (click)="isShowSearch=!isShowSearch">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button  (click)="filte($event)">
+        <ion-icon name="funel"></ion-icon>
+      </button>
+      <button  (click)="add($event)">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let c of memoes">
+      <button ion-item  (click)="editMemo(c);" >
+        <div>
+          <span class="fdType">{{c.fdType}}</span>
+          <span class="fdStartDate">{{c.fdStartDate}}</span>
+          <span >-</span>
+          <span class="fdEndDate">{{c.fdEndDate}}</span>
+        </div>
+        <div>
+          <span class="subTitle">业绩</span>
+          <span class="fdAchieve">{{c.fdAchieve}}</span>
+        </div>
+        <div class="fdRemark">
+          <span class="subTitle">计划</span>
+          <span class="fdPlanMemo">{{c.fdPlanMemo}}</span>
+        </div>
+      </button>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

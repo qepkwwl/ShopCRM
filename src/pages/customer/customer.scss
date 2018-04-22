@@ -1,0 +1,38 @@
+page-customer{
+  .fdName{
+    font-size: 2rem;
+    font-weight: 400;
+    color: #333;
+  }
+  .fdTel{
+    font-size: 1.5rem;
+    color: #666;
+  }
+  .fdCar{
+    font-size: 1.5rem;
+    color: #666;
+  }
+  .fdType{
+    font-size: 1.5rem;
+    color: #666;
+  }
+  .fdConsumeLevel{
+    font-size: 1.4rem;
+    color: #666;
+  }
+  .fdBuyPurpose{
+    font-size: 1.4rem;
+    color: #666;
+  }
+  .fdRemark{
+    font-size: 1rem;
+    margin-bottom: .1rem;
+    color: #666;
+  }
+  .line-right{
+    position: absolute;
+    top: .04rem;
+    right: 0;
+    font-size: .24rem;
+  }
+}
