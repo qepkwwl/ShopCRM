@@ -4,10 +4,6 @@ export class BaseModel{
     Object.assign(this, param||{} );
     this.id=this.id||this.getId();
   }
-  public reset(){
-    this.id=this.id||this.getId();
-    return this;
-  }
   getId():number{
     return 0;
   }

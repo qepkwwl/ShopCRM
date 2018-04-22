@@ -3,18 +3,20 @@ import {FollowupService} from "../../_services/followup.service";
 import {Followup} from "../../_models/followup";
 import {NavParams, NavController} from "ionic-angular";
 import {Customer} from "../../_models/customer";
+import {FollowupAddPage} from "./followup-add";
 @Component({
-  templateUrl:"follow.html",
-  selector:"page-follow"
+  templateUrl:"followup.html",
+  selector:"page-followup"
 })
 export class FollowupPage{
  private followups:Array<Followup>;
-  @Input() fdCustomer: Customer;
+  private fdOrigin:string;
   constructor(private nav:NavController,private navParams:NavParams,private followupService:FollowupService){
+    this.followups=[];
   }
-  ionViewWillEnter(){
-    let fdOrigin=this.navParams.get("fdOrigin");
-    switch(fdOrigin){
+  ionViewDidLoad(){
+    this.fdOrigin=this.navParams.get("fdOrigin");
+    switch(this.fdOrigin){
       case "customer":
         this.followupService.findFollowupByCustomer().then(res=>{
           this.followups=res;
@@ -26,5 +28,9 @@ export class FollowupPage{
         });
         break;
     }
+  }
+
+  add(){
+    this.nav.push(FollowupAddPage);
   }
 }

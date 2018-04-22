@@ -21,8 +21,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let c of memoes">
-      <button ion-item  (click)="editMemo(c);" >
+      <button ion-item *ngFor="let c of memoes" (click)="editMemo(c);" >
         <div>
           <span class="fdType">{{c.fdType}}</span>
           <span class="fdStartDate">{{c.fdStartDate}}</span>
@@ -30,14 +29,13 @@
           <span class="fdEndDate">{{c.fdEndDate}}</span>
         </div>
         <div>
-          <span class="subTitle">业绩</span>
+          <span class="subTitle">业绩：</span>
           <span class="fdAchieve">{{c.fdAchieve}}</span>
         </div>
         <div class="fdRemark">
           <span class="subTitle">计划</span>
-          <span class="fdPlanMemo">{{c.fdPlanMemo}}</span>
+          <span class="fdPlanMemo">{{c.fdPlanMemoToString()}}</span>
         </div>
       </button>
-    </ion-item-sliding>
   </ion-list>
 </ion-content>

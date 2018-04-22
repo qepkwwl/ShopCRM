@@ -10,10 +10,14 @@ import {MemoAddPage} from "./memo-add";
 export  class MemoPage{
   private memoes:Array<Memo>;
   constructor(private nav:NavController,private navParams:NavParams,private  event:Events,private memoService:MemoService){
+  }
+  onNgInit(){
     this.memoes=[];
   }
-  ionViewWillEnter(){
-    this.memoes=[];
+  ionViewDidLoad(){
+    this.memoService.findMemoes().then(data=>{
+      this.memoes=data;
+    });
   }
   add(){
     this.nav.push(MemoAddPage,{});
@@ -22,6 +26,6 @@ export  class MemoPage{
 
   }
   editMemo(p:Memo){
-
+    this.nav.push(MemoAddPage,{memo:p});
   }
 }

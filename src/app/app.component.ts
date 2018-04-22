@@ -12,6 +12,7 @@ import {ContractPage} from "../pages/contract/contract";
 import {ProductPage} from "../pages/product/product";
 import {BasePage} from "../pages/base/BasePage";
 import {MemoPage} from "../pages/memo/memo";
+import {FollowupPage} from "../pages/followup/followup";
 
 @Component({
   templateUrl: 'app.html'
@@ -39,6 +40,7 @@ export class MyApp {
       { title: '客户', component: CustomerPage },
       { title: '合同', component: ContractPage },
       { title: '商品', component: ProductPage },
+      { title: '拜访', component: FollowupPage },
       { title: '日志', component: MemoPage },
       { title: '注销', component: LoginPage }
     ];

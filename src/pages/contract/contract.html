@@ -17,6 +17,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <button ion-item *ngFor="let c of contracts">
       <ion-avatar item-start>
@@ -28,7 +31,7 @@
         <span class="fdTotal">{{c.fdTotal}}</span>
       </div>
       <div>
-        <span class="fdProducts">{{buildProductText(c.fdProducts)}}</span>
+        <span class="fdProducts">{{c.fdProductsToString()}}</span>
       </div>
     </button>
   </ion-list>

@@ -30,6 +30,7 @@ import {MemoPage} from "../pages/memo/memo";
 import {MemoAddPage} from "../pages/memo/memo-add";
 import {MemoItemPage} from "../pages/memo/modal/memo-item";
 import {CustomerViewPage} from "../pages/customer/customer-view";
+import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -58,6 +59,7 @@ const cloudSettings: CloudSettings = {
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -91,6 +93,7 @@ const cloudSettings: CloudSettings = {
     SplashScreen,
     File,
     SQLite,
+    FormBuilder,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

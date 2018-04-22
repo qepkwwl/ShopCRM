@@ -26,7 +26,7 @@ export class ContractAddPage{
     event.subscribe(ContractAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer)
   }
   reset(){
-    this.contract=new Contract({fdCustomer:new ContractCustomer({fdName:'选择客户'})}).reset();
+    this.contract=new Contract({fdCustomer:new ContractCustomer({fdName:'选择客户'})});
     this.contract.fdProducts=[];
   }
   insertNewProduct(){
@@ -88,7 +88,7 @@ export class ContractAddPage{
   updateContractTotal=function () {
     var total=0;
     this.contract.fdProducts.forEach(item=>{
-      total+=item.fdNum*item.fdRetailPrice;
+      total+=item.fdNum*(item.fdRetailPrice||0);
     });
     this.contract.fdTotal=total;
   }
@@ -97,7 +97,6 @@ export class ContractAddPage{
   }
 
   submitForm(){
-    console.log(this.contract);
   }
 }
 

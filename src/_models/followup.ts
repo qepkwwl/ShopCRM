@@ -1,7 +1,9 @@
 import {BaseModel} from "./base-model";
+import {Customer} from "./customer";
 export class Followup extends BaseModel{
   constructor(param?){
     super(param);
+    this.fdCustomer=this.fdCustomer||new Customer();
   }
   static _id=0;
   getId(){
@@ -9,8 +11,7 @@ export class Followup extends BaseModel{
     return ++Followup._id;
   }
 
-  fdCustomerId:number;
-  fdCustomerName:string;
+  fdCustomer:Customer;
   //拜访时间
   fdTime:string;
   //拜访形式

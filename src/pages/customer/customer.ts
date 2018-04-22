@@ -50,7 +50,7 @@ export  class CustomerPage{
     if(this.canSelected){
       this.selectCustomer=c;
     }else{
-      this.nav.push(CustomerViewPage,{fdCustomer:c});
+      this.nav.push(CustomerViewPage,{customer:c});
     }
   }
   ionViewWillLeave() {

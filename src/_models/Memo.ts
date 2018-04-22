@@ -4,8 +4,8 @@ import {BaseModel} from "./base-model";
 export class Memo extends BaseModel{
   constructor(param?){
     super(param);
-    this.fdPlanMemo=[];
-    this.fdSummaryMemo=[];
+    this.fdPlanMemo=this.fdPlanMemo||[];
+    this.fdSummaryMemo=this.fdSummaryMemo||[];
   }
   static _id=0;
   getId(){
@@ -20,4 +20,11 @@ export class Memo extends BaseModel{
   fdAchieve:string;
   fdSummaryMemo:Array<MemoItem>;
   fdPlanMemo:Array<MemoItem>;
+
+  public fdPlanMemoToString():string{
+    return this.fdPlanMemo.map(m=>{return m.fdContent;}).join(";");
+  }
+  public fdSummaryMemoToString():string{
+    return this.fdSummaryMemo.map(m=>{return m.fdContent;}).join(";");
+  }
 }

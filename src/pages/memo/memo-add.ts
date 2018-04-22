@@ -3,7 +3,7 @@ import {NavController, NavParams, ModalController, Events} from "ionic-angular";
 import {Memo} from "../../_models/Memo";
 import {MemoItem} from "../../_models/MemoItem";
 import {MemoItemPage} from "./modal/memo-item";
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import * as moment from "moment";
 
 @Component({
@@ -11,7 +11,7 @@ import * as moment from "moment";
   selector:"page-memo-add"
 })
 export  class MemoAddPage{
-  private memo:Memo;
+  @Input() memo:Memo;
   //总结的标题
   private fdSummaryTitle:string;
   //计划的标题

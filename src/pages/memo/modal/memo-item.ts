@@ -14,7 +14,7 @@ export  class MemoItemPage{
     this.reset();
   }
   ionViewWillEnter=function () {
-    this.memoItem=new MemoItem(this.navParams.get("memoItem")).reset();
+    this.memoItem=new MemoItem(this.navParams.get("memoItem"));
     this.fdTitle=this.navParams.get("fdTitle");
   }
   ionViewLoaded() {
@@ -25,7 +25,7 @@ export  class MemoItemPage{
 
   }
   reset(){
-    this.memoItem=new MemoItem().reset();
+    this.memoItem=new MemoItem();
   }
   save() {
     this.view.dismiss({memoItem:this.memoItem,result:"save"});

@@ -1,4 +1,6 @@
 import {BaseModel} from "./base-model";
+import {Contract} from "./contract";
+import {Followup} from "./followup";
 export class Customer extends BaseModel{
   constructor(param?){
     super(param);
@@ -25,4 +27,6 @@ export class Customer extends BaseModel{
   fdBehavior:string;
   fdRemark:string;
   fdCar:string;
+  fdContracts:Array<Contract>;
+  fdFollowups:Array<Followup>;
 }

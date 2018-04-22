@@ -18,10 +18,8 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header>
-
-    </ion-card-header>
-    <ion-content>
+    <ion-card-header>客户信息</ion-card-header>
+    <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-label color="primary">客户名称</ion-label>
@@ -29,27 +27,15 @@
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户等级</ion-label>
-          <ion-select [(ngModel)]="customer.fdGrade">
-            <ion-option value="{{p}}" *ngFor="let p of fdGrades">{{p}}</ion-option>
-          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label color="primary">消费档次</ion-label>
-          <ion-select [(ngModel)]="customer.fdConsumeLevel">
-            <ion-option value="{{p}}" *ngFor="let p of fdConsumeLevels">{{p}}</ion-option>
-          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label color="primary">购买用途</ion-label>
-          <ion-select [(ngModel)]="customer.fdBuyPurpose">
-            <ion-option value="{{p}}" *ngFor="let p of fdBuyPurposes">{{p}}</ion-option>
-          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户类型</ion-label>
-          <ion-select [(ngModel)]="customer.fdType">
-            <ion-option value="{{p}}" *ngFor="let p of fdTypes">{{p}}</ion-option>
-          </ion-select>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户电话</ion-label>
@@ -88,18 +74,43 @@
           <ion-input placeholder="公司地址" [(ngModel)]="customer.fdCompanyAddr"></ion-input>
         </ion-item>
       </ion-list>
-    </ion-content>
+    </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>合同信息</ion-card-header>
      <ion-card-content>
-       <page-contract [fdCustomer]="customer"></page-contract>
+       <ion-list>
+         <button ion-item *ngFor="let c of customer.fdContracts">
+           <ion-avatar item-start>
+             <ion-icon name="card"></ion-icon>
+           </ion-avatar>
+           <div>
+             <span class="fdName">{{c.fdCustomer.fdName}}</span>
+             <span class="fdStartTime">{{c.fdStartTime}}</span>
+             <span class="fdTotal">{{c.fdTotal}}</span>
+           </div>
+           <div>
+             <span class="fdProducts">{{c.fdProductsToString()}}</span>
+           </div>
+         </button>
+       </ion-list>
      </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>拜访信息</ion-card-header>
     <ion-card-content>
-      <page-contract [fdCustomer]="customer"></page-contract>
+      <ion-list>
+        <ion-item *ngFor="let c of customer.fdFollowups" >
+          <div>
+            <span class="fdTel">{{c.fdTime}}</span>
+            <span class="fdCar">{{c.fdType}}</span>
+          </div>
+          <div>
+            <span class="fdBuyPurpose">{{c.fdContent}}</span>
+          </div>
+          <div class="fdRemark">{{c.fdGift}}</div>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>

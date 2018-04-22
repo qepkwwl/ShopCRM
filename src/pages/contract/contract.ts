@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {NavController, NavParams} from "ionic-angular";
+import {NavController, NavParams, Refresher} from "ionic-angular";
 import {ContractAddPage} from "./contract-add.component";
 import {Contract} from "../../_models/contract";
 import {ContractProduct} from "../../_models/contractProduct";
@@ -15,25 +15,22 @@ export  class ContractPage{
   private isShowSearch:boolean=false;
   //客户列表
   private contracts:Array<Contract>;
-  @Input() fdCustomer: Customer;
+  private fdOrigin:string;
   constructor(private nav:NavController,private navParams:NavParams,private contractService:ContractService){
     this.reset();
-    console.log(this.fdCustomer);
   }
   reset(){
     this.contracts=[];
   }
-  buildProductText(fdProducts:Array<ContractProduct>){
-    return fdProducts.map((item,index)=>{
-      return item.fdName+":"+item.fdNum+"件"+item.fdSubtotal+"元"
-    }).join(";");
+  doRefresh(refresher:Refresher){
+    this.contractService.findContract().then(res=>{
+      this.contracts=res;
+      refresher.complete();
+    });
   }
-
-
-  ionViewWillEnter(){
-    console.log(this.fdCustomer);
-    let fdOrigin=this.navParams.get("fdOrigin");
-    switch(fdOrigin){
+  ionViewDidLoad(){
+    this.fdOrigin=this.navParams.get("fdOrigin");
+    switch(this.fdOrigin){
       case "customer":
         this.contractService.findContractByCustomer().then(res=>{
           this.contracts=res;
