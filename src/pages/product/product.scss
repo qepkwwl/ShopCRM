@@ -2,7 +2,7 @@ page-product{
   .title{
     padding-top: .1rem;
     margin-bottom: .12rem;
-    font-size: .3rem;
+    font-size: 2rem;
     font-weight: 400;
     color: #333;
   }
@@ -17,7 +17,7 @@ page-product{
   　background-color:rgba(247,243,255,0.15);
   }
   .detail {
-    font-size: .5rem;
+    font-size: 1.6rem;
     margin-bottom: .16rem;
     color: #666;
     text-overflow: ellipsis;
@@ -27,7 +27,7 @@ page-product{
     overflow: hidden;
   }
   .price .strong{
-    font-size: .48rem;
+    font-size: 1.7rem;
     color: #06c1ae;
   }
   .price{
@@ -35,13 +35,13 @@ page-product{
     bottom: .5rem;
   }
   .price .strong-color{
-  font-size: .26rem;
+  font-size: 1.5rem;
   color: #06c1ae;
   }
   .line-right{
   position: absolute;
   top: .04rem;
   right: 0;
-  font-size: .24rem;
+  font-size: 1.4rem;
   }
 }

@@ -26,6 +26,6 @@ export  class MemoPage{
 
   }
   editMemo(p:Memo){
-    this.nav.push(MemoAddPage,{memo:p});
+    this.nav.push(MemoAddPage,{memo:p,fdOrigin:'memo'});
   }
 }

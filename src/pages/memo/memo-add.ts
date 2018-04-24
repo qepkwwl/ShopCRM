@@ -11,11 +11,15 @@ import * as moment from "moment";
   selector:"page-memo-add"
 })
 export  class MemoAddPage{
-  @Input() memo:Memo;
+  private memo:Memo;
   //总结的标题
   private fdSummaryTitle:string;
   //计划的标题
   private fdPlanTitle:string;
+  //标题
+  private fdTitle:string='新日志';
+  //计划的标题
+  private fdOrigin:string;
   constructor(private nav:NavController,private navParams:NavParams,private  event:Events,private modal:ModalController,private memoService:MemoService){
     this.reset();
   }
@@ -28,7 +32,14 @@ export  class MemoAddPage{
     this.fdPlanTitle="明日工作计划";
   }
   ionViewWillEnter(){
-    this.reset();
+    this.fdOrigin=this.navParams.get("fdOrigin");
+    switch(this.fdOrigin){
+      case "memo":
+        let m=this.navParams.get("memo");
+        this.memo=m||this.memo;
+        this.fdTitle="编辑日志";
+        break;
+    }
   }
   fdType_Changed(){
     console.log(this.memo.fdEndDate);
