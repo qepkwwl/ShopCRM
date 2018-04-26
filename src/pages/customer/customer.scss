@@ -2,19 +2,22 @@ page-customer{
   .fdName{
     font-size: 2rem;
     font-weight: 400;
+    margin-right: 0.15rem;
+    margin-bottom: .1rem;
     color: #333;
   }
   .fdTel{
     font-size: 1.5rem;
     color: #666;
   }
-  .fdCar{
+  .fdCompanyName{
     font-size: 1.5rem;
+    margin-left:4rem;
     color: #666;
   }
-  .fdType{
-    font-size: 1.5rem;
-    color: #666;
+  .fdCall{
+    font-size: 3rem;
+    color: $taozhui-blue;
   }
   .fdConsumeLevel{
     font-size: 1.4rem;
@@ -22,11 +25,6 @@ page-customer{
   }
   .fdBuyPurpose{
     font-size: 1.4rem;
-    color: #666;
-  }
-  .fdRemark{
-    font-size: 1rem;
-    margin-bottom: .1rem;
     color: #666;
   }
   .line-right{

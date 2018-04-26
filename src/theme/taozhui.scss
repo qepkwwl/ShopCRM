@@ -1,0 +1,33 @@
+.tab-button[aria-selected=true]{
+  border: 0.3rem double $taozhui-white;
+  border-radius: 50%;
+}
+.tab-button-icon,.tab-button-text{
+  color:$taozhui-white !important;
+}
+.toolbar-background{
+  background-color:  $taozhui-blue !important;
+}
+.toolbar-title{
+  color: $taozhui-white !important;
+}
+.content-button .icon{
+  color: $taozhui-light-blue !important;
+}
+.content-title .toolbar-title{
+  color: $taozhui-light-blue !important;
+  font-size: 1.4rem !important;
+}
+.toolbar-button{
+  background-color:  $taozhui-blue !important;
+}
+.toolbar-button .icon{
+  color: $taozhui-white !important;
+  font-size: 4rem !important;
+}
+.back-button-icon,.back-button-text{
+  color: $taozhui-white !important;
+}
+.full-width{
+  width: 100%;
+}

@@ -32,6 +32,13 @@ import {MemoItemPage} from "../pages/memo/modal/memo-item";
 import {CustomerViewPage} from "../pages/customer/customer-view";
 import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DbProvider} from "../_helpers/DbProvider";
+import {TabsPage} from "../pages/home/tabs";
+import {CallNumber} from "@ionic-native/call-number";
+import {SearchFilterPipe} from "../_helpers/SearchFilterPipe";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {RedletterDayPage} from "../pages/redletter-day/redletter";
+import {RedletterDayAddPage} from "../pages/redletter-day/redletter-add";
+import {RedletterDayService} from "../_services/redletter-day.service";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -41,6 +48,7 @@ const cloudSettings: CloudSettings = {
 @NgModule({
   declarations: [
     MyApp,
+    SearchFilterPipe,
     LoginPage,
     HomePage,
     ListPage,
@@ -55,10 +63,14 @@ const cloudSettings: CloudSettings = {
     MemoPage,
     MemoAddPage,
     MemoItemPage,
-    CustomerViewPage
+    CustomerViewPage,
+    TabsPage,
+    RedletterDayPage,
+    RedletterDayAddPage
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     IonicModule.forRoot(MyApp),
@@ -80,7 +92,10 @@ const cloudSettings: CloudSettings = {
     MemoPage,
     MemoAddPage,
     MemoItemPage,
-    CustomerViewPage
+    CustomerViewPage,
+    TabsPage,
+    RedletterDayPage,
+    RedletterDayAddPage
   ],
   providers: [
     AuthService,
@@ -89,12 +104,14 @@ const cloudSettings: CloudSettings = {
     ProductService,
     CustomerService,
     FollowupService,
+    RedletterDayService,
     MemoService,
     StatusBar,
     SplashScreen,
     File,
     SQLite,
     DbProvider,
+    CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

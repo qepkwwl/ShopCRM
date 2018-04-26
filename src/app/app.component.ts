@@ -13,6 +13,7 @@ import {ProductPage} from "../pages/product/product";
 import {BasePage} from "../pages/base/BasePage";
 import {MemoPage} from "../pages/memo/memo";
 import {FollowupPage} from "../pages/followup/followup";
+import {TabsPage} from "../pages/home/tabs";
 
 @Component({
   templateUrl: 'app.html'
@@ -20,9 +21,7 @@ import {FollowupPage} from "../pages/followup/followup";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
-
-  pages: Array<{title: string, component: any}>;
+  rootPage: any = TabsPage;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,authService:AuthService) {
     this.initializeApp();
@@ -31,20 +30,10 @@ export class MyApp {
       BasePage.DeviceWidth=platform.width();
     });
     if(authService.isLogined()){
-      this.rootPage=HomePage;
+      //this.rootPage=HomePage;
     }else{
-      this.rootPage=LoginPage;
+      //this.rootPage=LoginPage;
     }
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: '客户', component: CustomerPage },
-      { title: '合同', component: ContractPage },
-      { title: '商品', component: ProductPage },
-      { title: '拜访', component: FollowupPage },
-      { title: '日志', component: MemoPage },
-      { title: '注销', component: LoginPage }
-    ];
-
   }
 
   initializeApp() {

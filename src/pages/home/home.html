@@ -1,36 +1,60 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>我的萄最</ion-title>
+    <ion-title>湖南萄最酒业有限公司</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>欢迎来到萄最酒店！</h3>
   <ion-card>
     <ion-card-content>
-      <canvas #barCanvas></canvas>
+      <progress class="full-width" value="2500" max="5000"></progress>
+      <ion-title class="content-title" float-left>已完成2500</ion-title>
+      <ion-title class="content-title" float-right>月度5000</ion-title>
+      <progress class="full-width" value="1000" max="50000"></progress>
+      <ion-title class="content-title" float-left>已完成1000</ion-title>
+      <ion-title class="content-title" float-right>年度50000</ion-title>
     </ion-card-content>
   </ion-card>
-  <ion-list>
-    <ion-list-header>记念日提醒</ion-list-header>
-    <ion-item *ngFor="let p of fdRedletterDaies">
-      <span>{{p}}</span>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-  <ion-list-header>回访提醒</ion-list-header>
-    <ion-item *ngFor="let p of fdFollowups">
-      <span>{{p}}</span>
-    </ion-item>
-</ion-list>
-  <ion-list>
-    <ion-list-header>任务提醒</ion-list-header>
-    <ion-item *ngFor="let p of fdPlans">
-      <span>{{p}}</span>
-    </ion-item>
-  </ion-list>
-
+  <ion-card>
+    <ion-card-header>记念日提醒
+      <button class="content-button" float-end (click)="goToRedletterDay()">
+        <ion-icon name="calendar"></ion-icon>
+      </button>
+    </ion-card-header>
+    <ion-card-content style="height: 4.4rem;overflow-y:hidden ">
+    <ion-list style="position: relative"  [@openClose]="dayIndexWithShowed">
+      <ion-item *ngFor="let p of fdRedletterDaies" >
+        <span>{{p.fdDate}}</span>
+        <span>{{p.fdLinker}}</span>
+        <span>{{p.fdContent}}</span>
+      </ion-item>
+    </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      回访提醒
+        <button class="content-button" float-end (click)="goToFollowup()">
+          <ion-icon name="calendar"></ion-icon>
+        </button>
+    </ion-card-header>
+    <ion-card-content style="height: 4.4rem;overflow-y:hidden ">
+      <ion-list>
+        <ion-item *ngFor="let p of fdFollowups" [@openClose]="dayIndexWithShowed">
+          <span>{{p.fdTime}}</span>
+          <span>{{p.fdCustomer.fdName}}</span>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>今日计划</ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let p of fdPlans">
+          <span>{{p}}</span>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

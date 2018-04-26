@@ -96,7 +96,7 @@ export class ContractAddPage{
     this.contract.fdCustomer=new ContractCustomer(selectedCustomer);
   }
 
-  submitForm(){
+  save(){
   }
 }
 

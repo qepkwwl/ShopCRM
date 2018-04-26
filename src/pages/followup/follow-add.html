@@ -1,9 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title >拜访客户</ion-title>
+    <ion-buttons end>
+      <button class="toolbar-button"  ion-button  (click)="save()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -31,12 +33,3 @@
     </ion-item>
   </ion-list>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <button ion-button full round (click)="save()">
-      <ion-icon name="checkmark"></ion-icon>
-      提交
-    </button>
-  </ion-toolbar>
-</ion-footer>

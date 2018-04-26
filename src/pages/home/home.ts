@@ -1,67 +1,69 @@
-import {Component, ViewChild} from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Chart } from 'chart.js';
+import {Component, ViewChild} from "@angular/core";
+import {NavController} from "ionic-angular";
+import {Chart} from "chart.js";
+import {transition, animate, state, trigger, style} from "@angular/animations";
+import {Followup} from "../../_models/followup";
+import {Customer} from "../../_models/customer";
+import {RedletterDay} from "../../_models/redletter-day";
+import {RedletterDayService} from "../../_services/redletter-day.service";
+import {FollowupService} from "../../_services/followup.service";
+import {FollowupPage} from "../followup/followup";
+import {RedletterDayAddPage} from "../redletter-day/redletter-add";
+import {RedletterDayPage} from "../redletter-day/redletter";
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  animations: [trigger(
+    'openClose',
+    [
+      state('true', style({transform:'translateY(0rem)'})),
+      state('false', style({transform:'translateY(-4.4rem)'})),
+      transition('true => false', [animate("2s 0ms linear")]),
+      transition('false => true', [])
+    ])]
 })
 export class HomePage {
-
-  private fdRedletterDaies:Array<string>;
-  private fdFollowups:Array<string>;
+  private fdRedletterDaies:Array<RedletterDay>;
+  private fdFollowups:Array<Followup>;
   private fdPlans:Array<string>;
   private fdTasks:Array<string>;
-
+  private dayIndexWithShowed=true;
   private barChart:any;
-  @ViewChild('barCanvas') barCanvas;
-  constructor(public navCtrl: NavController) {
-    this.fdRedletterDaies=["12月8号是经视台蒋台的生日","2月8号是车友会李先生的生日","1月8号是夏哥的生日"];
-    this.fdFollowups=["给沈建客户信息学院刘老师送酒","分销陈美沟通，要她逐渐开拓老公项目上用酒","房地产吴女士和郑总，以后定期回访。"];
+  constructor(public nav: NavController,private redletterDaySerivce:RedletterDayService,private followupService:FollowupService) {
+    this.fdRedletterDaies=[];
+    this.fdFollowups=[];
     this.fdPlans=["继续回访客户","沈建3月用酒回款沟通","农行送发票"];
     this.fdTasks=["月度销售任务:100000,还差42000","年度任务：1000000，还差420000"];
+    setInterval(this.animationRedletterDaies,2000);
+  }
+  animationRedletterDaies= ()=> {
+    if(!this.dayIndexWithShowed){
+      if(this.fdRedletterDaies.length>0){
+        let first=this.fdRedletterDaies[0];
+        this.fdRedletterDaies.splice(0,1);
+        this.fdRedletterDaies.push(first);
+      }
+      if(this.fdFollowups.length>0){
+        let first=this.fdFollowups[0];
+        this.fdFollowups.splice(0,1);
+        this.fdFollowups.push(first);
+      }
+    }
+    this.dayIndexWithShowed=!this.dayIndexWithShowed;
   }
   ionViewDidLoad() {
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: ["月度任务", "年度任务" ],
-        datasets: [{
-          label: '完成情况',
-          data: [{y:190,x:20}, {y:100,x:40}],
-          backgroundColor: [
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)'
-          ],
-          borderColor: [
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
-          ],
-          borderWidth: 1
-        },{
-          label: '任务要求',
-          data: [{y:120,x:20},{y:190,x:40}],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(75, 192, 192, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(75, 192, 192, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            stacked: true
-          }],
-          yAxes: [{
-            stacked: true
-          }]
-        }
-      }
+    this.redletterDaySerivce.findRedletterDay().then(res=>{
+      this.fdRedletterDaies=res;
     });
+    this.followupService.findFollowup().then(res=>{
+      this.fdFollowups=res;
+    });
+  }
+  goToFollowup(){
+    this.nav.push(FollowupPage);
+  }
+  goToRedletterDay(){
+    this.nav.push(RedletterDayPage);
   }
 }

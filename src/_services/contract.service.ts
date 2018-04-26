@@ -16,24 +16,24 @@ export class ContractService{
     return new Promise((resolve,reject)=>{
       resolve([new Contract({fdTotal:768,
         fdCustomer:new ContractCustomer({id:1,fdName:'张馨文',fdTel:'13973105080',fdCompanyName:'',fdCompanyAddr:'',fdBirthday:'',fdHomeAddr:'',fdCompanyContact:'',fdConsumeLevel:'100-300',fdCar:'银色大众792',fdBuyPurpose:'分销销售',fdType:'渠道',fdRemark:'比较直爽，也比较精明。'}),
-        fdProducts:[new ContractProduct({id:1,fdName:'贡多拉',fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"1"}),
-          new ContractProduct({id:2,fdName:'威尼斯小船',fdProductType:'团购',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"2"}),
-          new ContractProduct({id:3,fdName:'法米拉',fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:128,fdImageId:"3"})]}),
+        fdProducts:[new ContractProduct({id:1,fdName:'贡多拉',fdNum:10,fdSubtotal:100,fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"1"}),
+          new ContractProduct({id:2,fdName:'威尼斯小船',fdNum:10,fdSubtotal:100,fdProductType:'团购',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"2"}),
+          new ContractProduct({id:3,fdName:'法米拉',fdNum:10,fdSubtotal:100,fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:128,fdImageId:"3"})]}),
         new Contract({fdTotal:768,
           fdCustomer:new ContractCustomer({id:1,fdName:'张馨文',fdTel:'13973105080',fdCompanyName:'',fdCompanyAddr:'',fdBirthday:'',fdHomeAddr:'',fdCompanyContact:'',fdConsumeLevel:'100-300',fdCar:'银色大众792',fdBuyPurpose:'分销销售',fdType:'渠道',fdRemark:'比较直爽，也比较精明。'}),
-          fdProducts:[new ContractProduct({id:1,fdName:'贡多拉',fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"1"}),
-            new ContractProduct({id:2,fdName:'威尼斯小船',fdProductType:'团购',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"2"}),
-            new ContractProduct({id:3,fdName:'法米拉',fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:128,fdImageId:"3"})]}),
+          fdProducts:[new ContractProduct({id:1,fdName:'贡多拉',fdNum:10,fdSubtotal:100,fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"1"}),
+            new ContractProduct({id:2,fdName:'威尼斯小船',fdNum:10,fdSubtotal:100,fdProductType:'团购',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"2"}),
+            new ContractProduct({id:3,fdName:'法米拉',fdNum:10,fdSubtotal:100,fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:128,fdImageId:"3"})]}),
         new Contract({fdTotal:768,
           fdCustomer:new ContractCustomer({id:1,fdName:'张馨文',fdTel:'13973105080',fdCompanyName:'',fdCompanyAddr:'',fdBirthday:'',fdHomeAddr:'',fdCompanyContact:'',fdConsumeLevel:'100-300',fdCar:'银色大众792',fdBuyPurpose:'分销销售',fdType:'渠道',fdRemark:'比较直爽，也比较精明。'}),
-          fdProducts:[new ContractProduct({id:1,fdName:'贡多拉',fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"1"}),
-            new ContractProduct({id:2,fdName:'威尼斯小船',fdProductType:'团购',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"2"}),
-            new ContractProduct({id:3,fdName:'法米拉',fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:128,fdImageId:"3"})]}),
+          fdProducts:[new ContractProduct({id:1,fdName:'贡多拉',fdNum:10,fdSubtotal:100,fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"1"}),
+            new ContractProduct({id:2,fdName:'威尼斯小船',fdNum:10,fdSubtotal:100,fdProductType:'团购',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"2"}),
+            new ContractProduct({id:3,fdName:'法米拉',fdNum:10,fdSubtotal:100,fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:128,fdImageId:"3"})]}),
         new Contract({fdTotal:768,
           fdCustomer:new ContractCustomer({id:1,fdName:'张馨文',fdTel:'13973105080',fdCompanyName:'',fdCompanyAddr:'',fdBirthday:'',fdHomeAddr:'',fdCompanyContact:'',fdConsumeLevel:'100-300',fdCar:'银色大众792',fdBuyPurpose:'分销销售',fdType:'渠道',fdRemark:'比较直爽，也比较精明。'}),
-          fdProducts:[new ContractProduct({id:1,fdName:'贡多拉',fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"1"}),
-            new ContractProduct({id:2,fdName:'威尼斯小船',fdProductType:'团购',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"2"}),
-            new ContractProduct({id:3,fdName:'法米拉',fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:128,fdImageId:"3"})]})
+          fdProducts:[new ContractProduct({id:1,fdName:'贡多拉',fdNum:10,fdSubtotal:100,fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"1"}),
+            new ContractProduct({id:2,fdName:'威尼斯小船',fdNum:10,fdSubtotal:100,fdProductType:'团购',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:168,fdImageId:"2"}),
+            new ContractProduct({id:3,fdName:'法米拉',fdNum:10,fdSubtotal:100,fdProductType:'分销',fdProduceArea:'意大利',fdSpecify:'750ml',fdRetailPrice:128,fdImageId:"3"})]})
       ]);
     });
   }

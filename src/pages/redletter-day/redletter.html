@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title *ngIf="!isShowSearch">拜访记录</ion-title>
+    <ion-title *ngIf="!isShowSearch">纪念日</ion-title>
     <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
     <ion-buttons end>
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
@@ -15,16 +15,15 @@
 
 <ion-content>
   <ion-list>
-      <ion-item *ngFor="let c of followups">
+      <ion-item *ngFor="let c of redletterDaies">
         <div>
           <span class="fdName">{{c.fdCustomer.fdName}}</span>
-          <span class="fdTel">{{c.fdTime}}</span>
+          <span class="fdTel">{{c.fdDate}}</span>
           <span class="fdCar">{{c.fdType}}</span>
         </div>
         <div>
           <span class="fdBuyPurpose">{{c.fdContent}}</span>
         </div>
-        <div class="fdRemark">{{c.fdGift}}</div>
       </ion-item>
   </ion-list>
 </ion-content>

@@ -1,15 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title *ngIf="!isShowSearch">客户</ion-title>
     <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
     <ion-buttons end>
-      <button (click)="isShowSearch=!isShowSearch">
+      <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
       </button>
-      <button  (click)="add($event)">
+      <button class="toolbar-button"  (click)="add($event)">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -20,25 +17,19 @@
   <ion-list>
     <ion-item-sliding *ngFor="let c of customers">
     <button ion-item  (click)="selected(c);" >
-      <ion-avatar item-start>
-        <ion-icon name="contact"></ion-icon>
-      </ion-avatar>
+      <button ion-avatar item-start (click)="callCustomer(c)">
+        <ion-icon class="fdCall" name="call"></ion-icon>
+      </button>
       <div>
         <span class="fdName">{{c.fdName}}</span>
         <span class="fdTel">{{c.fdTel}}</span>
-        <span class="fdCar">{{c.fdCar}}</span>
-        <span class="fdType">{{c.fdType}}</span>
       </div>
-      <div>
-        <span class="fdConsumeLevel">{{c.fdConsumeLevel}}</span>
-        <span class="fdBuyPurpose">{{c.fdBuyPurpose}}</span>
-      </div>
+      <div class="fdCompanyName">{{c.fdCompanyName}}</div>
       <div *ngIf="selectCustomer==c"  class="line-right" >
         <button>
           <img width="25rem" height="25rem" class="checked" src="assets/imgs/checked.png" />
         </button>
       </div>
-      <div class="fdRemark">{{c.fdRemark}}</div>
     </button>
       <ion-item-options side="left">
         <button ion-button color="primary" (click)="newFollowup(c)">

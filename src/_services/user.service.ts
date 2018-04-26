@@ -8,6 +8,7 @@ export class UserService{
   constructor(private http:HttpClient){}
 
   login(userId:string,password:string){
+
     localStorage.setItem("currentUser","W08709");
     return "OK";
   }

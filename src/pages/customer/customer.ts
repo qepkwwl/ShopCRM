@@ -9,6 +9,8 @@ import {FollowupPage} from "../followup/followup";
 import {ContractPage} from "../contract/contract";
 import {CustomerService} from "../../_services/customer.service";
 import {CustomerViewPage} from "./customer-view";
+import {CallNumber} from "@ionic-native/call-number";
+import {RedletterDayAddPage} from "../redletter-day/redletter-add";
 
 @Component({
   templateUrl:"customer.html",
@@ -25,7 +27,7 @@ export  class CustomerPage{
   private selectCustomer:Customer;
   //客户列表
   private customers:Array<Customer>;
-  constructor(private nav:NavController,private navParams:NavParams,private  event:Events,private customerService:CustomerService){
+  constructor(private nav:NavController,private navParams:NavParams,private  event:Events,private callNumber: CallNumber,private customerService:CustomerService){
   }
 
 
@@ -37,6 +39,9 @@ export  class CustomerPage{
         this.canSelected=true;
         break;
       case "followup"://新建回访选则客户时
+        this.canSelected=true;
+        break;
+      case "redletterDay"://新建纪念日选则客户时
         this.canSelected=true;
         break;
       default:
@@ -61,6 +66,9 @@ export  class CustomerPage{
       case "followup"://新建回访选则客户时
         this.event.publish(FollowupAddPage.SELECTED_CUSTOMER,this.selectCustomer);
         break;
+      case "redletterDay"://新建纪念日选则客户时
+        this.event.publish(RedletterDayAddPage.SELECTED_CUSTOMER,this.selectCustomer);
+        break;
       default:
         break;
 
@@ -80,5 +88,10 @@ export  class CustomerPage{
   }
   add(){
     this.nav.push(CustomerAddPage);
+  }
+  callCustomer(p:Customer){
+    this.callNumber.callNumber(p.fdTel, true)
+      .then(res => console.log('Launched dialer!', res))
+      .catch(err => console.log('Error launching dialer', err));
   }
 }

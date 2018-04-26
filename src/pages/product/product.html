@@ -6,10 +6,10 @@
     <ion-title *ngIf="!isShowSearch">商品</ion-title>
     <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
     <ion-buttons end>
-      <button (click)="isShowSearch=!isShowSearch">
+      <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
       </button>
-      <button  (click)="add($event)">
+      <button class="toolbar-button"  (click)="add($event)">
         <ion-icon name="add"></ion-icon>
     </button>
     </ion-buttons>

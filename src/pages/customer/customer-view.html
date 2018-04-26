@@ -3,16 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="!isShowSearch">客户</ion-title>
-    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
-    <ion-buttons end>
-      <button (click)="isShowSearch=!isShowSearch">
-        <ion-icon name="search"></ion-icon>
-      </button>
-      <button  (click)="add($event)">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title *ngIf="!isShowSearch">查看客户</ion-title>
   </ion-navbar>
 </ion-header>
 
