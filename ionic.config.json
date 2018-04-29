@@ -1,6 +1,6 @@
 {
   "name": "shopCRM",
-  "app_id": "",
+  "app_id": "7988e8bd",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

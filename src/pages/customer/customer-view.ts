@@ -23,9 +23,11 @@ export  class CustomerViewPage{
 
   ionViewWillEnter(){
     this.customer=this.navParams.get("customer");
-    this.contractService.findContract().then(data=>{
+    this.customer.fdContracts=[];
+    this.customer.fdFollowups=[];
+    this.contractService.findContract().subscribe({next(data){
       this.customer.fdContracts=data;
-    });
+    }});
     this.followupService.findFollowup().then(data=>{
       this.customer.fdFollowups=data;
     });

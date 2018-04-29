@@ -11,22 +11,35 @@ export class Customer extends BaseModel{
     return ++Customer._id;
   }
 
+  fdSubject:string;
   fdName:string;
-  fdNo:string;
-  fdTel:string;
-  fdCompanyName:string;
+  fdCreatorId:string;
+  fdCreatorName:string;
+  fdCreateTime:string;
+  fdModifyTime:string;
+  fdOrder:string;
+  fdCode:string;
   fdCompanyAddr:string;
-  fdBirthday:string;
+  fdSourceId:string;
+  fdSourceName:string;
+  fdLevelId:string;
+  fdLevelName:string;
+  fdFollowerId:string;
+  fdFollowerName:string;
+  fdPurposeId:string;
+  fdPurposeName:string;
+  fdGradeId:string;
+  fdGradeName:string;
+  fdTypeId:string;
+  fdTypeName:string;
+  fdHobby:string;
+  fdMemo:string;
+  fdCompanyName:string;
+  fdStationPhone:string;
+  fdLinkPhone:string;
   fdHomeAddr:string;
-  fdCompanyContact:string;
-  fdLinkerPhone:string;
-  fdConsumeLevel:string;
-  fdType:string;
-  fdBuyPurpose:string;
-  fdGrade:string;
-  fdBehavior:string;
-  fdRemark:string;
-  fdCar:string;
+  fdBirthDay:string;
+  fdCarNo:string;
   fdContracts:Array<Contract>;
   fdFollowups:Array<Followup>;
 }

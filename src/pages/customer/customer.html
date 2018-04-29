@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title *ngIf="!isShowSearch">客户</ion-title>
-    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-searchbar *ngIf="isShowSearch" (ionInput)="search($event)"></ion-searchbar>
     <ion-buttons end>
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
@@ -22,7 +22,7 @@
       </button>
       <div>
         <span class="fdName">{{c.fdName}}</span>
-        <span class="fdTel">{{c.fdTel}}</span>
+        <span class="fdTel">{{c.fdStationPhone}}</span>
       </div>
       <div class="fdCompanyName">{{c.fdCompanyName}}</div>
       <div *ngIf="selectCustomer==c"  class="line-right" >
@@ -53,4 +53,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+  <ion-infinite-scroll threshold="10%" enabled="hasMoreProduct" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

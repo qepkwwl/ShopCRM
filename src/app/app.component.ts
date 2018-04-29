@@ -1,19 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { LoginPage } from '../pages/login/login';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { CustomerPage } from '../pages/customer/customer';
+import {Component, ViewChild} from "@angular/core";
+import {Nav, Platform} from "ionic-angular";
+import {StatusBar} from "@ionic-native/status-bar";
+import {SplashScreen} from "@ionic-native/splash-screen";
+import {LoginPage} from "../pages/login/login";
 import {AuthService} from "../_services/auth.service";
-import {ContractPage} from "../pages/contract/contract";
-import {ProductPage} from "../pages/product/product";
 import {BasePage} from "../pages/base/BasePage";
-import {MemoPage} from "../pages/memo/memo";
-import {FollowupPage} from "../pages/followup/followup";
 import {TabsPage} from "../pages/home/tabs";
+import {Subscription} from "rxjs";
+import {AppService} from "../_services/app.service";
 
 @Component({
   templateUrl: 'app.html'
@@ -22,17 +16,17 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = TabsPage;
-
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,authService:AuthService) {
+
     this.initializeApp();
     platform.ready().then((readySource) => {
       BasePage.DeviceHeight=platform.height();
       BasePage.DeviceWidth=platform.width();
     });
     if(authService.isLogined()){
-      //this.rootPage=HomePage;
+      this.rootPage=TabsPage;
     }else{
-      //this.rootPage=LoginPage;
+      this.rootPage=LoginPage;
     }
   }
 
@@ -44,7 +38,6 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
-
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

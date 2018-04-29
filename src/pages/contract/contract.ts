@@ -23,23 +23,23 @@ export  class ContractPage{
     this.contracts=[];
   }
   doRefresh(refresher:Refresher){
-    this.contractService.findContract().then(res=>{
-      this.contracts=res;
+    this.contractService.findContract().subscribe({next:res=>{
+      //this.contracts=res;
       refresher.complete();
-    });
+    }});
   }
   ionViewDidLoad(){
     this.fdOrigin=this.navParams.get("fdOrigin");
     switch(this.fdOrigin){
       case "customer":
-        this.contractService.findContractByCustomer().then(res=>{
-          this.contracts=res;
-        });
+        this.contractService.findContractByCustomer().subscribe({next:res=>{
+        //this.contracts=res;
+      }});
         break;
       default:
-        this.contractService.findContract().then(res=>{
-          this.contracts=res;
-        });
+      this.contractService.findContractByCustomer().subscribe({next:res=>{
+        //this.contracts=res;
+      }});
         break;
     }
   }

@@ -1,6 +1,6 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {ErrorHandler, NgModule} from "@angular/core";
-import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
+import {IonicApp, IonicErrorHandler, IonicModule, Events} from "ionic-angular";
 import {File} from "@ionic-native/file";
 import {SQLite} from "@ionic-native/sqlite";
 import {MyApp} from "./app.component";
@@ -12,7 +12,7 @@ import {ContractPage} from "../pages/contract/contract";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
 import {UserService} from "../_services/user.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {CustomerAddPage} from "../pages/customer/customer-add.component";
 import {AuthService} from "../_services/auth.service";
 import {CloudSettings} from "@ionic/cloud";
@@ -30,7 +30,7 @@ import {MemoPage} from "../pages/memo/memo";
 import {MemoAddPage} from "../pages/memo/memo-add";
 import {MemoItemPage} from "../pages/memo/modal/memo-item";
 import {CustomerViewPage} from "../pages/customer/customer-view";
-import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {DbProvider} from "../_helpers/DbProvider";
 import {TabsPage} from "../pages/home/tabs";
 import {CallNumber} from "@ionic-native/call-number";
@@ -39,6 +39,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RedletterDayPage} from "../pages/redletter-day/redletter";
 import {RedletterDayAddPage} from "../pages/redletter-day/redletter-add";
 import {RedletterDayService} from "../_services/redletter-day.service";
+import {TokenInterceptor} from "../_helpers/TokenInterceptor";
+import {AppService} from "../_services/app.service";
+import {CustomerGradeService} from "../_services/customer-grade.service";
+import {CustomerTypeService} from "../_services/customer-type.service";
+import {CustomerLevelService} from "../_services/customer-level.service";
+import {CustomerPurposeService} from "../_services/customer-purpose.service";
+import {CustomerSourceService} from "../_services/customer-source.service";
+import {JwtInterceptor} from "../_helpers/JwtInterceptor";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -103,16 +111,24 @@ const cloudSettings: CloudSettings = {
     ContractService,
     ProductService,
     CustomerService,
+    CustomerGradeService,
+    CustomerTypeService,
+    CustomerLevelService,
+    CustomerPurposeService,
+    CustomerSourceService,
     FollowupService,
     RedletterDayService,
     MemoService,
+    AppService,
     StatusBar,
     SplashScreen,
     File,
     SQLite,
     DbProvider,
     CallNumber,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor,multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor,multi: true}
   ]
 })
 export class AppModule {}
