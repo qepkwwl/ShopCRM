@@ -13,11 +13,15 @@
   <ion-list>
       <button ion-item (click)="selectCustomer()">
         <ion-label color="primary">客户名称</ion-label>
-        <ion-input placeholder="客户名称" [(ngModel)]="followup.fdCustomer.fdName"></ion-input>
+        <ion-label >{{followup.fdCustomerName}}</ion-label>
       </button>
     <ion-item>
+      <ion-label color="primary">拜访日期</ion-label>
+      <ion-datetime dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="followup.fdDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
       <ion-label color="primary">拜访时间</ion-label>
-      <ion-datetime dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="followup.fdTime"></ion-datetime>
+      <ion-datetime dataformatas="HH:mm" displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="followup.fdTime"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label color="primary">拜访形式</ion-label>

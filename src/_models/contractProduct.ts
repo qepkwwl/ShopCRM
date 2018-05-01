@@ -8,17 +8,17 @@ export class ContractProduct extends BaseModel{
   static _id=0;
   getId(){
     super.getId();
-    return ++ContractProduct._id;
+    return ContractProduct._id;
   }
 
   fdName:string;
   fdNum:number;
+  fdProductId:number;
   //单价
   fdRetailPrice:number;
   fdDiscount:number;
   //指导价
-  fdGuidePrice:number;
-  fdSubtotal:number;
+  fdGardePrice:number;
+  fdTotal:number;
   fdSaleType:string;
-  fdIsShowDetail:boolean;
 }

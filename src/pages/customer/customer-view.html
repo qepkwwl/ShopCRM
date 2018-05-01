@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="!isShowSearch">查看客户</ion-title>
+    <ion-buttons end>
+      <button class="toolbar-button"  (click)="edit($event)">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -14,55 +19,59 @@
       <ion-list>
         <ion-item>
           <ion-label color="primary">客户名称</ion-label>
-          <ion-input placeholder="客户名称" [(ngModel)]="customer.fdName"></ion-input>
+          <ion-label>{{customer.fdName}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户等级</ion-label>
+          <ion-label>{{customer.fdGradeName}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">消费档次</ion-label>
+          <ion-label>{{customer.fdLevelName}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">购买用途</ion-label>
+          <ion-label>{{customer.fdPurposeName}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户类型</ion-label>
+          <ion-label>{{customer.fdTypeName}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户电话</ion-label>
-          <ion-input placeholder="客户电话" [(ngModel)]="customer.fdStationPhone"></ion-input>
+          <ion-label>{{customer.fdStationPhone}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户生日</ion-label>
-          <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="customer.fdBirthDay"></ion-datetime>
+          <ion-label>{{customer.fdBirthDay}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label color="primary">说明</ion-label>
-          <ion-input placeholder="其它说明" [(ngModel)]="customer.fdMemo"></ion-input>
+          <ion-label color="primary">其它说明</ion-label>
+          <ion-label>{{customer.fdMemo}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户爱好</ion-label>
-          <ion-input placeholder="客户爱好" [(ngModel)]="customer.fdHobby"></ion-input>
+          <ion-label>{{customer.fdHobby}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户车牌</ion-label>
-          <ion-input placeholder="客户车牌" [(ngModel)]="customer.fdCarNo"></ion-input>
+          <ion-label>{{customer.fdCarNo}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">家庭地址</ion-label>
-          <ion-input placeholder="家庭地址" [(ngModel)]="customer.fdHomeAddr"></ion-input>
+          <ion-label>{{customer.fdHomeAddr}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">其它电话</ion-label>
-          <ion-input placeholder="其它电话" [(ngModel)]="customer.fdLinkPhone"></ion-input>
+          <ion-label>{{customer.fdLinkPhone}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">公司名称</ion-label>
-          <ion-input placeholder="公司名称" [(ngModel)]="customer.fdCompanyName"></ion-input>
+          <ion-label>{{customer.fdCompanyName}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">公司地址</ion-label>
-          <ion-input placeholder="公司地址" [(ngModel)]="customer.fdCompanyAddr"></ion-input>
+          <ion-label>{{customer.fdCompanyAddr}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -72,11 +81,8 @@
      <ion-card-content>
        <ion-list>
          <button ion-item *ngFor="let c of customer.fdContracts">
-           <ion-avatar item-start>
-             <ion-icon name="card"></ion-icon>
-           </ion-avatar>
            <div>
-             <span class="fdName">{{c.fdCustomer.fdName}}</span>
+             <span class="fdName">{{c.fdCustomerName}}</span>
              <span class="fdStartTime">{{c.fdStartTime}}</span>
              <span class="fdTotal">{{c.fdTotal}}</span>
            </div>

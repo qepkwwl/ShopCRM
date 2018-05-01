@@ -13,8 +13,8 @@ export class Product extends BaseModel{
   fdProduceArea:string;
   fdProductType:string;
   fdSpecify:string;
-  fdGuidePrice:number;
-  fdImageId:string;
+  fdGardePrice:number;
+  fdImageUrl:string;
   //信息更新时间
   fdModefiTime:number;
   //是否被选中

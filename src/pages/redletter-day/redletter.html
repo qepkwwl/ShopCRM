@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title *ngIf="!isShowSearch">纪念日</ion-title>
-    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-searchbar *ngIf="isShowSearch" (ionInput)="search($event)"></ion-searchbar>
     <ion-buttons end>
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
@@ -17,13 +17,15 @@
   <ion-list>
       <ion-item *ngFor="let c of redletterDaies">
         <div>
-          <span class="fdName">{{c.fdCustomer.fdName}}</span>
-          <span class="fdTel">{{c.fdDate}}</span>
-          <span class="fdCar">{{c.fdType}}</span>
+          <span class="fdName">{{c.fdCustomerName}}</span>
+          <span class="fdTel">{{c.fdKeyDay}}</span>
         </div>
         <div>
-          <span class="fdBuyPurpose">{{c.fdContent}}</span>
+          <span class="fdBuyPurpose">{{c.fdName}}</span>
         </div>
       </ion-item>
   </ion-list>
+  <ion-infinite-scroll threshold="10%" enabled="hasMoreRecords" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -10,6 +10,10 @@ import {FollowupService} from "../../_services/followup.service";
 import {FollowupPage} from "../followup/followup";
 import {RedletterDayAddPage} from "../redletter-day/redletter-add";
 import {RedletterDayPage} from "../redletter-day/redletter";
+import {UserService} from "../../_services/user.service";
+import {Achieve} from "../../_models/achieve";
+import {MemoItem} from "../../_models/MemoItem";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'page-home',
@@ -24,17 +28,12 @@ import {RedletterDayPage} from "../redletter-day/redletter";
     ])]
 })
 export class HomePage {
-  private fdRedletterDaies:Array<RedletterDay>;
-  private fdFollowups:Array<Followup>;
-  private fdPlans:Array<string>;
-  private fdTasks:Array<string>;
+  private achieve:Achieve=new Achieve();
+  private fdRedletterDaies:Array<RedletterDay>=[];
+  private fdFollowups:Array<Followup>=[];
+  private fdPlans:Array<MemoItem>=[];
   private dayIndexWithShowed=true;
-  private barChart:any;
-  constructor(public nav: NavController,private redletterDaySerivce:RedletterDayService,private followupService:FollowupService) {
-    this.fdRedletterDaies=[];
-    this.fdFollowups=[];
-    this.fdPlans=["继续回访客户","沈建3月用酒回款沟通","农行送发票"];
-    this.fdTasks=["月度销售任务:100000,还差42000","年度任务：1000000，还差420000"];
+  constructor(public nav: NavController,private redletterDaySerivce:RedletterDayService,private followupService:FollowupService,private userService:UserService) {
     setInterval(this.animationRedletterDaies,2000);
   }
   animationRedletterDaies= ()=> {
@@ -53,12 +52,32 @@ export class HomePage {
     this.dayIndexWithShowed=!this.dayIndexWithShowed;
   }
   ionViewDidLoad() {
-    this.redletterDaySerivce.findRedletterDay().then(res=>{
-      this.fdRedletterDaies=res;
-    });
-    this.followupService.findFollowup().then(res=>{
-      this.fdFollowups=res;
-    });
+    this.redletterDaySerivce.findAll(0,"",0).pipe(
+      tap(data=>{
+        let records=data.content.map(item=>{
+          return new RedletterDay(item);
+        });
+        this.fdRedletterDaies=this.fdRedletterDaies.concat(records);
+      })).subscribe();
+    this.followupService.findAll(0,"",0).pipe(
+      tap(data=>{
+        let records=data.content.map(item=>{
+          let followup=new Followup();
+          followup.fdCustomerId=item.fdCustomerId;
+          followup.fdCustomerName=item.fdCustomerName;
+          followup.fdDate=/(\d{2}:\d{2}):\d{2}$/ig.exec(item.fdTime)[1];
+          followup.fdTime=/^(\d{4}-\d{2}-\d{2})/ig.exec(item.fdTime)[1];
+          followup.fdContent=item.fdContent;
+          followup.fdGift=item.fdGift;
+          return followup;
+        });
+        this.fdFollowups=this.fdFollowups.concat(records);
+      })).subscribe();
+    this.userService.findAchieve().pipe(
+      tap(data=>{
+      Object.assign(this.achieve,data);
+      console.log(data);
+    })).subscribe();
   }
   goToFollowup(){
     this.nav.push(FollowupPage);

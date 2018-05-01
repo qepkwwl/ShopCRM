@@ -1,7 +1,10 @@
 import {Component} from "@angular/core";
 import {Contract} from "../../_models/contract";
 import {ContractProduct} from "../../_models/contractProduct";
-import {NavController, ModalController, Events, NavParams} from "ionic-angular";
+import {
+  NavController, ModalController, Events, NavParams, Toast, Loading, LoadingController,
+  ToastController
+} from "ionic-angular";
 import {ProductPage} from "../product/product";
 import {CustomerPage} from "../customer/customer";
 import {ContractCustomer} from "../../_models/contractCustomer";
@@ -20,17 +23,22 @@ export class ContractAddPage{
   //合同
   private contract:Contract;
   private fdOrigin:string;
-  constructor(private nav:NavController,private navParams:NavParams,private event:Events,private modal :ModalController,private contractService:ContractService){
+  private loading:Loading;
+  private toast:Toast;
+  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private event:Events,private modal :ModalController,private contractService:ContractService){
     this.reset();
     event.subscribe(ContractAddPage.SELECTED_PRODUCT,this.afterSelectedProduct)
-    event.subscribe(ContractAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer)
+    event.subscribe(ContractAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
+    this.loading = this.loadingCtrl.create({
+      content: '正在提交...'
+    });
   }
   reset(){
     this.contract=new Contract({fdCustomer:new ContractCustomer({fdName:'选择客户'})});
     this.contract.fdProducts=[];
   }
   insertNewProduct(){
-    this.nav.push(ProductPage,{fdOrigin:'contract'});
+    this.nav.push(ProductPage,{fdOrigin:'contract',fdSelectedProducts:this.contract.fdProducts});
   }
 
   ionViewWillEnter() {
@@ -77,26 +85,63 @@ export class ContractAddPage{
     this.nav.push(CustomerPage,{fdOrigin:'contract'});
   }
   private afterSelectedProduct=(selectedProductIds:Array<Product>)=>{
-    this.contract.fdProducts=this.contract.fdProducts.concat(selectedProductIds.map((item,index)=>{
+    this.contract.fdProducts=selectedProductIds.map((item,index)=>{
       let contractProduct= new ContractProduct(item);
       contractProduct.fdNum=1;
       return contractProduct;
-    }));
+    });
     this.updateContractTotal();
   }
   //更新合同总价
   updateContractTotal=function () {
     var total=0;
     this.contract.fdProducts.forEach(item=>{
+      item.fdTotal=item.fdNum*(item.fdRetailPrice||0);
+      console.log(item);
       total+=item.fdNum*(item.fdRetailPrice||0);
     });
     this.contract.fdTotal=total;
   }
   private afterSelectedCustomer=(selectedCustomer:Customer)=>{
-    this.contract.fdCustomer=new ContractCustomer(selectedCustomer);
+    this.contract.fdCustomerId=selectedCustomer.id;
+    this.contract.fdCustomerName=selectedCustomer.fdName;
   }
 
   save(){
+    this.toast = this.toastCtrl.create({
+      message:'',
+      duration:1000
+    });
+    if(!this.contract.fdStartTime){
+      this.toast.setMessage("开始日期必填");
+      this.toast.present();
+      return;
+    }
+    if(!this.contract.fdCustomerId){
+      this.toast.setMessage("客户需要指定");
+      this.toast.present();
+      return;
+    }
+    if(this.contract.fdTotal<=0){
+      this.toast.setMessage("请维护产品");
+      this.toast.present();
+      return;
+    }
+    for(let p of this.contract.fdProducts){
+      if(p.fdTotal<=0){
+        this.toast.setMessage(`${p.fdName}输入不正确`);
+        this.toast.present();
+        return;
+      }
+    }
+    this.loading.present();
+    this.contractService.save(this.contract).subscribe(result=>{
+      if(result){
+        this.nav.pop();
+      }
+    },err=>{},()=>{
+      this.loading.dismiss();
+    });
   }
 }
 

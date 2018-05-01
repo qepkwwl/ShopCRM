@@ -11,17 +11,17 @@
 
 <ion-content>
   <ion-list>
-      <button ion-item (click)="selectCustomer()">
-        <ion-label color="primary">客户名称</ion-label>
-        <ion-input placeholder="客户名称" [(ngModel)]="redletterDay.fdCustomer.fdName"></ion-input>
-      </button>
+    <button ion-item (click)="selectCustomer()">
+      <ion-label color="primary">客户名称</ion-label>
+      <ion-label >{{redletterDay.fdCustomerName}}</ion-label>
+    </button>
     <ion-item>
       <ion-label color="primary">重要节日</ion-label>
-      <ion-datetime dataformatas="YYYY-MM-DD" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="redletterDay.fdDate"></ion-datetime>
+      <ion-datetime dataformatas="YYYY-MM-DD" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="redletterDay.fdKeyDay"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label color="primary">说明</ion-label>
-      <ion-input placeholder="拜访内容" [(ngModel)]="redletterDay.fdContent"></ion-input>
+      <ion-input placeholder="拜访内容" [(ngModel)]="redletterDay.fdName"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -47,6 +47,7 @@ import {CustomerLevelService} from "../_services/customer-level.service";
 import {CustomerPurposeService} from "../_services/customer-purpose.service";
 import {CustomerSourceService} from "../_services/customer-source.service";
 import {JwtInterceptor} from "../_helpers/JwtInterceptor";
+import {CustomerEditPage} from "../pages/customer/customer-edit";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -64,6 +65,7 @@ const cloudSettings: CloudSettings = {
     ContractPage,
     ContractAddPage,
     CustomerAddPage,
+    CustomerEditPage,
     ProductPage,
     ContractProductPage,
     FollowupPage,
@@ -93,6 +95,7 @@ const cloudSettings: CloudSettings = {
     ContractPage,
     ContractAddPage,
     CustomerAddPage,
+    CustomerEditPage,
     ProductPage,
     ContractProductPage,
     FollowupPage,

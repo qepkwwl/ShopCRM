@@ -15,6 +15,8 @@ export class Contract extends BaseModel{
 
   fdStartTime:string;
   fdCustomer:ContractCustomer;
+  fdCustomerId:number;
+  fdCustomerName:string;
   //合同总价
   fdTotal:number;
   fdProducts:Array<ContractProduct>
@@ -22,7 +24,7 @@ export class Contract extends BaseModel{
   //合同中的产品信息描述
   public fdProductsToString(){
     return this.fdProducts.map((item,index)=>{
-      return item.fdName+":"+item.fdNum+"件"+item.fdSubtotal+"元"
+      return item.fdName+":"+item.fdNum+"件"+item.fdTotal+"元"
     }).join(";");
   }
 }

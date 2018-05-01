@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="!isShowSearch">日志</ion-title>
-    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-searchbar *ngIf="isShowSearch" (ionInput)="search($event)"></ion-searchbar>
     <ion-buttons end>
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
@@ -35,4 +35,7 @@
         </div>
       </button>
   </ion-list>
+  <ion-infinite-scroll threshold="10%" enabled="hasMoreRecords" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

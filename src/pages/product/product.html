@@ -4,14 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="!isShowSearch">商品</ion-title>
-    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-searchbar *ngIf="isShowSearch" (ionInput)="search($event)"></ion-searchbar>
     <ion-buttons end>
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
       </button>
-      <button class="toolbar-button"  (click)="add($event)">
-        <ion-icon name="add"></ion-icon>
-    </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -22,13 +19,13 @@
       <ion-grid>
         <ion-row>
           <ion-col col-4>
-            <img class="product" [src]="urlForImage(p.fdImageId)" />
+            <img class="product" [src]="p.fdImageUrl" />
           </ion-col>
           <ion-col col-8>
               <div class="title" [innerText]="p.fdName"></div>
               <div class="detail">[{{p.fdProduceArea}}]{{p.fdSpecify}}</div>
               <div class="price">
-                <span class="strong" [innerText]="p.fdGuidePrice"></span>
+                <span class="strong" [innerText]="p.fdGardePrice"></span>
                 <span class="strong-color">元</span>
                 <del></del>
               </div>
@@ -43,7 +40,7 @@
       </ion-grid>
     </button>
   </ion-list>
-  <ion-infinite-scroll threshold="10%" enabled="hasMoreProduct" (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll threshold="10%" enabled="hasMoreRecords" (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

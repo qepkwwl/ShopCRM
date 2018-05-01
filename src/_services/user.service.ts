@@ -31,6 +31,9 @@ export class UserService{
     );
   }
 
+  findAchieve(): Observable<any> {
+    return this.http.get<any>(this.appSerivce.baseUrl+'/bz/achieve/main/my');
+  }
 
   getToken(): String {
     return localStorage.getItem('token');

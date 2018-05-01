@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="!isShowSearch">合同</ion-title>
-    <ion-searchbar *ngIf="isShowSearch"></ion-searchbar>
+    <ion-searchbar *ngIf="isShowSearch" (ionInput)="search($event)"></ion-searchbar>
     <ion-buttons end>
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon class="big" name="search"></ion-icon>
@@ -17,16 +17,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <ion-list>
     <button ion-item *ngFor="let c of contracts">
       <ion-avatar item-start>
         <ion-icon name="card"></ion-icon>
       </ion-avatar>
       <div>
-        <span class="fdName">{{c.fdCustomer.fdName}}</span>
+        <span class="fdName">{{c.fdCustomerName}}</span>
         <span class="fdStartTime">{{c.fdStartTime}}</span>
         <span class="fdTotal">{{c.fdTotal}}</span>
       </div>
@@ -35,4 +32,7 @@
       </div>
     </button>
   </ion-list>
+  <ion-infinite-scroll threshold="10%" enabled="hasMoreRecords" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

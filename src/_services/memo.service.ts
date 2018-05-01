@@ -3,16 +3,34 @@ import "rxjs/add/operator/map";
 import {Injectable} from "@angular/core";
 import {Memo} from "../_models/Memo";
 import {MemoItem} from "../_models/MemoItem";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
+import {AppService} from "./app.service";
 
 @Injectable()
 export class MemoService{
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient,private appService:AppService){}
 
-  public findMemoes():Promise<Array<Memo>>{
-    return new Promise((resolve,reject)=>{
-      resolve([
-        new Memo({fdType:'日报',fdStartDate:'2018-04-11',fdEndDate:'2018-04-11',fdAchieve:'业绩5000元',fdSummaryMemo:[new MemoItem({fdContent:'上午早会'}),new MemoItem({fdContent:'下午致电张家界叶总，现在侯家塘开了一个餐厅，这两天去看看。'})],fdPlanMemo:[new MemoItem({fdContent:'继续回访客户'}),new MemoItem({fdContent:'沈建3月用酒回款沟通'})]}),
-        new Memo({fdType:'周报',fdStartDate:'2018-04-16',fdEndDate:'2018-04-22',fdAchieve:'业绩15000元',fdSummaryMemo:[new MemoItem({fdContent:'上午早会'}),new MemoItem({fdContent:'下午致电张家界叶总，现在侯家塘开了一个餐厅，这两天去看看。'})],fdPlanMemo:[new MemoItem({fdContent:'继续回访客户'}),new MemoItem({fdContent:'沈建3月用酒回款沟通'})]})]);
+  public save(form:Memo):Observable<boolean>{
+    let formData=new FormData();
+    formData.append("fdName",form.fdAchieve);
+    formData.append("fdType",form.fdType);
+    formData.append("fdStartDate",form.fdStartDate);
+    formData.append("fdEndDate",form.fdEndDate);
+    formData.append("fdAchieve",form.fdAchieve);
+    form.fdPlanMemo.forEach((p,i)=> {
+      formData.append(`fdPlanMemo[${i}].fdContent`, p.fdContent);
     });
+    form.fdSummaryMemo.forEach((p,i)=> {
+      formData.append(`fdSummaryMemo[${i}].fdContent`, p.fdContent);
+    });
+
+    return this.http.post<any>(this.appService.baseUrl+'/bz/person/memory/api/save',formData).pipe(
+      map(response=>response.fdCode=="OK")
+    );
+  }
+
+  public findAll(searchValue:string,indexPage:number):Observable<any>{
+    return this.http.get<any>(this.appService.baseUrl+'/bz/person/memory/data?size=10&sortby=+id&searchValue='+searchValue+'&start='+indexPage)
   }
 }

@@ -23,6 +23,14 @@ export  class ContractProductPage{
      alert("请输入合适的单价");
      return;
    }
+    if(!/^\d+(\.\d+)?$/ig.test(this.product.fdDiscount+"")){
+      alert("请输入合适的折扣");
+      return;
+    }
+    if(!/^\s*$/ig.test(this.product.fdSaleType+"")){
+      alert("请输入销售类型");
+      return;
+    }
     this.view.dismiss({product:this.product,result:"save"});
   }
   onSubmit() {

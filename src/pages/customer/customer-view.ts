@@ -10,6 +10,10 @@ import {ContractPage} from "../contract/contract";
 import {CustomerService} from "../../_services/customer.service";
 import {ContractService} from "../../_services/contract.service";
 import {FollowupService} from "../../_services/followup.service";
+import {tap} from "rxjs/operators";
+import {Contract} from "../../_models/contract";
+import {Followup} from "../../_models/followup";
+import {CustomerEditPage} from "./customer-edit";
 
 @Component({
   templateUrl:"customer-view.html",
@@ -22,14 +26,26 @@ export  class CustomerViewPage{
   }
 
   ionViewWillEnter(){
-    this.customer=this.navParams.get("customer");
+    Object.assign(this.customer,this.navParams.get("customer"));
     this.customer.fdContracts=[];
     this.customer.fdFollowups=[];
-    this.contractService.findContract().subscribe({next(data){
-      this.customer.fdContracts=data;
-    }});
-    this.followupService.findFollowup().then(data=>{
-      this.customer.fdFollowups=data;
-    });
+    this.contractService.findAll(this.customer.id,"",0).pipe(
+      tap(data=>{
+        let records=data.content.map(item=>{
+          return new Contract(item);
+        });
+        this.customer.fdContracts=this.customer.fdContracts.concat(records);
+      })).subscribe();
+    this.followupService.findAll(this.customer.id,"",0).pipe(
+      tap(data=>{
+        let records=data.content.map(item=>{
+          return new Followup(item);
+        });
+        this.customer.fdFollowups=this.customer.fdFollowups.concat(records);
+      })).subscribe();
+  }
+
+  edit(){
+    this.nav.push(CustomerEditPage,{fdCustomer:this.customer});
   }
 }

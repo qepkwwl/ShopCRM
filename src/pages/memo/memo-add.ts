@@ -1,5 +1,8 @@
 import {MemoService} from "../../_services/memo.service";
-import {NavController, NavParams, ModalController, Events} from "ionic-angular";
+import {
+  NavController, NavParams, ModalController, Events, ToastController, LoadingController,
+  Toast, Loading
+} from "ionic-angular";
 import {Memo} from "../../_models/Memo";
 import {MemoItem} from "../../_models/MemoItem";
 import {MemoItemPage} from "./modal/memo-item";
@@ -20,7 +23,9 @@ export  class MemoAddPage{
   private fdTitle:string='新日志';
   //计划的标题
   private fdOrigin:string;
-  constructor(private nav:NavController,private navParams:NavParams,private  event:Events,private modal:ModalController,private memoService:MemoService){
+  private loading:Loading;
+  private toast:Toast;
+  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private  event:Events,private modal:ModalController,private memoService:MemoService){
     this.reset();
   }
   reset(){
@@ -30,6 +35,9 @@ export  class MemoAddPage{
     this.memo.fdEndDate=moment().format("YYYY-MM-DD");
     this.fdSummaryTitle="今日工作总结";
     this.fdPlanTitle="明日工作计划";
+    this.loading = this.loadingCtrl.create({
+      content: '正在提交...'
+    });
   }
   ionViewWillEnter(){
     this.fdOrigin=this.navParams.get("fdOrigin");
@@ -67,7 +75,38 @@ export  class MemoAddPage{
     }
   }
   save(){
-
+    this.toast = this.toastCtrl.create({
+      message:'',
+      duration:1000
+    });
+    if(!this.memo.fdStartDate){
+      this.toast.setMessage("开始时间必填");
+      this.toast.present();
+      return;
+    }
+    if(!this.memo.fdEndDate){
+      this.toast.setMessage("结束时间必填");
+      this.toast.present();
+      return;
+    }
+    if(this.memo.fdPlanMemo.length<=0){
+      this.toast.setMessage("工作计划必填");
+      this.toast.present();
+      return;
+    }
+    if(this.memo.fdPlanMemo.length<=0){
+      this.toast.setMessage("上周总结必填");
+      this.toast.present();
+      return;
+    }
+    this.loading.present();
+    this.memoService.save(this.memo).subscribe(result=>{
+      if(result){
+        this.nav.pop();
+      }
+    },err=>{},()=>{
+      this.loading.dismiss();
+    });
   }
   createSummaryMemo(){
     this.editSummaryMemo(new MemoItem(),'新增工作总结');

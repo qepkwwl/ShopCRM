@@ -15,8 +15,13 @@
       </ion-card-header>
       <ion-card-content>
         <ion-list>
+            <ion-item>
+              <ion-label color="primary">开始日期</ion-label>
+              <ion-datetime dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="contract.fdStartTime"></ion-datetime>
+            </ion-item>
             <button ion-item (click)="selectCustomer()">
-              <ion-label color="primary">{{contract.fdCustomer.fdName}}</ion-label>
+              <ion-label color="primary">选择客户</ion-label>
+              <ion-label >{{contract.fdCustomerName}}</ion-label>
             </button>
         </ion-list>
       </ion-card-content>
@@ -26,10 +31,9 @@
     <ion-card-header>
         <span>产品信息</span>
         <ion-badge item-end>{{contract.fdTotal}}</ion-badge>
-        <ion-buttons end>
+        <ion-buttons right>
           <button (click)="insertNewProduct()">
             <ion-icon name="add"></ion-icon>
-            增加产品
           </button>
         </ion-buttons>
     </ion-card-header>
@@ -45,7 +49,7 @@
                 <span [innerText]="p.fdNum"></span>
               </ion-col>
               <ion-col col-3 >
-                <ion-title>{{p.fdSubtotal}}</ion-title>
+                <ion-title>{{p.fdTotal}}</ion-title>
               </ion-col>
             </ion-row>
           </ion-grid>

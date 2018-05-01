@@ -34,7 +34,7 @@ export  class CustomerPage{
   //当面页码
   private indexPage:number=0;
   //服务器端是否还有更多数据
-  private hasMoreProduct:boolean=true;
+  private hasMoreRecords:boolean=true;
   constructor(private nav:NavController,private navParams:NavParams,private  event:Events,private callNumber: CallNumber,private customerService:CustomerService){
   }
 
@@ -42,6 +42,8 @@ export  class CustomerPage{
   ionViewWillEnter(){
     this.fdOrigin=this.navParams.get("fdOrigin");
     this.canSelected=false;
+    this.indexPage=0;
+    this.customers=[];
     switch(this.fdOrigin){
       case "contract"://新建合同选则客户时
         this.canSelected=true;
@@ -77,7 +79,8 @@ export  class CustomerPage{
         return new Customer(item);
       });
       this.customers=this.customers.concat(newCustomers);
-      this.hasMoreProduct=data.totalPages-1>this.indexPage++;
+      this.indexPage++;
+      this.hasMoreRecords=data.totalPages>this.indexPage;
     }));
   }
   doInfinite(infiniteScroll:InfiniteScroll){

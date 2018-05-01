@@ -13,11 +13,11 @@ import {CustomerLevel} from "../../_models/customer-level";
 import {CustomerService} from "../../_services/customer.service";
 
 @Component({
-  templateUrl:"customer-add.component.html",
-  selector:"page-customer-add"
+  templateUrl:"customer-edit.html",
+  selector:"page-customer-edit"
 })
 
-export class CustomerAddPage{
+export class CustomerEditPage{
   private customer:Customer;
   //客户等级
   private fdGrades:Array<CustomerGrade>;
@@ -48,7 +48,9 @@ export class CustomerAddPage{
       content: '正在提交...'
     });
   }
-
+  ionViewWillEnter(){
+    Object.assign(this.customer,this.navParams.get("fdCustomer"));
+  }
   save(){
     this.toast = this.toastCtrl.create({
       message:'',
@@ -60,7 +62,7 @@ export class CustomerAddPage{
       return;
     }
     this.loading.present();
-    this.customerService.save(this.customer).subscribe(result=>{
+    this.customerService.update(this.customer).subscribe(result=>{
       if(result){
         this.nav.pop();
       }

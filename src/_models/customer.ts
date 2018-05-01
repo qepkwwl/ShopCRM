@@ -13,8 +13,6 @@ export class Customer extends BaseModel{
 
   fdSubject:string;
   fdName:string;
-  fdCreatorId:string;
-  fdCreatorName:string;
   fdCreateTime:string;
   fdModifyTime:string;
   fdOrder:string;
@@ -42,4 +40,5 @@ export class Customer extends BaseModel{
   fdCarNo:string;
   fdContracts:Array<Contract>;
   fdFollowups:Array<Followup>;
+
 }

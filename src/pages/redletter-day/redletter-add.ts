@@ -1,5 +1,8 @@
 import {Component} from "@angular/core";
-import {IonicPage, IonicModule, NavParams, NavController, Events} from "ionic-angular";
+import {
+  IonicPage, IonicModule, NavParams, NavController, Events, ToastController,
+  LoadingController, Toast, Loading
+} from "ionic-angular";
 import {CustomerPage} from "../customer/customer";
 import {Customer} from "../../_models/customer";
 import {RedletterDayService} from "../../_services/redletter-day.service";
@@ -10,10 +13,16 @@ import {RedletterDay} from "../../_models/redletter-day";
 })
 export class RedletterDayAddPage {
   private redletterDay:RedletterDay;
+  private loading:Loading;
+  private toast:Toast;
+
   public static SELECTED_CUSTOMER:string="RedletterDay.select.customer.completed";
-  constructor( private nav:NavController,private navParams:NavParams,private event:Events,private redletterDayService:RedletterDayService){
+  constructor( private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private event:Events,private redletterDayService:RedletterDayService){
     this.redletterDay=new RedletterDay();
-    this.event.subscribe(RedletterDayAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer)
+    this.event.subscribe(RedletterDayAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
+    this.loading = this.loadingCtrl.create({
+      content: '正在提交...'
+    });
   }
 
   ionViewWillEnter(){
@@ -28,12 +37,24 @@ export class RedletterDayAddPage {
     }
   }
   private afterSelectedCustomer=(c:Customer)=>{
-    this.redletterDay.fdCustomer=new Customer(c);
+    this.redletterDay.fdCustomerId=c.id;
+    this.redletterDay.fdCustomerName=c.fdName;
 }
   selectCustomer(){
-    this.nav.push(CustomerPage,{fdOrigin:'redletterDay',fdCustomer:this.redletterDay.fdCustomer});
+    this.nav.push(CustomerPage,{fdOrigin:'redletterDay',fdCustomer:this.redletterDay.fdCustomerId});
   }
   save(){
-
+    this.toast = this.toastCtrl.create({
+      message:'',
+      duration:1000
+    });
+    this.loading.present();
+    this.redletterDayService.save(this.redletterDay).subscribe(result=>{
+      if(result){
+        this.nav.pop();
+      }
+    },err=>{},()=>{
+      this.loading.dismiss();
+    });
   };
 }
