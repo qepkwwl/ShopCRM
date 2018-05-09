@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+    <button ion-button icon-only (click)="back()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
+    <ion-title >重置密码</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list >
+      <ion-item>
+          <ion-label color="primary">原密码</ion-label>
+          <ion-input aria-readonly="true" type="password" [(ngModel)]="fdPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>新密码</ion-label>
+          <ion-input type="password" [(ngModel)]="fdNewPassword" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">重复密码</ion-label>
+        <ion-input type="password"  [(ngModel)]="fdRepeatPassword" ></ion-input>
+      </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-navbar text-center>
+    <button ion-button round (click)="save()">
+      <ion-icon name="close"></ion-icon>
+      确定
+    </button>
+  </ion-navbar>
+
+</ion-footer>

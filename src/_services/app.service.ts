@@ -11,7 +11,7 @@ export class AppService{
     this.httpJsonOptions.headers.append('Access-Control-Allow-Origin','*');
     this.httpFormOptions.headers.append('Access-Control-Allow-Origin','*');
   }
-   baseUrl:string="http://192.168.122.9:8080";
+   baseUrl:string="http://111.230.9.200:8080";
   httpJsonOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
   httpFormOptions = {headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})};
 }

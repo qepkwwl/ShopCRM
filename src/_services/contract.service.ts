@@ -16,8 +16,8 @@ export class ContractService{
   public save(form:Contract):Observable<boolean>{
     let formData=new FormData();
     formData.append('fdStartTime',form.fdStartTime);
-    formData.append('fdTotal',form.fdTotal);
-    formData.append('fdCustomerId',form.fdCustomerId);
+    formData.append('fdTotal',form.fdTotal+"");
+    formData.append('fdCustomerId',form.fdCustomerId+"");
     formData.append('fdName',form.fdCustomerName);
     form.fdProducts.forEach((p,i)=>{
       formData.append(`fdProducts[${i}].fdName`,p.fdName);
@@ -35,10 +35,10 @@ export class ContractService{
   }
   public update(form:Contract):Observable<boolean>{
     let formData=new FormData();
-    formData.append('id',form.id);
+    formData.append('id',form.id+"");
     formData.append('fdStartTime',form.fdStartTime);
-    formData.append('fdTotal',form.fdTotal);
-    formData.append('fdCustomerId',form.fdCustomerId);
+    formData.append('fdTotal',form.fdTotal+"");
+    formData.append('fdCustomerId',form.fdCustomerId+"");
     formData.append('fdName',form.fdCustomerName);
     form.fdProducts.forEach((p,i)=>{
       if(p.id!=0){

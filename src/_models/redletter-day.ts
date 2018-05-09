@@ -16,5 +16,5 @@ export class RedletterDay extends BaseModel{
   fdKeyDay:string;
   fdCustomerId:number;
   fdCustomerName:string;
-  fdame:string;
+  fdName:string;
 }

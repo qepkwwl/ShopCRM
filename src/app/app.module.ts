@@ -48,6 +48,7 @@ import {CustomerPurposeService} from "../_services/customer-purpose.service";
 import {CustomerSourceService} from "../_services/customer-source.service";
 import {JwtInterceptor} from "../_helpers/JwtInterceptor";
 import {CustomerEditPage} from "../pages/customer/customer-edit";
+import {PersonResetPage} from "../pages/home/modal/person-reset";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -76,7 +77,8 @@ const cloudSettings: CloudSettings = {
     CustomerViewPage,
     TabsPage,
     RedletterDayPage,
-    RedletterDayAddPage
+    RedletterDayAddPage,
+    PersonResetPage
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,8 @@ const cloudSettings: CloudSettings = {
     CustomerViewPage,
     TabsPage,
     RedletterDayPage,
-    RedletterDayAddPage
+    RedletterDayAddPage,
+    PersonResetPage
   ],
   providers: [
     AuthService,

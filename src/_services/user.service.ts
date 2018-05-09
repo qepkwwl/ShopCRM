@@ -48,4 +48,7 @@ export class UserService{
     // remove user from local storage to log user out
     localStorage.removeItem('token');
   }
+  resetPassword(fdPassword :string,fdNewPassword:string):Observable<any>{
+    return this.http.post<any>(this.appSerivce.baseUrl+'/sys/org/person/api/reset', JSON.stringify({fdPassword: fdPassword, fdNewPassword: fdNewPassword}), this.appSerivce.httpJsonOptions);
+}
 }

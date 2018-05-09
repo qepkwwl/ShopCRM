@@ -1,5 +1,5 @@
 import {Component, ViewChild} from "@angular/core";
-import {NavController} from "ionic-angular";
+import {NavController, ModalController} from "ionic-angular";
 import {Chart} from "chart.js";
 import {transition, animate, state, trigger, style} from "@angular/animations";
 import {Followup} from "../../_models/followup";
@@ -14,6 +14,8 @@ import {UserService} from "../../_services/user.service";
 import {Achieve} from "../../_models/achieve";
 import {MemoItem} from "../../_models/MemoItem";
 import {tap} from "rxjs/operators";
+import {LoginPage} from "../login/login";
+import {PersonResetPage} from "./modal/person-reset";
 
 @Component({
   selector: 'page-home',
@@ -33,7 +35,7 @@ export class HomePage {
   private fdFollowups:Array<Followup>=[];
   private fdPlans:Array<MemoItem>=[];
   private dayIndexWithShowed=true;
-  constructor(public nav: NavController,private redletterDaySerivce:RedletterDayService,private followupService:FollowupService,private userService:UserService) {
+  constructor(public nav: NavController,private redletterDaySerivce:RedletterDayService,private followupService:FollowupService,private modal :ModalController,private userService:UserService) {
     setInterval(this.animationRedletterDaies,2000);
   }
   animationRedletterDaies= ()=> {
@@ -84,5 +86,13 @@ export class HomePage {
   }
   goToRedletterDay(){
     this.nav.push(RedletterDayPage);
+  }
+  reset_password(){
+    let personModal=this.modal.create(PersonResetPage);
+    personModal.present();
+  }
+  logout(){
+    this.userService.logout();
+    this.nav.setRoot(LoginPage);
   }
 }

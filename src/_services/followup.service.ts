@@ -14,7 +14,7 @@ export class FollowupService{
   public save(form:Followup):Observable<boolean>{
     let formData=new FormData();
     formData.append("fdName",form.fdCustomerName);
-    formData.append("fdCustomerId",form.fdCustomerId);
+    formData.append("fdCustomerId",form.fdCustomerId+"");
     formData.append("fdTime",`${form.fdDate} ${form.fdTime}:00`);
     formData.append("fdContent",form.fdContent);
     formData.append("fdGift",form.fdGift||'');
@@ -25,9 +25,9 @@ export class FollowupService{
 
   public update(form:Followup):Observable<boolean>{
     let formData=new FormData();
-    formData.append("id",form.id);
+    formData.append("id",form.id+"");
     formData.append("fdName",form.fdCustomerName);
-    formData.append("fdCustomerId",form.fdCustomerId);
+    formData.append("fdCustomerId",form.fdCustomerId+"");
     formData.append("fdTime",`${form.fdDate} ${form.fdTime}:00`);
     formData.append("fdContent",form.fdContent);
     formData.append("fdGift",form.fdGift||'');

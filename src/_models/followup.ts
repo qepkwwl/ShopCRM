@@ -3,7 +3,6 @@ import {Customer} from "./customer";
 export class Followup extends BaseModel{
   constructor(param?){
     super(param);
-    this.fdCustomer=this.fdCustomer||new Customer();
   }
   static _id=0;
   getId(){
