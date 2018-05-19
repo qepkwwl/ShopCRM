@@ -1,33 +1,68 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title *ngIf="!isShowSearch">拜访记录</ion-title>
-    <ion-searchbar *ngIf="isShowSearch" (ionInput)="search($event)"></ion-searchbar>
-    <ion-buttons end>
-      <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
-        <ion-icon name="search"></ion-icon>
-      </button>
-      <button class="toolbar-button"  (click)="add($event)">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
 
-<ion-content>
-  <ion-list>
-      <ion-item *ngFor="let c of followups">
-        <div>
-          <span class="fdName">{{c.fdCustomerName}}</span>
-          <span class="fdTel">{{c.fdTime}}</span>
-          <span class="fdCar">{{c.fdType}}</span>
-        </div>
-        <div>
-          <span class="fdBuyPurpose">{{c.fdContent}}</span>
-        </div>
-        <div class="fdRemark">{{c.fdGift}}</div>
-      </ion-item>
-  </ion-list>
-  <ion-infinite-scroll threshold="10%" enabled="hasMoreRecords" (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</ion-content>
+<ion-split-pane >
+  <ion-header>
+    <ion-navbar>
+      <ion-title>{{fdCriterial.fdDesc}}</ion-title>
+      <ion-buttons end>
+        <button *ngIf="fdCriterial.fdDesc!='拜访记录'" class="toolbar-button" (click)="resetQuery()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+        <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
+          <ion-icon name="search"></ion-icon>
+        </button>
+        <button class="toolbar-button"  (click)="add($event)">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  <ion-content main>
+    <ion-list>
+        <ion-item *ngFor="let c of followups">
+          <div>
+            <span class="fdName">{{c.fdCustomerName}}</span>
+            <span class="fdTel">{{c.fdTime}}</span>
+            <span class="fdCar">{{c.fdType}}</span>
+          </div>
+          <div>
+            <span class="fdBuyPurpose">{{c.fdContent}}</span>
+          </div>
+          <div class="fdRemark">{{c.fdGift}}</div>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll threshold="10%" enabled="hasMoreRecords" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+   <ion-content *ngIf="isShowSearch">
+     <ion-list>
+       <ion-list-header>查询条件</ion-list-header>
+       <ion-item>
+         <ion-select [(ngModel)]="fdCriterial.fdOrder" placeholder="时间排序"  okText="确定" cancelText="取消" style="max-width: 100% !important;">
+           <ion-option value="+">时间升序</ion-option>
+           <ion-option value="-">时间降序</ion-option>
+         </ion-select>
+       </ion-item>
+       <ion-item>
+         <ion-input placeholder="拜访内容" [(ngModel)]="fdCriterial.fdName"></ion-input>
+       </ion-item>
+       <button ion-item (click)="selectCustomer()">{{fdCriterial.fdCustomerName}}</button>
+       <ion-item>
+         <ion-datetime placeholder="起始日期" cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="fdCriterial.fdStartDate"></ion-datetime>
+       </ion-item>
+       <ion-item>
+         <ion-datetime placeholder="截止日期" cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="fdCriterial.fdEndDate"></ion-datetime>
+       </ion-item>
+       <ion-item>
+         <ion-buttons>
+           <button ion-button (click)="isShowSearch=!isShowSearch">
+             <ion-icon name="close-circle"></ion-icon>
+           </button>
+           <button ion-button (click)="search()">
+             <ion-icon name="checkmark-circle"></ion-icon>
+           </button>
+         </ion-buttons>
+       </ion-item>
+     </ion-list>
+   </ion-content>
+</ion-split-pane>

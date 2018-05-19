@@ -41,8 +41,8 @@ export  class MemoPage{
       tap(data=>{
         let newRecords=data.content.map(item=>{
           let m= new Memo(item);
-          m.fdPlanMemo=item.fdPlanMemoes.map(p=>Object.assign(new MemoItem(),p));
-          m.fdSummaryMemo=item.fdSummaryMemoes.map(p=>Object.assign(new MemoItem(),p));
+          m.fdPlanMemoes=item.fdPlanMemoes.map(p=>Object.assign(new MemoItem(),p));
+          m.fdSummaryMemoes=item.fdSummaryMemoes.map(p=>Object.assign(new MemoItem(),p));
           return m;
         });
         this.memoes=this.memoes.concat(newRecords);

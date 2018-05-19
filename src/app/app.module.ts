@@ -1,8 +1,6 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {ErrorHandler, NgModule} from "@angular/core";
 import {IonicApp, IonicErrorHandler, IonicModule, Events} from "ionic-angular";
-import {File} from "@ionic-native/file";
-import {SQLite} from "@ionic-native/sqlite";
 import {MyApp} from "./app.component";
 import {LoginPage} from "../pages/login/login";
 import {HomePage} from "../pages/home/home";
@@ -31,7 +29,6 @@ import {MemoAddPage} from "../pages/memo/memo-add";
 import {MemoItemPage} from "../pages/memo/modal/memo-item";
 import {CustomerViewPage} from "../pages/customer/customer-view";
 import {FormsModule} from "@angular/forms";
-import {DbProvider} from "../_helpers/DbProvider";
 import {TabsPage} from "../pages/home/tabs";
 import {CallNumber} from "@ionic-native/call-number";
 import {SearchFilterPipe} from "../_helpers/SearchFilterPipe";
@@ -48,7 +45,12 @@ import {CustomerPurposeService} from "../_services/customer-purpose.service";
 import {CustomerSourceService} from "../_services/customer-source.service";
 import {JwtInterceptor} from "../_helpers/JwtInterceptor";
 import {CustomerEditPage} from "../pages/customer/customer-edit";
-import {PersonResetPage} from "../pages/home/modal/person-reset";
+import {PersonResetPage} from "../pages/system/modal/person-reset";
+import {AppVersion} from "@ionic-native/app-version";
+import {SystemSettingPage} from "../pages/system/setting";
+import {FollowupTypeService} from "../_services/followup-type.service";
+import {ContractProductTypeService} from "../_services/contractproduct-type.service";
+import {ContractViewPage} from "../pages/contract/contract-view.component";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -78,14 +80,23 @@ const cloudSettings: CloudSettings = {
     TabsPage,
     RedletterDayPage,
     RedletterDayAddPage,
-    PersonResetPage
+    PersonResetPage,
+    SystemSettingPage,
+    ContractViewPage
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      backButtonText: '返回',
+      cancelText:'取消',
+      doneText:'选定',
+      monthNames: ['一月', '二月', '三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+      monthShortNames:['01', '02', '03','04','05','06','07','08','09','10','11','12'],
+      dayNames: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+      dayShortNames: ['一', '二', '三', '四', '五', '六', '日']})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -109,12 +120,15 @@ const cloudSettings: CloudSettings = {
     TabsPage,
     RedletterDayPage,
     RedletterDayAddPage,
-    PersonResetPage
+    PersonResetPage,
+    SystemSettingPage,
+    ContractViewPage
   ],
   providers: [
     AuthService,
     UserService,
     ContractService,
+    ContractProductTypeService,
     ProductService,
     CustomerService,
     CustomerGradeService,
@@ -123,14 +137,13 @@ const cloudSettings: CloudSettings = {
     CustomerPurposeService,
     CustomerSourceService,
     FollowupService,
+    FollowupTypeService,
     RedletterDayService,
     MemoService,
     AppService,
+    AppVersion,
     StatusBar,
     SplashScreen,
-    File,
-    SQLite,
-    DbProvider,
     CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor,multi: true},

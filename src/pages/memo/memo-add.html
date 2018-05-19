@@ -13,7 +13,7 @@
   <ion-list>
     <ion-item>
       <ion-label>日志类型</ion-label>
-      <ion-select [(ngModel)]="memo.fdType" (ionChange)="fdType_Changed()">
+      <ion-select okText="确定" cancelText="取消"[(ngModel)]="memo.fdType" (ionChange)="fdType_Changed()">
         <ion-option value="日报">日报</ion-option>
         <ion-option value="周报">周报</ion-option>
         <ion-option value="月报">月报</ion-option>
@@ -21,11 +21,11 @@
     </ion-item>
     <ion-item>
       <ion-label>开始日期</ion-label>
-      <ion-datetime dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="memo.fdStartDate"></ion-datetime>
+      <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="memo.fdStartDate"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>截止日期</ion-label>
-      <ion-datetime dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="memo.fdEndDate"></ion-datetime>
+      <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="memo.fdEndDate"></ion-datetime>
     </ion-item>
   </ion-list>
   <ion-list>
@@ -35,7 +35,7 @@
         <ion-icon name="add" right></ion-icon>
       </button>
     </ion-list-header>
-    <button ion-item *ngFor="let p of memo.fdSummaryMemo;let i=index;" (click)="editSummaryMemo(p)">
+    <button ion-item *ngFor="let p of memo.fdSummaryMemoes;let i=index;" (click)="editSummaryMemo(p)">
       <span>{{i+1}}、</span>
       <span>{{p.fdContent}}</span>
     </button>
@@ -47,7 +47,7 @@
         <ion-icon name="add" right></ion-icon>
       </button>
     </ion-list-header>
-    <button ion-item *ngFor="let p of memo.fdPlanMemo;let i=index;" (click)="editPlanMemo(p)">
+    <button ion-item *ngFor="let p of memo.fdPlanMemoes;let i=index;" (click)="editPlanMemo(p)">
       <span>{{i+1}}、</span>
       <span>{{p.fdContent}}</span>
     </button>

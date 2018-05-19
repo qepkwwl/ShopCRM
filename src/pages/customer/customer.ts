@@ -51,6 +51,9 @@ export  class CustomerPage{
       case "followup"://新建回访选则客户时
         this.canSelected=true;
         break;
+      case "followup-query"://新建回访选则客户时
+        this.canSelected=true;
+        break;
       case "redletterDay"://新建纪念日选则客户时
         this.canSelected=true;
         break;
@@ -95,6 +98,9 @@ export  class CustomerPage{
         break;
       case "followup"://新建回访选则客户时
         this.event.publish(FollowupAddPage.SELECTED_CUSTOMER,this.selectCustomer);
+        break;
+      case "followup-query"://新建回访选则客户时
+        this.event.publish(FollowupPage.SELECTED_CUSTOMER,this.selectCustomer);
         break;
       case "redletterDay"://新建纪念日选则客户时
         this.event.publish(RedletterDayAddPage.SELECTED_CUSTOMER,this.selectCustomer);

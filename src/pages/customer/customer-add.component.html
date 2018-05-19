@@ -18,26 +18,32 @@
           <ion-input placeholder="客户名称" [(ngModel)]="customer.fdName"></ion-input>
         </ion-item>
         <ion-item>
+          <ion-label color="primary">客户来源</ion-label>
+          <ion-select okText="确定" cancelText="取消"[(ngModel)]="customer.fdSourceId">
+            <ion-option value="{{p.id}}" *ngFor="let p of fdSources">{{p.fdName}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
           <ion-label color="primary">客户等级</ion-label>
-          <ion-select [(ngModel)]="customer.fdGradeId">
+          <ion-select okText="确定" cancelText="取消"[(ngModel)]="customer.fdGradeId">
             <ion-option value="{{p.id}}" *ngFor="let p of fdGrades">{{p.fdName}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label color="primary">消费档次</ion-label>
-          <ion-select [(ngModel)]="customer.fdLevelId">
+          <ion-select okText="确定" cancelText="取消"[(ngModel)]="customer.fdLevelId">
             <ion-option value="{{p.id}}" *ngFor="let p of fdConsumeLevels">{{p.fdName}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label color="primary">购买用途</ion-label>
-          <ion-select [(ngModel)]="customer.fdPurposeId">
+          <ion-select okText="确定" cancelText="取消"[(ngModel)]="customer.fdPurposeId">
             <ion-option value="{{p.id}}" *ngFor="let p of fdBuyPurposes">{{p.fdName}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户类型</ion-label>
-          <ion-select [(ngModel)]="customer.fdTypeId">
+          <ion-select okText="确定" cancelText="取消"[(ngModel)]="customer.fdTypeId">
             <ion-option value="{{p.id}}" *ngFor="let p of fdTypes">{{p.fdName}}</ion-option>
           </ion-select>
         </ion-item>
@@ -47,7 +53,7 @@
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户生日</ion-label>
-          <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="customer.fdBirthDay"></ion-datetime>
+          <ion-datetime cancelText="取消" doneText="确定" placeholder="请指定日期" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="customer.fdBirthDay" ></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label color="primary">说明</ion-label>

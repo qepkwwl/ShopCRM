@@ -1,7 +1,9 @@
 import {Component, ViewChild} from "@angular/core";
-import {NavController, NavParams, ViewController} from "ionic-angular";
+import {NavController, NavParams, ViewController, Toast, ToastController} from "ionic-angular";
 import {ContractProduct} from "../../../_models/contractProduct";
 import {FormGroup, Validators, FormBuilder, NgForm} from "@angular/forms";
+import {ContractProductType} from "../../../_models/contractProduct-type";
+import {ContractProductTypeService} from "../../../_services/contractproduct-type.service";
 
 @Component({
   templateUrl:"contract-product.html",
@@ -9,8 +11,12 @@ import {FormGroup, Validators, FormBuilder, NgForm} from "@angular/forms";
 })
 export  class ContractProductPage{
   private product:ContractProduct;
-  @ViewChild("myForm") myForm:NgForm;
-  constructor(private view: ViewController,private navParams:NavParams,private formBuilder: FormBuilder){
+  //客户类型
+  private fdSaleTypes:Array<ContractProductType>;
+  private toast:Toast;
+  constructor(private view: ViewController,private toastCtrl:ToastController,private navParams:NavParams,private contractProductTypeService: ContractProductTypeService){
+    this.fdSaleTypes=[];
+    this.contractProductTypeService.findAll().subscribe(result=>{this.fdSaleTypes=result;});
     this.product=new ContractProduct({});
   }
  ngOnInit(){
@@ -19,22 +25,23 @@ export  class ContractProductPage{
     this.product=new ContractProduct(this.navParams.get("product"));
   }
   save() {
+    this.toast = this.toastCtrl.create({
+      message:'',
+      duration:1000
+    });
    if(!/^\d+(\.\d+)?$/ig.test(this.product.fdRetailPrice+"")){
-     alert("请输入合适的单价");
+     this.toast.setMessage("请输入合适的单价");
+     this.toast.present();
      return;
    }
-    if(!/^\d+(\.\d+)?$/ig.test(this.product.fdDiscount+"")){
-      alert("请输入合适的折扣");
-      return;
-    }
-    if(!/^\s*$/ig.test(this.product.fdSaleType+"")){
-      alert("请输入销售类型");
+    this.product.fdDiscount=parseFloat((this.product.fdRetailPrice/this.product.fdGardePrice).toFixed(2));
+
+    if(/^\s*$/ig.test(this.product.fdSaleType+"")){
+      this.toast.setMessage("请输入销售类型");
+      this.toast.present();
       return;
     }
     this.view.dismiss({product:this.product,result:"save"});
-  }
-  onSubmit() {
-    console.log(this.myForm);
   }
   back() {
     this.view.dismiss({result:"back"});

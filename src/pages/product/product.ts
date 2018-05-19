@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import { File } from '@ionic-native/file';
 import {Product} from "../../_models/product";
 import {NavController, NavParams, Events, InfiniteScroll} from "ionic-angular";
 import {ContractAddPage} from "../contract/contract-add.component";
@@ -26,8 +25,10 @@ export  class ProductPage {
   private indexPage:number=0;
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
+  //按指导价排序
+  private fdOrder:string="+";
   private fdOrigin:string;
-  constructor(private nav :NavController,private navParams:NavParams,private event:Events,private file: File,private productService:ProductService,private appService:AppService){
+  constructor(private nav :NavController,private navParams:NavParams,private event:Events,private productService:ProductService,private appService:AppService){
   }
   urlForImage = function(imageId:string) {
     var trueOrigin = "assets/imgs/product/image"+imageId+".jpeg";
@@ -40,7 +41,7 @@ export  class ProductPage {
     this.loadData().subscribe();
   }
   loadData():Observable<any>{
-    return this.productService.findAll(this.fdSearchValue,this.indexPage).pipe(
+    return this.productService.findAll(this.fdSearchValue,this.fdOrder,this.indexPage).pipe(
       tap(data=>{
         let newRecords=data.content.map(item=>{
           return new Product(item);
@@ -80,6 +81,12 @@ export  class ProductPage {
         }
       }
     }
+  }
+  orderSearch(){
+    this.fdOrder=(this.fdOrder=='+'?'-':'+');
+    this.indexPage=0;
+    this.products=[];
+    this.loadData().subscribe();
   }
   ionViewWillEnter(){
     this.selectedProducts=[];

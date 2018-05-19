@@ -7,19 +7,23 @@ import {
 import {FollowupService} from "../../_services/followup.service";
 import {CustomerPage} from "../customer/customer";
 import {Customer} from "../../_models/customer";
+import {FollowupType} from "../../_models/followup-type";
+import {FollowupTypeService} from "../../_services/followup-type.service";
 @Component({
   templateUrl:"follow-add.html",
   selector:"page-follow-add"
 })
 export class FollowupAddPage {
   private followup:Followup;
-
+  private fdFollowTypes:Array<FollowupType>;
   private loading:Loading;
   private toast:Toast;
 
   public static SELECTED_CUSTOMER:string="Followup.select.customer.completed";
-  constructor( private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private event:Events,private followupService:FollowupService){
+  constructor( private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private event:Events,private followupService:FollowupService,private followupTypeService:FollowupTypeService){
     this.followup=new Followup();
+    this.fdFollowTypes=[];
+    this.followupTypeService.findAll().subscribe(result=>{this.fdFollowTypes=result;});
     this.event.subscribe(FollowupAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
     this.loading = this.loadingCtrl.create({
       content: '正在提交...'
@@ -38,8 +42,10 @@ export class FollowupAddPage {
     }
   }
   private afterSelectedCustomer=(c:Customer)=>{
-    this.followup.fdCustomerId=c.id;
-    this.followup.fdCustomerName=c.fdName;
+    if(c){
+      this.followup.fdCustomerId=c.id;
+      this.followup.fdCustomerName=c.fdName;
+    }
 }
   selectCustomer(){
     this.nav.push(CustomerPage,{fdOrigin:'followup',fdCustomerId:this.followup.fdCustomerId});
@@ -54,8 +60,8 @@ export class FollowupAddPage {
       this.toast.present();
       return;
     }
-    if(!this.followup.fdTime){
-      this.toast.setMessage("拜访时间必填");
+    if(!this.followup.fdDate){
+      this.toast.setMessage("拜访日期必填");
       this.toast.present();
       return;
     }

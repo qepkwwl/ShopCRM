@@ -36,7 +36,7 @@ export  class CustomerViewPage{
         });
         this.customer.fdContracts=this.customer.fdContracts.concat(records);
       })).subscribe();
-    this.followupService.findAll(this.customer.id,"",0).pipe(
+    this.followupService.findAll("","",this.customer.id,"","+",0).pipe(
       tap(data=>{
         let records=data.content.map(item=>{
           return new Followup(item);

@@ -8,14 +8,13 @@ import {RedletterDay} from "../../_models/redletter-day";
 import {RedletterDayService} from "../../_services/redletter-day.service";
 import {FollowupService} from "../../_services/followup.service";
 import {FollowupPage} from "../followup/followup";
-import {RedletterDayAddPage} from "../redletter-day/redletter-add";
 import {RedletterDayPage} from "../redletter-day/redletter";
 import {UserService} from "../../_services/user.service";
 import {Achieve} from "../../_models/achieve";
 import {MemoItem} from "../../_models/MemoItem";
 import {tap} from "rxjs/operators";
-import {LoginPage} from "../login/login";
-import {PersonResetPage} from "./modal/person-reset";
+import {MemoService} from "../../_services/memo.service";
+import {SystemSettingPage} from "../system/setting";
 
 @Component({
   selector: 'page-home',
@@ -35,7 +34,7 @@ export class HomePage {
   private fdFollowups:Array<Followup>=[];
   private fdPlans:Array<MemoItem>=[];
   private dayIndexWithShowed=true;
-  constructor(public nav: NavController,private redletterDaySerivce:RedletterDayService,private followupService:FollowupService,private modal :ModalController,private userService:UserService) {
+  constructor(public nav: NavController,private redletterDaySerivce:RedletterDayService,private followupService:FollowupService,private modal :ModalController,private memoService:MemoService,private userService:UserService) {
     setInterval(this.animationRedletterDaies,2000);
   }
   animationRedletterDaies= ()=> {
@@ -53,7 +52,7 @@ export class HomePage {
     }
     this.dayIndexWithShowed=!this.dayIndexWithShowed;
   }
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.redletterDaySerivce.findAll(0,"",0).pipe(
       tap(data=>{
         let records=data.content.map(item=>{
@@ -61,7 +60,7 @@ export class HomePage {
         });
         this.fdRedletterDaies=this.fdRedletterDaies.concat(records);
       })).subscribe();
-    this.followupService.findAll(0,"",0).pipe(
+    this.followupService.findAll("","",0,"","+",0).pipe(
       tap(data=>{
         let records=data.content.map(item=>{
           let followup=new Followup();
@@ -78,8 +77,16 @@ export class HomePage {
     this.userService.findAchieve().pipe(
       tap(data=>{
       Object.assign(this.achieve,data);
-      console.log(data);
     })).subscribe();
+    this.memoService.findAll("",0).pipe(
+      tap(data=>{
+        if(data.content.length>0){
+          let records=data.content[0].fdPlanMemoes.map(item=>{
+            return new MemoItem(item);
+          });
+          this.fdPlans=this.fdPlans.concat(records);
+        }
+      })).subscribe();
   }
   goToFollowup(){
     this.nav.push(FollowupPage);
@@ -87,12 +94,7 @@ export class HomePage {
   goToRedletterDay(){
     this.nav.push(RedletterDayPage);
   }
-  reset_password(){
-    let personModal=this.modal.create(PersonResetPage);
-    personModal.present();
-  }
-  logout(){
-    this.userService.logout();
-    this.nav.setRoot(LoginPage);
+  gotoSetting(){
+    this.nav.push(SystemSettingPage);
   }
 }

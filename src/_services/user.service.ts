@@ -6,6 +6,7 @@ import {tap, catchError} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
 import {HttpHeaders} from "@angular/common/http";
 import {AppService} from "./app.service";
+import {BasePage} from "../pages/base/BasePage";
 
 @Injectable()
 export class UserService{
@@ -50,5 +51,8 @@ export class UserService{
   }
   resetPassword(fdPassword :string,fdNewPassword:string):Observable<any>{
     return this.http.post<any>(this.appSerivce.baseUrl+'/sys/org/person/api/reset', JSON.stringify({fdPassword: fdPassword, fdNewPassword: fdNewPassword}), this.appSerivce.httpJsonOptions);
-}
+  }
+  getVersion(): Observable<any> {
+    return this.http.get<any>(this.appSerivce.baseUrl+'/sys/admin/system/version?p='+BasePage.DevicePlatform);
+  }
 }

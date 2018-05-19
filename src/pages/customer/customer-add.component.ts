@@ -59,6 +59,36 @@ export class CustomerAddPage{
       this.toast.present();
       return;
     }
+    if(!this.customer.fdStationPhone){
+      this.toast.setMessage("客户手机必填");
+      this.toast.present();
+      return;
+    }
+    if(!this.customer.fdStationPhone){
+      this.toast.setMessage("客户手机必填");
+      this.toast.present();
+      return;
+    }
+    if(!this.customer.fdTypeId){
+      this.toast.setMessage("客户类型必填");
+      this.toast.present();
+      return;
+    }
+    if(!this.customer.fdSourceId){
+      this.toast.setMessage("客户来源必填");
+      this.toast.present();
+      return;
+    }
+    if(!this.customer.fdPurposeId){
+      this.toast.setMessage("购酒目的必填");
+      this.toast.present();
+      return;
+    }
+    if(!this.customer.fdLevelId){
+      this.toast.setMessage("消费档次必填");
+      this.toast.present();
+      return;
+    }
     this.loading.present();
     this.customerService.save(this.customer).subscribe(result=>{
       if(result){

@@ -15,7 +15,7 @@ export class FollowupService{
     let formData=new FormData();
     formData.append("fdName",form.fdCustomerName);
     formData.append("fdCustomerId",form.fdCustomerId+"");
-    formData.append("fdTime",`${form.fdDate} ${form.fdTime}:00`);
+    formData.append("fdTime",`${form.fdDate} 00:00:00`);
     formData.append("fdContent",form.fdContent);
     formData.append("fdGift",form.fdGift||'');
     return this.http.post<any>(this.appService.baseUrl+'/bz/person/followup/api/save',formData).pipe(
@@ -28,15 +28,15 @@ export class FollowupService{
     formData.append("id",form.id+"");
     formData.append("fdName",form.fdCustomerName);
     formData.append("fdCustomerId",form.fdCustomerId+"");
-    formData.append("fdTime",`${form.fdDate} ${form.fdTime}:00`);
+    formData.append("fdTime",`${form.fdDate} 00:00:00`);
     formData.append("fdContent",form.fdContent);
     formData.append("fdGift",form.fdGift||'');
     return this.http.post<any>(this.appService.baseUrl+'/bz/person/followup/api/update',formData).pipe(
       map(response=>response.fdCode=="OK")
     );
   }
-
-  public findAll(customerId:number,searchValue:string,indexPage:number):Observable<any>{
-    return this.http.get<any>(this.appService.baseUrl+'/bz/person/followup/data?size=10&sortby=+id&customerId='+(customerId||'')+'&searchValue='+searchValue+'&start='+indexPage)
+ //startTime endTime customerId searchValue
+  public findAll(startTime:string,endTime:string,customerId:number,searchValue:string,order:string,indexPage:number):Observable<any>{
+    return this.http.get<any>(this.appService.baseUrl+'/bz/person/followup/data?size=10&sortby='+order+'fdTime&customerId='+(customerId||'')+'&searchValue='+searchValue+'&startTime='+startTime+'&endTime='+endTime+'&start='+indexPage)
   }
 }

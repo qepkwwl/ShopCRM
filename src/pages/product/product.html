@@ -9,6 +9,9 @@
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
       </button>
+      <button class="toolbar-button" (click)="orderSearch()">
+        <ion-icon [name]="fdOrder=='+'?'arrow-up':'arrow-down'"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

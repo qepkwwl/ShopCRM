@@ -89,12 +89,12 @@ export  class MemoAddPage{
       this.toast.present();
       return;
     }
-    if(this.memo.fdPlanMemo.length<=0){
+    if(this.memo.fdPlanMemoes.length<=0){
       this.toast.setMessage("工作计划必填");
       this.toast.present();
       return;
     }
-    if(this.memo.fdPlanMemo.length<=0){
+    if(this.memo.fdPlanMemoes.length<=0){
       this.toast.setMessage("上周总结必填");
       this.toast.present();
       return;
@@ -118,23 +118,23 @@ export  class MemoAddPage{
         case "save":
           let hasExists=false;
           let memoItem=data.memoItem;
-          this.memo.fdSummaryMemo.forEach((item,index)=>{
+          this.memo.fdSummaryMemoes.forEach((item,index)=>{
             if(item.id==memoItem.id){
               hasExists=true;
-              this.memo.fdSummaryMemo.splice(index,1,new MemoItem(memoItem));
+              this.memo.fdSummaryMemoes.splice(index,1,new MemoItem(memoItem));
               return false;
             }
           });
           if(!hasExists){
-            this.memo.fdSummaryMemo.push(new MemoItem(memoItem));
+            this.memo.fdSummaryMemoes.push(new MemoItem(memoItem));
           }
           break;
         case "back":
           break;
         case "delete":
-          this.memo.fdSummaryMemo.forEach((item,index)=>{
+          this.memo.fdSummaryMemoes.forEach((item,index)=>{
             if(item.id==data.memoItem.id){
-              this.memo.fdSummaryMemo.splice(index,1);
+              this.memo.fdSummaryMemoes.splice(index,1);
               return false;
             }
           });
@@ -154,23 +154,23 @@ export  class MemoAddPage{
         case "save":
           let hasExists=false;
           let memoItem=data.memoItem;
-          this.memo.fdPlanMemo.forEach((item,index)=>{
+          this.memo.fdPlanMemoes.forEach((item,index)=>{
             if(item.id==memoItem.id){
               hasExists=true;
-              this.memo.fdPlanMemo.splice(index,1,new MemoItem(memoItem));
+              this.memo.fdPlanMemoes.splice(index,1,new MemoItem(memoItem));
               return false;
             }
           });
           if(!hasExists){
-            this.memo.fdPlanMemo.push(new MemoItem(memoItem));
+            this.memo.fdPlanMemoes.push(new MemoItem(memoItem));
           }
           break;
         case "back":
           break;
         case "delete":
-          this.memo.fdPlanMemo.forEach((item,index)=>{
+          this.memo.fdPlanMemoes.forEach((item,index)=>{
             if(item.id==data.memoItem.id){
-              this.memo.fdPlanMemo.splice(index,1);
+              this.memo.fdPlanMemoes.splice(index,1);
               return false;
             }
           });

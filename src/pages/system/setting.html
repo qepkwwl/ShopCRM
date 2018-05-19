@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{fdTitle}}</ion-title>
+    <ion-buttons end>
+      <button class="toolbar-button"  ion-button  (click)="save()">
+        <ion-icon name="done-all"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item (click)="btnCheckVersion()">
+      检查新版本
+    </button>
+    <button ion-item  (click)="reset_password()">
+      <ion-icon name="key"></ion-icon>
+      重置密码
+    </button>
+    <button ion-item (click)="logout()">
+      <ion-icon name="log-out"></ion-icon>
+      注销登录
+    </button>
+  </ion-list>
+</ion-content>
+

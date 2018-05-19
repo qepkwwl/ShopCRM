@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import 'rxjs/add/operator/map'
 import {HttpParams} from "@angular/common/http";
 import {HttpHeaders} from "@angular/common/http";
+import {BasePage} from "../pages/base/BasePage";
 
 @Injectable()
 export class AppService{

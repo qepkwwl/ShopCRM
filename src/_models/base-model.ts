@@ -2,6 +2,12 @@ export class BaseModel{
   id:number;
   constructor(param?){
     Object.assign(this, param||{} );
+    let ps=Object.getOwnPropertyNames(this);
+    for(let p of ps){
+      if(this[p]=='null'){
+        this[p]="";
+      }
+    }
     this.id=this.id||this.getId();
   }
   getId():number{

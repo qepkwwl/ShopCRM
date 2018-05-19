@@ -2,11 +2,8 @@
   <ion-navbar>
     <ion-title>湖南萄最酒业有限公司</ion-title>
     <ion-buttons end>
-      <button class="toolbar-button"  ion-button  (click)="reset_password()">
-        <ion-icon name="key"></ion-icon>
-      </button>
-      <button class="toolbar-button"  ion-button  (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
+      <button class="toolbar-button"  ion-button  (click)="gotoSetting()">
+        <ion-icon name="settings"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -24,7 +21,7 @@
     </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-card-header>记念日提醒
+    <ion-card-header>纪念日提醒
       <button class="content-button" float-end (click)="goToRedletterDay()">
         <ion-icon name="calendar"></ion-icon>
       </button>
@@ -60,7 +57,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let p of fdPlans">
-          <span>{{p}}</span>
+          <span>{{p.fdContent}}</span>
         </ion-item>
       </ion-list>
     </ion-card-content>

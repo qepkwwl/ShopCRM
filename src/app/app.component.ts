@@ -22,6 +22,7 @@ export class MyApp {
     platform.ready().then((readySource) => {
       BasePage.DeviceHeight=platform.height();
       BasePage.DeviceWidth=platform.width();
+      BasePage.DevicePlatform=(platform.is("ios")||platform.is("iphone")||platform.is("ipad"))?"ios":"android";
     });
     if(authService.isLogined()){
       this.rootPage=TabsPage;

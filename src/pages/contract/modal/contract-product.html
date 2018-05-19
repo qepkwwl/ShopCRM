@@ -17,23 +17,25 @@
       </ion-item>
       <ion-item>
           <ion-label>数量</ion-label>
-          <ion-input type="text" placeholder="数量" [(ngModel)]="product.fdNum" ></ion-input>
+          <ion-input type="text" placeholder="数量" [(ngModel)]="product.fdNum"  ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">单价</ion-label>
-        <ion-input type="text"  placeholder="单价" [(ngModel)]="product.fdRetailPrice" ></ion-input>
+        <ion-input type="text"  placeholder="单价" [(ngModel)]="product.fdRetailPrice"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">指导价</ion-label>
-        <ion-input aria-readonly="true" type="text" placeholder="指导价" [(ngModel)]="product.fdGardePrice" ></ion-input>
+        <ion-input readonly="true" type="text" placeholder="指导价" [(ngModel)]="product.fdGardePrice" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">折扣</ion-label>
-        <ion-input type="text" placeholder="折扣" [(ngModel)]="product.fdDiscount" ></ion-input>
+        <ion-input readonly="true" type="text" placeholder="折扣" [(ngModel)]="product.fdDiscount" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">销售类型</ion-label>
-        <ion-input type="text" placeholder="销售类型" [(ngModel)]="product.fdSaleType" ></ion-input>
+        <ion-select okText="确定" cancelText="取消"[(ngModel)]="product.fdSaleType">
+          <ion-option value="{{p.fdName}}" *ngFor="let p of fdSaleTypes">{{p.fdName}}</ion-option>
+        </ion-select>
       </ion-item>
     </ion-list>
 </ion-content>

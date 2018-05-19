@@ -17,10 +17,11 @@ export  class MemoItemPage{
     this.memoItem=new MemoItem(this.navParams.get("memoItem"));
     this.fdTitle=this.navParams.get("fdTitle");
   }
-  ionViewLoaded() {
+  ionViewDidLoaded() {
 
     setTimeout(() => {
       this.fdContent.setFocus();
+      console.log(this.fdContent);
     },150);
 
   }

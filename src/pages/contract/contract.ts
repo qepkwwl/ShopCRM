@@ -7,6 +7,7 @@ import {ContractService} from "../../_services/contract.service";
 import {Customer} from "../../_models/customer";
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
+import {ContractViewPage} from "./contract-view.component";
 
 @Component({
   templateUrl:"contract.html",
@@ -53,7 +54,7 @@ export  class ContractPage{
       infiniteScroll.complete();
     });
   }
-  ionViewDidLoad(){
+  ionViewWillEnter(){
     this.indexPage=0;
     this.contracts=[];
     this.fdOrigin=this.navParams.get("fdOrigin");
@@ -68,8 +69,10 @@ export  class ContractPage{
     }
     this.loadData().subscribe();
   }
-
   add(){
     this.nav.push(ContractAddPage);
+  }
+  view(c:Contract){
+    this.nav.push(ContractViewPage,{fdContract:c});
   }
 }

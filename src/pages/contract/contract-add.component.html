@@ -16,8 +16,8 @@
       <ion-card-content>
         <ion-list>
             <ion-item>
-              <ion-label color="primary">开始日期</ion-label>
-              <ion-datetime dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="contract.fdStartTime"></ion-datetime>
+              <ion-label color="primary">合同日期</ion-label>
+              <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="contract.fdStartTime"></ion-datetime>
             </ion-item>
             <button ion-item (click)="selectCustomer()">
               <ion-label color="primary">选择客户</ion-label>

@@ -1,24 +1,25 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../_services/user.service";
-import {NavController, LoadingController} from "ionic-angular";
+import {NavController, LoadingController, Toast, Loading, ToastController} from "ionic-angular";
 import {MyApp} from "../../app/app.component";
 
 @Component({
     selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage implements OnInit{
+export class LoginPage{
   @ViewChild('email') email: any;
   private username: string;
   private password: string;
   private error: string;
-  private loading;
-  constructor(private nav: NavController,private loadingCtrl: LoadingController,private userService:UserService) {
+  private loading:Loading;
+  private toast:Toast;
+  constructor(private nav: NavController,private loadingCtrl: LoadingController,private toastCtrl:ToastController,private userService:UserService) {
     this.loading = this.loadingCtrl.create({
       content: '正在登录...'
     });
   }
-  ngOnInit(): void {
+  ionViewWillEnter(): void {
     this.userService.logout();
   }
   login(){
@@ -28,7 +29,11 @@ export class LoginPage implements OnInit{
       if (result) {
         this.nav.push(MyApp);
       } else {
-        console.log('用户名或密码错误');
+        this.toast = this.toastCtrl.create({
+          message:'用户名或密码错误',
+          duration:1000
+        });
+        this.toast.present();
       }
     });
   }

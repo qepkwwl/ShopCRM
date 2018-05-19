@@ -17,15 +17,13 @@
       </button>
     <ion-item>
       <ion-label color="primary">拜访日期</ion-label>
-      <ion-datetime dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="followup.fdDate"></ion-datetime>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">拜访时间</ion-label>
-      <ion-datetime dataformatas="HH:mm" displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="followup.fdTime"></ion-datetime>
+      <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="followup.fdDate"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label color="primary">拜访形式</ion-label>
-      <ion-input placeholder="拜访形式" [(ngModel)]="followup.fdType"></ion-input>
+      <ion-select okText="确定" cancelText="取消"[(ngModel)]="followup.fdType">
+        <ion-option value="{{p.fdName}}" *ngFor="let p of fdFollowTypes">{{p.fdName}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label color="primary">拜访内容</ion-label>
