@@ -51,6 +51,7 @@ import {SystemSettingPage} from "../pages/system/setting";
 import {FollowupTypeService} from "../_services/followup-type.service";
 import {ContractProductTypeService} from "../_services/contractproduct-type.service";
 import {ContractViewPage} from "../pages/contract/contract-view.component";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -145,6 +146,7 @@ const cloudSettings: CloudSettings = {
     StatusBar,
     SplashScreen,
     CallNumber,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor,multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor,multi: true}
