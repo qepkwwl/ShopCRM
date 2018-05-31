@@ -1,19 +1,14 @@
-import {Component, Input} from "@angular/core";
+import {Component} from "@angular/core";
 import {Customer} from "../../_models/customer";
-import {NavController, Events, NavParams} from "ionic-angular";
-import {CustomerAddPage} from "./customer-add.component";
-import {LoginPage} from "../login/login";
-import {ContractAddPage} from "../contract/contract-add.component";
-import {FollowupAddPage} from "../followup/followup-add";
-import {FollowupPage} from "../followup/followup";
-import {ContractPage} from "../contract/contract";
-import {CustomerService} from "../../_services/customer.service";
+import {NavParams, NavController, ModalController} from "ionic-angular";
 import {ContractService} from "../../_services/contract.service";
 import {FollowupService} from "../../_services/followup.service";
 import {tap} from "rxjs/operators";
 import {Contract} from "../../_models/contract";
 import {Followup} from "../../_models/followup";
 import {CustomerEditPage} from "./customer-edit";
+import {ContractProduct} from "../../_models/contractProduct";
+import {ProductOpinionPage} from "../contract/modal/product-opinion";
 
 @Component({
   templateUrl:"customer-view.html",
@@ -21,7 +16,10 @@ import {CustomerEditPage} from "./customer-edit";
 })
 export  class CustomerViewPage{
   private customer:Customer;
-  constructor(private nav:NavController,private navParams:NavParams,private  event:Events,private customerService:CustomerService,private contractService:ContractService,private followupService:FollowupService){
+  private isShowCustomerInfo=false;
+  private isShowContractInfo=false;
+  private isShowFollowupInfo=false;
+  constructor(private nav:NavController,private modal:ModalController,private navParams:NavParams,private contractService:ContractService,private followupService:FollowupService){
     this.customer=new Customer();
   }
 
@@ -47,5 +45,24 @@ export  class CustomerViewPage{
 
   edit(){
     this.nav.push(CustomerEditPage,{fdCustomer:this.customer});
+  }
+
+  addOpinion(p:ContractProduct){
+    let productModal=this.modal.create(ProductOpinionPage,{product:p});
+    productModal.onDidDismiss(data=>{
+      switch (data.result){
+        case "save":
+          var product=data.product;
+          this.contractService.addOpinion(product).subscribe(data=>{
+            if(data){
+              p.fdOpinion=product.fdOpinion;
+            }
+          });
+          break;
+        case "back":
+          break;
+      }
+    });
+    productModal.present();
   }
 }

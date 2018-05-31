@@ -4,8 +4,7 @@ import {Customer} from "../_models/customer";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {AppService} from "./app.service";
-import {tap, catchError, map} from "rxjs/operators";
-import {of} from "rxjs/observable/of";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class CustomerService{

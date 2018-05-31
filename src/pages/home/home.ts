@@ -1,12 +1,6 @@
-import {Component, ViewChild} from "@angular/core";
-import {NavController, ModalController} from "ionic-angular";
-import {Chart} from "chart.js";
+import {Component} from "@angular/core";
+import {NavController} from "ionic-angular";
 import {transition, animate, state, trigger, style} from "@angular/animations";
-import {Followup} from "../../_models/followup";
-import {Customer} from "../../_models/customer";
-import {RedletterDay} from "../../_models/redletter-day";
-import {RedletterDayService} from "../../_services/redletter-day.service";
-import {FollowupService} from "../../_services/followup.service";
 import {FollowupPage} from "../followup/followup";
 import {RedletterDayPage} from "../redletter-day/redletter";
 import {UserService} from "../../_services/user.service";
@@ -15,6 +9,8 @@ import {MemoItem} from "../../_models/MemoItem";
 import {tap} from "rxjs/operators";
 import {MemoService} from "../../_services/memo.service";
 import {SystemSettingPage} from "../system/setting";
+import {TodoService} from "../../_services/todo.service";
+import {Todo} from "../../_models/todo";
 
 @Component({
   selector: 'page-home',
@@ -30,49 +26,42 @@ import {SystemSettingPage} from "../system/setting";
 })
 export class HomePage {
   private achieve:Achieve=new Achieve();
-  private fdRedletterDaies:Array<RedletterDay>=[];
-  private fdFollowups:Array<Followup>=[];
+  private fdKeyDayTodoes:Array<Todo>=[];
+  private fdFollowupTodoes:Array<Todo>=[];
   private fdPlans:Array<MemoItem>=[];
   private dayIndexWithShowed=true;
-  constructor(public nav: NavController,private redletterDaySerivce:RedletterDayService,private followupService:FollowupService,private modal :ModalController,private memoService:MemoService,private userService:UserService) {
+  constructor(public nav: NavController,private todoService:TodoService,private memoService:MemoService,private userService:UserService) {
     setInterval(this.animationRedletterDaies,2000);
   }
   animationRedletterDaies= ()=> {
     if(!this.dayIndexWithShowed){
-      if(this.fdRedletterDaies.length>0){
-        let first=this.fdRedletterDaies[0];
-        this.fdRedletterDaies.splice(0,1);
-        this.fdRedletterDaies.push(first);
+      if(this.fdKeyDayTodoes.length>0){
+        let first=this.fdKeyDayTodoes[0];
+        this.fdKeyDayTodoes.splice(0,1);
+        this.fdKeyDayTodoes.push(first);
       }
-      if(this.fdFollowups.length>0){
-        let first=this.fdFollowups[0];
-        this.fdFollowups.splice(0,1);
-        this.fdFollowups.push(first);
+      if(this.fdFollowupTodoes.length>0){
+        let first=this.fdFollowupTodoes[0];
+        this.fdFollowupTodoes.splice(0,1);
+        this.fdFollowupTodoes.push(first);
       }
     }
     this.dayIndexWithShowed=!this.dayIndexWithShowed;
   }
   ionViewWillEnter() {
-    this.redletterDaySerivce.findAll(0,"",0).pipe(
+    this.todoService.findAll("TODO_KEYDDAY_NOTIFY").pipe(
       tap(data=>{
         let records=data.content.map(item=>{
-          return new RedletterDay(item);
+          return new Todo(item);
         });
-        this.fdRedletterDaies=this.fdRedletterDaies.concat(records);
+        this.fdKeyDayTodoes=this.fdKeyDayTodoes.concat(records);
       })).subscribe();
-    this.followupService.findAll("","",0,"","+",0).pipe(
+    this.todoService.findAll("TODO_FOLLOWUP_NOTIFY").pipe(
       tap(data=>{
         let records=data.content.map(item=>{
-          let followup=new Followup();
-          followup.fdCustomerId=item.fdCustomerId;
-          followup.fdCustomerName=item.fdCustomerName;
-          followup.fdDate=/(\d{2}:\d{2}):\d{2}$/ig.exec(item.fdTime)[1];
-          followup.fdTime=/^(\d{4}-\d{2}-\d{2})/ig.exec(item.fdTime)[1];
-          followup.fdContent=item.fdContent;
-          followup.fdGift=item.fdGift;
-          return followup;
+          return new Todo(item);
         });
-        this.fdFollowups=this.fdFollowups.concat(records);
+        this.fdFollowupTodoes=this.fdFollowupTodoes.concat(records);
       })).subscribe();
     this.userService.findAchieve().pipe(
       tap(data=>{

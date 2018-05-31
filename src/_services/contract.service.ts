@@ -5,6 +5,7 @@ import {Contract} from "../_models/contract";
 import {Observable} from "rxjs";
 import {AppService} from "./app.service";
 import {map} from "rxjs/operators";
+import {ContractProduct} from "../_models/contractProduct";
 
 @Injectable()
 export class ContractService{
@@ -54,6 +55,14 @@ export class ContractService{
       formData.append(`fdProducts[${i}].fdSaleType`,p.fdSaleType);
     });
     return this.http.post<any>(this.appService.baseUrl+'/bz/sale/contract/api/update',form.toFormData()).pipe(
+      map(response=>response.fdCode=="OK")
+    );
+  }
+  public addOpinion(form:ContractProduct){
+    let formData=new FormData();
+    formData.append('id',"67762553570677");
+    formData.append('fdOpinion',form.fdOpinion);
+    return this.http.post<any>(this.appService.baseUrl+'/bz/sale/contractproduct/addopinion',formData).pipe(
       map(response=>response.fdCode=="OK")
     );
   }

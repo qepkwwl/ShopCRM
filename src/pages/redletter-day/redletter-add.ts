@@ -1,8 +1,5 @@
 import {Component} from "@angular/core";
-import {
-  IonicPage, IonicModule, NavParams, NavController, Events, ToastController,
-  LoadingController, Toast, Loading
-} from "ionic-angular";
+import {NavParams, NavController, Events, ToastController, LoadingController, Toast, Loading} from "ionic-angular";
 import {CustomerPage} from "../customer/customer";
 import {Customer} from "../../_models/customer";
 import {RedletterDayService} from "../../_services/redletter-day.service";

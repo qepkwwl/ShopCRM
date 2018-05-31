@@ -1,7 +1,7 @@
-import {Component, Input, ViewChild} from "@angular/core";
+import {Component} from "@angular/core";
 import {FollowupService} from "../../_services/followup.service";
 import {Followup} from "../../_models/followup";
-import {NavParams, NavController, InfiniteScroll, MenuController, Menu, Events} from "ionic-angular";
+import {NavParams, NavController, InfiniteScroll, Events} from "ionic-angular";
 import {Customer} from "../../_models/customer";
 import {FollowupAddPage} from "./followup-add";
 import {tap} from "rxjs/operators";
@@ -12,10 +12,9 @@ import {CustomerPage} from "../customer/customer";
   selector:"page-followup"
 })
 export class FollowupPage{
-  //是否显示搜索框
-  private isShowSearch:boolean=false;
 
  private followups:Array<Followup>=[];
+ private isShowSearch:boolean;
   //事件的来源
   private fdOrigin:string;
   //搜索的内容

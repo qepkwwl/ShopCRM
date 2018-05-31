@@ -1,5 +1,5 @@
-import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component, OnInit} from "@angular/core";
+import {NavController, NavParams} from "ionic-angular";
 
 @Component({
   selector: 'page-list',
@@ -9,7 +9,6 @@ export class ListPage implements OnInit{
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
-  private isOn: boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');

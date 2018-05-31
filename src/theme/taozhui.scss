@@ -1,9 +1,9 @@
 .tab-button[aria-selected=true]{
-  border: 0.3rem double $taozhui-white;
+  border: 0.3rem double $taozhui-golden;
   border-radius: 50%;
 }
 .tab-button-icon,.tab-button-text{
-  color:$taozhui-white !important;
+  color:$taozhui-golden !important;
 }
 .toolbar-background{
   background-color:  $taozhui-blue !important;

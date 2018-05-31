@@ -2,8 +2,13 @@ import {Component} from "@angular/core";
 import {Contract} from "../../_models/contract";
 import {ContractProduct} from "../../_models/contractProduct";
 import {
-  NavController, ModalController, Events, NavParams, Toast, Loading, LoadingController,
-  ToastController
+  NavController,
+  ModalController,
+  NavParams,
+  Toast,
+  Loading,
+  LoadingController,
+  ToastController, Events
 } from "ionic-angular";
 import {ProductPage} from "../product/product";
 import {CustomerPage} from "../customer/customer";
@@ -25,10 +30,10 @@ export class ContractAddPage{
   private fdOrigin:string;
   private loading:Loading;
   private toast:Toast;
-  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private event:Events,private modal :ModalController,private contractService:ContractService){
+  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private modal :ModalController,private event :Events,private contractService:ContractService){
     this.reset();
-    event.subscribe(ContractAddPage.SELECTED_PRODUCT,this.afterSelectedProduct)
-    event.subscribe(ContractAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
+    this.event.subscribe(ContractAddPage.SELECTED_PRODUCT,this.afterSelectedProduct)
+    this.event.subscribe(ContractAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
     this.loading = this.loadingCtrl.create({
       content: '正在提交...'
     });

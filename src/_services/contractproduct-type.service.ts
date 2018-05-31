@@ -6,7 +6,6 @@ import {AppService} from "./app.service";
 import {CustomerGrade} from "../_models/customer-grade";
 import {catchError, map} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
-import {FollowupType} from "../_models/followup-type";
 import {ContractProductType} from "../_models/contractProduct-type";
 
 @Injectable()

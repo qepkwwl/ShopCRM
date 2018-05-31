@@ -21,4 +21,5 @@ export class ContractProduct extends BaseModel{
   fdGardePrice:number;
   fdTotal:number;
   fdSaleType:string;
+  fdOpinion:string;
 }

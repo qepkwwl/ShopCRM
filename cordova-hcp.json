@@ -1,0 +1,7 @@
+{
+  "name": "shopCRM",
+  "ios_identifier": "id123456789",
+  "android_identifier": "con.stone.shopCRM",
+  "update": "resume",
+  "content_url": "http://111.230.9.200:31284"
+}

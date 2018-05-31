@@ -1,10 +1,8 @@
-import {Component, Input} from "@angular/core";
-import {NavController, NavParams, Refresher, InfiniteScroll} from "ionic-angular";
+import {Component} from "@angular/core";
+import {NavController, NavParams, InfiniteScroll} from "ionic-angular";
 import {ContractAddPage} from "./contract-add.component";
 import {Contract} from "../../_models/contract";
-import {ContractProduct} from "../../_models/contractProduct";
 import {ContractService} from "../../_services/contract.service";
-import {Customer} from "../../_models/customer";
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {ContractViewPage} from "./contract-view.component";
@@ -14,8 +12,6 @@ import {ContractViewPage} from "./contract-view.component";
   selector:"page-contract"
 })
 export  class ContractPage{
-  //是否显示搜索框
-  private isShowSearch:boolean=false;
   //客户列表
   private contracts:Array<Contract>;
   //事件的来源

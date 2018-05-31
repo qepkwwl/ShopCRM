@@ -1,5 +1,4 @@
 import {BaseModel} from "./base-model";
-import {Customer} from "./customer";
 export class Followup extends BaseModel{
   constructor(param?){
     super(param);

@@ -4,7 +4,7 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {AppService} from "./app.service";
 import {CustomerType} from "../_models/customer-type";
-import {catchError, tap, map} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
 
 @Injectable()

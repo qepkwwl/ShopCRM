@@ -1,17 +1,5 @@
 page-home {
-  .ios, .md {
-
-    page-home {
-
-      .scroll-content {
-        background-color: map-get($colors, light);
-      }
-
-      ion-card-header {
-        font-weight: bold;
-      }
-
-    }
-
+  ion-card-header {
+    font-weight: bold !important;
   }
 }

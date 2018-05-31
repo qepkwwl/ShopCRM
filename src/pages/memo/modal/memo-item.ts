@@ -1,5 +1,5 @@
-import {Component, ElementRef, ViewChild} from "@angular/core";
-import {NavController, NavParams, ViewController} from "ionic-angular";
+import {Component, ViewChild} from "@angular/core";
+import {ViewController} from "ionic-angular";
 import {MemoItem} from "../../../_models/MemoItem";
 
 @Component({
@@ -8,9 +8,9 @@ import {MemoItem} from "../../../_models/MemoItem";
 })
 export  class MemoItemPage{
   private memoItem:MemoItem;
-  private fdTitle:string;
+
   @ViewChild('fdContent') fdContent: any;
-  constructor(private view: ViewController,private navParams:NavParams){
+  constructor(private view: ViewController){
     this.reset();
   }
   ionViewWillEnter=function () {

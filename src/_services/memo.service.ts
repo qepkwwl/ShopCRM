@@ -2,7 +2,6 @@ import {HttpClient} from "@angular/common/http";
 import "rxjs/add/operator/map";
 import {Injectable} from "@angular/core";
 import {Memo} from "../_models/Memo";
-import {MemoItem} from "../_models/MemoItem";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {AppService} from "./app.service";

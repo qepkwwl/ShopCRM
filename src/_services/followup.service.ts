@@ -2,7 +2,6 @@ import {HttpClient} from "@angular/common/http";
 import "rxjs/add/operator/map";
 import {Followup} from "../_models/followup";
 import {Injectable} from "@angular/core";
-import {Customer} from "../_models/customer";
 import {AppService} from "./app.service";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";

@@ -1,6 +1,5 @@
-import {Component, Input} from "@angular/core";
+import {Component} from "@angular/core";
 import {NavParams, NavController, InfiniteScroll} from "ionic-angular";
-import {Customer} from "../../_models/customer";
 import {RedletterDayService} from "../../_services/redletter-day.service";
 import {RedletterDay} from "../../_models/redletter-day";
 import {RedletterDayAddPage} from "./redletter-add";

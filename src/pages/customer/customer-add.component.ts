@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Customer} from "../../_models/customer";
-import {NavController, NavParams, LoadingController, Loading, Toast, ToastController} from "ionic-angular";
+import {NavController, LoadingController, Loading, Toast, ToastController} from "ionic-angular";
 import {CustomerGradeService} from "../../_services/customer-grade.service";
 import {CustomerLevelService} from "../../_services/customer-level.service";
 import {CustomerSourceService} from "../../_services/customer-source.service";
@@ -31,7 +31,7 @@ export class CustomerAddPage{
   private fdSources:Array<CustomerSource>;
   private loading:Loading;
   private toast:Toast;
-  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private customerGradeService:CustomerGradeService,private customerService: CustomerService, private customerLevelService:CustomerLevelService
+  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private customerGradeService:CustomerGradeService,private customerService: CustomerService, private customerLevelService:CustomerLevelService
     ,private customerPurposeService:CustomerPurposeService,private customerTypeService:CustomerTypeService,private customerSourceService:CustomerSourceService){
     this.customer=new Customer({});
     this.fdGrades=[];

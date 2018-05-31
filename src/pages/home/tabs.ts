@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
 import {CustomerPage} from "../customer/customer";
 import {ContractPage} from "../contract/contract";
 import {ProductPage} from "../product/product";
 import {FollowupPage} from "../followup/followup";
 import {MemoPage} from "../memo/memo";
-import {LoginPage} from "../login/login";
 import {HomePage} from "./home";
 
 @Component({

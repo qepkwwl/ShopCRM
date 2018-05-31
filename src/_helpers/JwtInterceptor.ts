@@ -8,7 +8,6 @@ import {
   HttpHandler
 } from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AppService} from "../_services/app.service";
 import {Injectable} from "@angular/core";
 import {App} from "ionic-angular";
 import {LoginPage} from "../pages/login/login";

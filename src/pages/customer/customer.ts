@@ -1,8 +1,7 @@
 import {Component} from "@angular/core";
 import {Customer} from "../../_models/customer";
-import {NavController, Events, NavParams, Refresher, InfiniteScroll} from "ionic-angular";
+import {NavController, Events, NavParams, InfiniteScroll} from "ionic-angular";
 import {CustomerAddPage} from "./customer-add.component";
-import {LoginPage} from "../login/login";
 import {ContractAddPage} from "../contract/contract-add.component";
 import {FollowupAddPage} from "../followup/followup-add";
 import {FollowupPage} from "../followup/followup";
@@ -19,8 +18,6 @@ import {tap} from "rxjs/operators";
   selector:"page-customer"
 })
 export  class CustomerPage{
-  //是否显示搜索框
-  private isShowSearch:boolean=false;
   //是否单点时可以选中
   private canSelected:boolean=false;
   //事件的来源

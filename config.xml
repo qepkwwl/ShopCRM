@@ -84,6 +84,13 @@
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <chcp>
+        <config-file url="http://111.230.9.200:31284/chcp.json" />
+        <native-interface version="2" />
+        <auto-download enabled="true" />
+        <auto-install enabled="true" />
+    </chcp>
+    <allow-navigation href="http://111.230.9.200:31284" />
+    <plugin name="cordova-hot-code-push-plugin" spec="^1.5.3" />
     <engine name="android" spec="6.3.0" />
-    <engine name="ios" spec="4.5.4" />
 </widget>

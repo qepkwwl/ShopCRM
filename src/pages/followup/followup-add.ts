@@ -1,9 +1,6 @@
 import {Component} from "@angular/core";
 import {Followup} from "../../_models/followup";
-import {
-  IonicPage, IonicModule, NavParams, NavController, Events, ToastController,
-  LoadingController, Toast, Loading
-} from "ionic-angular";
+import {NavParams, NavController, Events, ToastController, LoadingController, Toast, Loading} from "ionic-angular";
 import {FollowupService} from "../../_services/followup.service";
 import {CustomerPage} from "../customer/customer";
 import {Customer} from "../../_models/customer";

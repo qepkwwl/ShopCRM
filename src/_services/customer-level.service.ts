@@ -1,12 +1,10 @@
 import {HttpClient} from "@angular/common/http";
 import "rxjs/add/operator/map";
-import {Customer} from "../_models/customer";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {AppService} from "./app.service";
-import {CustomerGrade} from "../_models/customer-grade";
 import {CustomerLevel} from "../_models/customer-level";
-import {catchError, tap, map} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
 
 @Injectable()

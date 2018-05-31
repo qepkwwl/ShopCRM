@@ -1,10 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import 'rxjs/add/operator/map'
+import "rxjs/add/operator/map";
 import {tap, catchError} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
-import {HttpHeaders} from "@angular/common/http";
 import {AppService} from "./app.service";
 import {BasePage} from "../pages/base/BasePage";
 

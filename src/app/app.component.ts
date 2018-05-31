@@ -6,8 +6,8 @@ import {LoginPage} from "../pages/login/login";
 import {AuthService} from "../_services/auth.service";
 import {BasePage} from "../pages/base/BasePage";
 import {TabsPage} from "../pages/home/tabs";
-import {Subscription} from "rxjs";
-import {AppService} from "../_services/app.service";
+import {tap} from "rxjs/operators";
+import { HotCodePush } from '@ionic-native/hot-code-push';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,14 +16,10 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = TabsPage;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,authService:AuthService) {
+  constructor(public platform: Platform, public statusBar: StatusBar,private chcp:HotCodePush,public splashScreen: SplashScreen,authService:AuthService) {
 
     this.initializeApp();
-    platform.ready().then((readySource) => {
-      BasePage.DeviceHeight=platform.height();
-      BasePage.DeviceWidth=platform.width();
-      BasePage.DevicePlatform=(platform.is("ios")||platform.is("iphone")||platform.is("ipad"))?"ios":"android";
-    });
+
     if(authService.isLogined()){
       this.rootPage=TabsPage;
     }else{
@@ -37,6 +33,10 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      BasePage.DeviceHeight=this.platform.height();
+      BasePage.DeviceWidth=this.platform.width();
+      BasePage.DevicePlatform=(this.platform.is("ios")||this.platform.is("iphone")||this.platform.is("ipad"))?"ios":"android";
     });
   }
   openPage(page) {

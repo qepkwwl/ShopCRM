@@ -1,10 +1,12 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
-$taozhui-blue:#297DFF;
-$taozhui-light-blue:#299DFF;
+$taozhui-blue: #181415;
+$taozhui-light-blue: #191516;
+$taozhui-golden: #645e43;
 $taozhui-white:#E7EFFF;
 $tabs-background:$taozhui-blue;
 
+$background-color:$taozhui-golden;
 @import "taozhui";
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts

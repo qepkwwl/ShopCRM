@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Product} from "../../_models/product";
-import {NavController, NavParams, Events, InfiniteScroll} from "ionic-angular";
+import {NavParams, Events, InfiniteScroll} from "ionic-angular";
 import {ContractAddPage} from "../contract/contract-add.component";
 import {ProductService} from "../../_services/product.service";
 import {tap} from "rxjs/operators";
@@ -20,7 +20,7 @@ export  class ProductPage {
   private products:Array<Product>;
   //商品列表
   private selectedProducts:Array<Product>;
-  private afterSelectedProduct:any;
+
   //当面页码
   private indexPage:number=0;
   //服务器端是否还有更多数据
@@ -28,7 +28,8 @@ export  class ProductPage {
   //按指导价排序
   private fdOrder:string="+";
   private fdOrigin:string;
-  constructor(private nav :NavController,private navParams:NavParams,private event:Events,private productService:ProductService,private appService:AppService){
+  constructor(private navParams:NavParams,private event:Events,private productService:ProductService,private appService:AppService){
+    this.isShowSearch=false;
   }
   urlForImage = function(imageId:string) {
     var trueOrigin = "assets/imgs/product/image"+imageId+".jpeg";

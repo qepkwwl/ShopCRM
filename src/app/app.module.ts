@@ -1,6 +1,6 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {ErrorHandler, NgModule} from "@angular/core";
-import {IonicApp, IonicErrorHandler, IonicModule, Events} from "ionic-angular";
+import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
 import {MyApp} from "./app.component";
 import {LoginPage} from "../pages/login/login";
 import {HomePage} from "../pages/home/home";
@@ -51,7 +51,9 @@ import {SystemSettingPage} from "../pages/system/setting";
 import {FollowupTypeService} from "../_services/followup-type.service";
 import {ContractProductTypeService} from "../_services/contractproduct-type.service";
 import {ContractViewPage} from "../pages/contract/contract-view.component";
-import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {TodoService} from "../_services/todo.service";
+import {HotCodePush} from "@ionic-native/hot-code-push";
+import {ProductOpinionPage} from "../pages/contract/modal/product-opinion";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -83,7 +85,8 @@ const cloudSettings: CloudSettings = {
     RedletterDayAddPage,
     PersonResetPage,
     SystemSettingPage,
-    ContractViewPage
+    ContractViewPage,
+    ProductOpinionPage
   ],
   imports: [
     BrowserModule,
@@ -123,7 +126,8 @@ const cloudSettings: CloudSettings = {
     RedletterDayAddPage,
     PersonResetPage,
     SystemSettingPage,
-    ContractViewPage
+    ContractViewPage,
+    ProductOpinionPage
   ],
   providers: [
     AuthService,
@@ -146,7 +150,8 @@ const cloudSettings: CloudSettings = {
     StatusBar,
     SplashScreen,
     CallNumber,
-    InAppBrowser,
+    TodoService,
+    HotCodePush,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor,multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor,multi: true}

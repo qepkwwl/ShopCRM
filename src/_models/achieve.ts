@@ -12,4 +12,11 @@ export class Achieve extends BaseModel{
   fdMonthAchieved:number=0;
   fdYearCompleted:number=0;
   fdYearAchieved:number=0;
+  public getPercent(fdCompleted:number,fdAchieved:number):string{
+    let result="0";
+    if(fdAchieved>0){
+      result=(fdCompleted/fdAchieved*100).toFixed(2)
+    }
+    return "("+result+"%)";
+  }
 }

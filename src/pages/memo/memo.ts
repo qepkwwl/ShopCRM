@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, NavParams, Events, InfiniteScroll} from "ionic-angular";
+import {NavController, InfiniteScroll} from "ionic-angular";
 import {MemoService} from "../../_services/memo.service";
 import {Memo} from "../../_models/Memo";
 import {MemoAddPage} from "./memo-add";
@@ -18,8 +18,8 @@ export  class MemoPage{
   private indexPage:number=0;
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
-  private fdOrigin:string;
-  constructor(private nav:NavController,private navParams:NavParams,private  event:Events,private memoService:MemoService){
+
+  constructor(private nav:NavController,private memoService:MemoService){
   }
   onNgInit(){
     this.memoes=[];

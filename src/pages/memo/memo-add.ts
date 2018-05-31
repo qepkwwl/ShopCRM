@@ -1,12 +1,17 @@
 import {MemoService} from "../../_services/memo.service";
 import {
-  NavController, NavParams, ModalController, Events, ToastController, LoadingController,
-  Toast, Loading
+  NavController,
+  NavParams,
+  ModalController,
+  ToastController,
+  LoadingController,
+  Toast,
+  Loading
 } from "ionic-angular";
 import {Memo} from "../../_models/Memo";
 import {MemoItem} from "../../_models/MemoItem";
 import {MemoItemPage} from "./modal/memo-item";
-import {Component, Input} from "@angular/core";
+import {Component} from "@angular/core";
 import * as moment from "moment";
 
 @Component({
@@ -25,7 +30,7 @@ export  class MemoAddPage{
   private fdOrigin:string;
   private loading:Loading;
   private toast:Toast;
-  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private  event:Events,private modal:ModalController,private memoService:MemoService){
+  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private modal:ModalController,private memoService:MemoService){
     this.reset();
   }
   reset(){

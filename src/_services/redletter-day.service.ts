@@ -1,9 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import "rxjs/add/operator/map";
-import {Followup} from "../_models/followup";
 import {Injectable} from "@angular/core";
 import {RedletterDay} from "../_models/redletter-day";
-import {Customer} from "../_models/customer";
 import {Observable} from "rxjs";
 import {AppService} from "./app.service";
 import {map} from "rxjs/operators";

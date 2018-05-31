@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component} from "@angular/core";
 import {UserService} from "../../_services/user.service";
 import {NavController, LoadingController, Toast, Loading, ToastController} from "ionic-angular";
 import {MyApp} from "../../app/app.component";
@@ -8,10 +8,8 @@ import {MyApp} from "../../app/app.component";
   templateUrl: 'login.html'
 })
 export class LoginPage{
-  @ViewChild('email') email: any;
   private username: string;
   private password: string;
-  private error: string;
   private loading:Loading;
   private toast:Toast;
   constructor(private nav: NavController,private loadingCtrl: LoadingController,private toastCtrl:ToastController,private userService:UserService) {

@@ -13,24 +13,23 @@
   <ion-card>
     <ion-card-content>
       <progress class="full-width" value="{{achieve.fdMonthCompleted}}" max="{{achieve.fdMonthAchieved}}"></progress>
-      <ion-title class="content-title" float-left>已完成{{achieve.fdMonthCompleted}}</ion-title>
+      <ion-title class="content-title" float-left>已完成{{achieve.fdMonthCompleted}}{{achieve.getPercent(achieve.fdMonthCompleted,achieve.fdMonthAchieved)}}</ion-title>
       <ion-title class="content-title" float-right>月度{{achieve.fdMonthAchieved}}</ion-title>
       <progress class="full-width" value="{{achieve.fdYearCompleted}}" max="{{achieve.fdYearAchieved}}"></progress>
-      <ion-title class="content-title" float-left>已完成{{achieve.fdYearCompleted}}</ion-title>
+      <ion-title class="content-title" float-left>已完成{{achieve.fdYearCompleted}}{{achieve.getPercent(achieve.fdYearCompleted,achieve.fdYearAchieved)}}</ion-title>
       <ion-title class="content-title" float-right>年度{{achieve.fdYearAchieved}}</ion-title>
     </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-card-header>纪念日提醒
+    <ion-card-header>
+      <span>纪念日提醒</span>
       <button class="content-button" float-end (click)="goToRedletterDay()">
         <ion-icon name="calendar"></ion-icon>
       </button>
     </ion-card-header>
     <ion-card-content style="height: 4.4rem;overflow-y:hidden ">
     <ion-list style="position: relative"  [@openClose]="dayIndexWithShowed">
-      <ion-item *ngFor="let p of fdRedletterDaies" >
-        <span>{{p.fdKeyDay}}</span>
-        <span>{{p.fdCustomerName}}</span>
+      <ion-item *ngFor="let p of fdKeyDayTodoes" >
         <span>{{p.fdName}}</span>
       </ion-item>
     </ion-list>
@@ -38,22 +37,23 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-      回访提醒
+      <span>回访提醒</span>
         <button class="content-button" float-end (click)="goToFollowup()">
           <ion-icon name="calendar"></ion-icon>
         </button>
     </ion-card-header>
     <ion-card-content style="height: 4.4rem;overflow-y:hidden ">
       <ion-list>
-        <ion-item *ngFor="let p of fdFollowups" [@openClose]="dayIndexWithShowed">
-          <span>{{p.fdTime}}</span>
-          <span>{{p.fdCustomerName}}</span>
+        <ion-item *ngFor="let p of fdFollowupTodoes" [@openClose]="dayIndexWithShowed">
+          <span>{{p.fdName}}</span>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-card-header>今日计划</ion-card-header>
+    <ion-card-header>
+      <span>今日计划</span>
+    </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let p of fdPlans">

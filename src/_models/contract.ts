@@ -1,5 +1,4 @@
 import {ContractProduct} from "./contractProduct";
-import {Customer} from "./customer";
 import {ContractCustomer} from "./contractCustomer";
 import {BaseModel} from "./base-model";
 export class Contract extends BaseModel{

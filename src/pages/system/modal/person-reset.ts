@@ -1,6 +1,5 @@
-import {Component, ViewChild} from "@angular/core";
-import {NavParams, ViewController, ToastController, Toast} from "ionic-angular";
-import {FormBuilder, NgForm} from "@angular/forms";
+import {Component} from "@angular/core";
+import {ViewController, ToastController, Toast} from "ionic-angular";
 import {UserService} from "../../../_services/user.service";
 
 @Component({
@@ -13,7 +12,7 @@ export  class PersonResetPage{
   private fdRepeatPassword:string;
 
   private toast:Toast;
-  constructor(private view: ViewController,private toastCtrl:ToastController,private navParams:NavParams,private userService:UserService){
+  constructor(private view: ViewController,private toastCtrl:ToastController,private userService:UserService){
   }
  ngOnInit(){
  }

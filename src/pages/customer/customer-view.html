@@ -14,9 +14,16 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header>客户信息</ion-card-header>
-    <ion-card-content>
-      <ion-list>
+    <ion-card-header >
+      <span>客户信息</span>
+      <ion-buttons float-end>
+        <button ion-button icon-only clear (click)="isShowCustomerInfo=!isShowCustomerInfo">
+          <ion-icon [name]="isShowCustomerInfo?'arrow-dropdown-circle':'arrow-dropleft-circle'"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-card-header>
+    <ion-card-content >
+      <ion-list *ngIf="isShowCustomerInfo">
         <ion-item>
           <ion-label color="primary">客户名称</ion-label>
           <ion-label>{{customer.fdName}}</ion-label>
@@ -77,26 +84,61 @@
     </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-card-header>合同信息</ion-card-header>
+    <ion-card-header>
+      <span>合同信息</span>
+      <ion-buttons float-end>
+        <button ion-button icon-only clear (click)="isShowContractInfo=!isShowContractInfo">
+          <ion-icon [name]="isShowContractInfo?'arrow-dropdown-circle':'arrow-dropleft-circle'"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-card-header>
      <ion-card-content>
-       <ion-list>
-         <button ion-item *ngFor="let c of customer.fdContracts">
-           <div>
-             <span class="fdName">{{c.fdCustomerName}}</span>
-             <span class="fdStartTime">{{c.fdStartTime}}</span>
-             <span class="fdTotal">{{c.fdTotal}}</span>
+       <ion-list *ngIf="isShowContractInfo">
+         <ion-item *ngFor="let c of customer.fdContracts">
+           <ion-row>
+             <ion-col class="fdStartTime" col-6>{{c.fdStartTime}}</ion-col>
+             <ion-col class="lbl-contract-total"  col-6>
+               <span>总价</span>{{c.fdTotal}}</ion-col>
+           </ion-row>
+           <div *ngFor="let p of c.fdProducts">
+             <ion-row class="product-area row">
+               <ion-col class="lbl-prod-name col-6">{{p.fdName}}</ion-col>
+               <ion-col class="fdStartTime col-2">
+                 <span>数量</span>
+                 {{p.fdNum}}</ion-col>
+               <ion-col class="fdStartTime col-2">
+                 <span>单价</span>{{p.fdRetailPrice}}</ion-col>
+               <ion-col class="lbl-prod-total col-2">
+                 <span>总价</span>{{p.fdTotal}}</ion-col>
+             </ion-row>
+             <div class="opinion-area" *ngIf="p.fdOpinion.length>0">
+               <span class="lbl-opinion">酒品反馈:</span>
+               {{p.fdOpinion}}
+             </div>
+             <ion-row>
+               <ion-col offset-6 col-12>
+                 <button class="button-create-opinion" ion-button *ngIf="p.fdOpinion.length<=0" (click)="addOpinion(p)">
+                   <ion-icon name=""></ion-icon>
+                   增加酒品反馈
+                 </button>
+               </ion-col>
+             </ion-row>
            </div>
-           <div>
-             <span class="fdProducts">{{c.fdProductsToString()}}</span>
-           </div>
-         </button>
+         </ion-item>
        </ion-list>
      </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-card-header>拜访信息</ion-card-header>
-    <ion-card-content>
-      <ion-list>
+    <ion-card-header>
+      <span>拜访信息</span>
+      <ion-buttons float-end>
+        <button ion-button icon-only clear (click)="isShowFollowupInfo=!isShowFollowupInfo">
+          <ion-icon [name]="isShowFollowupInfo?'arrow-dropdown-circle':'arrow-dropleft-circle'"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-card-header>
+    <ion-card-content >
+      <ion-list *ngIf="isShowFollowupInfo">
         <ion-item *ngFor="let c of customer.fdFollowups" >
           <div>
             <span class="fdTel">{{c.fdTime}}</span>

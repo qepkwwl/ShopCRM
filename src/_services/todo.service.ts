@@ -5,9 +5,9 @@ import {Observable} from "rxjs";
 import {AppService} from "./app.service";
 
 @Injectable()
-export class ProductService{
+export class TodoService{
   constructor(private http:HttpClient,private appService:AppService){}
-  public findAll(searchValue:string,fdOrder:string,indexPage:number):Observable<any>{
-    return this.http.get(this.appService.baseUrl+'/bz/product/main/data?size=10&sortby='+fdOrder+'fdGardePrice&IsOnSale=True&searchValue='+searchValue+'&start='+indexPage)
+  public findAll(fdType:string):Observable<any>{
+    return this.http.get(this.appService.baseUrl+'/sys/notify/todo/data?size=10&sortby=+fdValidTime&fdType='+fdType+'&start=0')
   }
 }
