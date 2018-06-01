@@ -55,7 +55,6 @@ export  class MemoAddPage{
     }
   }
   fdType_Changed(){
-    console.log(this.memo.fdEndDate);
     switch (this.memo.fdType){
       case "日报":
         this.memo.fdStartDate=moment().format("YYYY-MM-DD");

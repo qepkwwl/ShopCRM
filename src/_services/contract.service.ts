@@ -60,7 +60,7 @@ export class ContractService{
   }
   public addOpinion(form:ContractProduct){
     let formData=new FormData();
-    formData.append('id',"67762553570677");
+    formData.append('id',form.id+"");
     formData.append('fdOpinion',form.fdOpinion);
     return this.http.post<any>(this.appService.baseUrl+'/bz/sale/contractproduct/addopinion',formData).pipe(
       map(response=>response.fdCode=="OK")

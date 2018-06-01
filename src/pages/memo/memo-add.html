@@ -12,7 +12,7 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label>日志类型</ion-label>
+      <ion-label color="primary">日志类型</ion-label>
       <ion-select okText="确定" cancelText="取消"[(ngModel)]="memo.fdType" (ionChange)="fdType_Changed()">
         <ion-option value="日报">日报</ion-option>
         <ion-option value="周报">周报</ion-option>
@@ -20,11 +20,11 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>开始日期</ion-label>
+      <ion-label color="primary">开始日期</ion-label>
       <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="memo.fdStartDate"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>截止日期</ion-label>
+      <ion-label color="primary">截止日期</ion-label>
       <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="memo.fdEndDate"></ion-datetime>
     </ion-item>
   </ion-list>

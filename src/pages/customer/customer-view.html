@@ -111,13 +111,13 @@
                <ion-col class="lbl-prod-total col-2">
                  <span>总价</span>{{p.fdTotal}}</ion-col>
              </ion-row>
-             <div class="opinion-area" *ngIf="p.fdOpinion.length>0">
+             <div class="opinion-area" *ngIf="p.fdOpinion&&p.fdOpinion.length>0">
                <span class="lbl-opinion">酒品反馈:</span>
                {{p.fdOpinion}}
              </div>
              <ion-row>
                <ion-col offset-6 col-12>
-                 <button class="button-create-opinion" ion-button *ngIf="p.fdOpinion.length<=0" (click)="addOpinion(p)">
+                 <button class="button-create-opinion" ion-button *ngIf="!p.fdOpinion||p.fdOpinion.length<=0" (click)="addOpinion(p)">
                    <ion-icon name=""></ion-icon>
                    增加酒品反馈
                  </button>

@@ -8,6 +8,7 @@ import {BasePage} from "../pages/base/BasePage";
 import {TabsPage} from "../pages/home/tabs";
 import {tap} from "rxjs/operators";
 import { HotCodePush } from '@ionic-native/hot-code-push';
+import {AdPage} from "../pages/home/adpage";
 
 @Component({
   templateUrl: 'app.html'
@@ -19,12 +20,7 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar,private chcp:HotCodePush,public splashScreen: SplashScreen,authService:AuthService) {
 
     this.initializeApp();
-
-    if(authService.isLogined()){
-      this.rootPage=TabsPage;
-    }else{
-      this.rootPage=LoginPage;
-    }
+    this.rootPage=AdPage;
   }
 
   initializeApp() {

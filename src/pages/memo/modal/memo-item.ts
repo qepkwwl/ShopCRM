@@ -1,5 +1,5 @@
 import {Component, ViewChild} from "@angular/core";
-import {ViewController} from "ionic-angular";
+import {ViewController, NavParams} from "ionic-angular";
 import {MemoItem} from "../../../_models/MemoItem";
 
 @Component({
@@ -10,7 +10,7 @@ export  class MemoItemPage{
   private memoItem:MemoItem;
 
   @ViewChild('fdContent') fdContent: any;
-  constructor(private view: ViewController){
+  constructor(private view: ViewController,private navParams:NavParams){
     this.reset();
   }
   ionViewWillEnter=function () {
@@ -21,7 +21,6 @@ export  class MemoItemPage{
 
     setTimeout(() => {
       this.fdContent.setFocus();
-      console.log(this.fdContent);
     },150);
 
   }
@@ -30,9 +29,6 @@ export  class MemoItemPage{
   }
   save() {
     this.view.dismiss({memoItem:this.memoItem,result:"save"});
-  }
-  resize() {
-    this.fdContent.nativeElement.style.height = this.fdContent.nativeElement.scrollHeight + 'px';
   }
   back() {
     this.view.dismiss({result:"back"});

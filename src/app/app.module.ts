@@ -54,6 +54,7 @@ import {ContractViewPage} from "../pages/contract/contract-view.component";
 import {TodoService} from "../_services/todo.service";
 import {HotCodePush} from "@ionic-native/hot-code-push";
 import {ProductOpinionPage} from "../pages/contract/modal/product-opinion";
+import {AdPage} from "../pages/home/adpage";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -86,7 +87,8 @@ const cloudSettings: CloudSettings = {
     PersonResetPage,
     SystemSettingPage,
     ContractViewPage,
-    ProductOpinionPage
+    ProductOpinionPage,
+    AdPage
   ],
   imports: [
     BrowserModule,
@@ -127,7 +129,8 @@ const cloudSettings: CloudSettings = {
     PersonResetPage,
     SystemSettingPage,
     ContractViewPage,
-    ProductOpinionPage
+    ProductOpinionPage,
+    AdPage
   ],
   providers: [
     AuthService,

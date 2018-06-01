@@ -11,6 +11,7 @@ import {CustomerSource} from "../../_models/customer-source";
 import {CustomerPurpose} from "../../_models/customer-prupose";
 import {CustomerLevel} from "../../_models/customer-level";
 import {CustomerService} from "../../_services/customer.service";
+import {CustomerPage} from "./customer";
 
 @Component({
   templateUrl:"customer-edit.html",
@@ -94,7 +95,7 @@ export class CustomerEditPage{
     this.loading.present();
     this.customerService.update(this.customer).subscribe(result=>{
       if(result){
-        this.nav.pop();
+        this.nav.setRoot(CustomerPage)
       }
     },err=>{},()=>{
       this.loading.dismiss();

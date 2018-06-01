@@ -2,11 +2,18 @@
 // http://ionicframework.com/docs/theming/
 $taozhui-blue: #181415;
 $taozhui-light-blue: #191516;
-$taozhui-golden: #645e43;
+$taozhui-golden: #ffab0f;
+$taozhui-backgroup:#a99163;
 $taozhui-white:#E7EFFF;
 $tabs-background:$taozhui-blue;
 
-$background-color:$taozhui-golden;
+$background-color:$taozhui-backgroup;
+$card-header-color:$taozhui-golden;
+$text-input-placeholder-color:$taozhui-golden;
+
+$toolbar-background:$taozhui-white;
+$searchbar-toolbar-input-background:$taozhui-white;
+$searchbar-background-color:$taozhui-white;
 @import "taozhui";
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
@@ -41,7 +48,7 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #7c3805,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
