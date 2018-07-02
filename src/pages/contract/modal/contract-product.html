@@ -16,7 +16,7 @@
           <ion-input aria-readonly="true" type="text" placeholder="名称" [(ngModel)]="product.fdName"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-label>数量</ion-label>
+          <ion-label color="primary">数量</ion-label>
           <ion-input type="text" placeholder="数量" [(ngModel)]="product.fdNum"  ></ion-input>
       </ion-item>
       <ion-item>
@@ -33,7 +33,7 @@
       </ion-item>
       <ion-item>
         <ion-label color="primary">销售类型</ion-label>
-        <ion-select okText="确定" cancelText="取消"[(ngModel)]="product.fdSaleType">
+        <ion-select color="primary" okText="确定" cancelText="取消"[(ngModel)]="product.fdSaleType">
           <ion-option value="{{p.fdName}}" *ngFor="let p of fdSaleTypes">{{p.fdName}}</ion-option>
         </ion-select>
       </ion-item>

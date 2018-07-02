@@ -3,6 +3,7 @@
 $taozhui-blue: #181415;
 $taozhui-light-blue: #191516;
 $taozhui-golden: #ffab0f;
+$taozhui-high-golden: #7c3805;
 $taozhui-backgroup:#a99163;
 $taozhui-white:#E7EFFF;
 $tabs-background:$taozhui-blue;
@@ -14,6 +15,11 @@ $text-input-placeholder-color:$taozhui-golden;
 $toolbar-background:$taozhui-white;
 $searchbar-toolbar-input-background:$taozhui-white;
 $searchbar-background-color:$taozhui-white;
+$select-ios-icon-color:$taozhui-golden;
+$select-md-icon-color:$taozhui-golden;
+$datetime-md-placeholder-color:$taozhui-golden;
+$datetime-ios-placeholder-color:$taozhui-golden;
+
 @import "taozhui";
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts

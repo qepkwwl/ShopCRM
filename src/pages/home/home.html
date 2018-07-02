@@ -13,11 +13,11 @@
   <ion-card>
     <ion-card-content>
       <progress class="full-width" value="{{achieve.fdMonthCompleted}}" max="{{achieve.fdMonthAchieved}}"></progress>
-      <ion-title class="content-title" float-left>已完成{{achieve.fdMonthCompleted}}{{achieve.getPercent(achieve.fdMonthCompleted,achieve.fdMonthAchieved)}}</ion-title>
-      <ion-title class="content-title" float-right>月度{{achieve.fdMonthAchieved}}</ion-title>
+      <ion-title class="content-title" float-left>已完成{{achieve.fdMonthCompleted}}万{{achieve.getPercent(achieve.fdMonthCompleted,achieve.fdMonthAchieved)}}</ion-title>
+      <ion-title class="content-title" float-right>月度{{achieve.fdMonthAchieved}}万</ion-title>
       <progress class="full-width" value="{{achieve.fdYearCompleted}}" max="{{achieve.fdYearAchieved}}"></progress>
-      <ion-title class="content-title" float-left>已完成{{achieve.fdYearCompleted}}{{achieve.getPercent(achieve.fdYearCompleted,achieve.fdYearAchieved)}}</ion-title>
-      <ion-title class="content-title" float-right>年度{{achieve.fdYearAchieved}}</ion-title>
+      <ion-title class="content-title" float-left>已完成{{achieve.fdYearCompleted}}万{{achieve.getPercent(achieve.fdYearCompleted,achieve.fdYearAchieved)}}</ion-title>
+      <ion-title class="content-title" float-right>年度{{achieve.fdYearAchieved}}万</ion-title>
     </ion-card-content>
   </ion-card>
   <ion-card>

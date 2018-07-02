@@ -65,7 +65,11 @@ export class HomePage {
       })).subscribe();
     this.userService.findAchieve().pipe(
       tap(data=>{
-      Object.assign(this.achieve,data);
+        Object.assign(this.achieve,data);
+        this.achieve.fdMonthCompleted=parseFloat((this.achieve.fdMonthCompleted/10000).toFixed(2));
+        this.achieve.fdMonthAchieved=parseFloat((this.achieve.fdMonthAchieved/10000).toFixed(2));
+        this.achieve.fdYearCompleted=parseFloat((this.achieve.fdYearCompleted/10000).toFixed(2));
+        this.achieve.fdYearAchieved=parseFloat((this.achieve.fdYearAchieved/10000).toFixed(2));
     })).subscribe();
     this.memoService.findAll("",0).pipe(
       tap(data=>{

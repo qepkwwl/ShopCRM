@@ -62,16 +62,6 @@ export class CustomerEditPage{
       this.toast.present();
       return;
     }
-    if(!this.customer.fdStationPhone){
-      this.toast.setMessage("客户手机必填");
-      this.toast.present();
-      return;
-    }
-    if(!this.customer.fdStationPhone){
-      this.toast.setMessage("客户手机必填");
-      this.toast.present();
-      return;
-    }
     if(!this.customer.fdTypeId){
       this.toast.setMessage("客户类型必填");
       this.toast.present();

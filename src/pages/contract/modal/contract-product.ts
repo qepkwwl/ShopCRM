@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ViewController, Toast, ToastController} from "ionic-angular";
+import {ViewController, Toast, ToastController, NavParams} from "ionic-angular";
 import {ContractProduct} from "../../../_models/contractProduct";
 import {ContractProductType} from "../../../_models/contractProduct-type";
 import {ContractProductTypeService} from "../../../_services/contractproduct-type.service";
@@ -13,7 +13,7 @@ export  class ContractProductPage{
   //客户类型
   private fdSaleTypes:Array<ContractProductType>;
   private toast:Toast;
-  constructor(private view: ViewController,private toastCtrl:ToastController,private contractProductTypeService: ContractProductTypeService){
+  constructor(private view: ViewController,private navParams:NavParams,private toastCtrl:ToastController,private contractProductTypeService: ContractProductTypeService){
     this.fdSaleTypes=[];
     this.contractProductTypeService.findAll().subscribe(result=>{this.fdSaleTypes=result;});
     this.product=new ContractProduct({});
