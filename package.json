@@ -1,5 +1,5 @@
 {
-  "name": "喜喜酒",
+  "name": "shopCRM",
   "version": "1.0.0",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -39,6 +39,7 @@
     "chart.js": "^2.7.2",
     "cordova-android": "6.3.0",
     "cordova-hot-code-push-plugin": "^1.5.3",
+    "cordova-ios": "4.5.4",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "ionic-angular": "3.9.2",
@@ -57,7 +58,8 @@
   "description": "An Ionic project",
   "cordova": {
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
