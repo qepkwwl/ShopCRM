@@ -38,7 +38,7 @@ export class UserService{
     return this.http.get<any>(this.appSerivce.baseUrl+'/bz/achieve/main/my');
   }
 
-  getToken(): String {
+  getToken(): string {
     return localStorage.getItem('token');
   }
 
@@ -46,11 +46,11 @@ export class UserService{
     return parseInt(localStorage.getItem('userid'));
   }
 
-  getArea(): String {
+  getArea(): string {
     return localStorage.getItem('area');
   }
 
-  getRole(): String {
+  getRole(): string {
     return localStorage.getItem('role');
   }
 

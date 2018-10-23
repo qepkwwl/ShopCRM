@@ -35,7 +35,7 @@
     <ion-card-header>产品信息</ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let p of contract.fdProducts" >
+        <ion-item class="contract-detail" *ngFor="let p of contract.fdProducts" >
           {{p.fdName}}
           <p class="detail">
             数量：{{p.fdNum}}

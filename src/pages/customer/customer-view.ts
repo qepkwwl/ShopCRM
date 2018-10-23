@@ -27,7 +27,7 @@ export  class CustomerViewPage{
     Object.assign(this.customer,this.navParams.get("customer"));
     this.customer.fdContracts=[];
     this.customer.fdFollowups=[];
-    this.contractService.findAll(this.customer.id,"","","","","",0).pipe(
+    this.contractService.findAll(this.customer.id,"","","","","-",0).pipe(
       tap(data=>{
         let records=data.content.map(item=>{
           return new Contract(item);
