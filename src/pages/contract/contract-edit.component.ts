@@ -19,12 +19,12 @@ import {ContractProductPage} from "./modal/contract-product";
 import {ContractService} from "../../_services/contract.service";
 
 @Component({
-  templateUrl:"contract-add.component.html",
-  selector:"page-contract-add"
+  templateUrl:"contract-edit.component.html",
+  selector:"page-contract-edit"
 })
-export class ContractAddPage{
-  public static SELECTED_PRODUCT:string="Contract.select.product.completed";
-  public static SELECTED_CUSTOMER:string="Contract.select.customer.completed";
+export class ContractEditPage{
+  public static SELECTED_PRODUCT:string="ContractEdit.select.product.completed";
+  public static SELECTED_CUSTOMER:string="ContractEdit.select.customer.completed";
   //合同
   private contract:Contract;
   private fdOrigin:string;
@@ -32,8 +32,8 @@ export class ContractAddPage{
   private toast:Toast;
   constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private modal :ModalController,private event :Events,private contractService:ContractService){
     this.reset();
-    this.event.subscribe(ContractAddPage.SELECTED_PRODUCT,this.afterSelectedProduct)
-    this.event.subscribe(ContractAddPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
+    this.event.subscribe(ContractEditPage.SELECTED_PRODUCT,this.afterSelectedProduct)
+    this.event.subscribe(ContractEditPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
     this.loading = this.loadingCtrl.create({
       content: '正在提交...'
     });
@@ -43,20 +43,12 @@ export class ContractAddPage{
     this.contract.fdProducts=[];
   }
   insertNewProduct(){
-    this.nav.push(ProductPage,{fdOrigin:'contract',fdSelectedProducts:this.contract.fdProducts});
+    this.nav.push(ProductPage,{fdOrigin:'contract-edit',fdSelectedProducts:this.contract.fdProducts});
   }
 
   ionViewWillEnter() {
-    this.fdOrigin = this.navParams.get("fdOrigin");
-
-    switch (this.fdOrigin){
-      case "customer"://指定客户来新建合同时
-        let customer=this.navParams.get("fdCustomer");
-        this.afterSelectedCustomer(customer);
-        break;
-      default:
-        break;
-    }
+    this.contract = this.navParams.get("fdContract");
+    this.updateContractTotal();
   }
   editProduct(p:ContractProduct){
     let productModal=this.modal.create(ContractProductPage,{product:p});
@@ -87,7 +79,7 @@ export class ContractAddPage{
     productModal.present();
   }
   selectCustomer(){
-    this.nav.push(CustomerPage,{fdOrigin:'contract'});
+    this.nav.push(CustomerPage,{fdOrigin:'contract-edit'});
   }
   private afterSelectedProduct=(selectedProductIds:Array<Product>)=>{
     this.contract.fdProducts=selectedProductIds.map((item,index)=>{
@@ -143,7 +135,7 @@ export class ContractAddPage{
       }
     }
     this.loading.present();
-    this.contractService.save(this.contract).subscribe(result=>{
+    this.contractService.update(this.contract).subscribe(result=>{
       if(result){
         this.nav.pop();
       }

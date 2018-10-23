@@ -18,6 +18,8 @@ export class Memo extends BaseModel{
   fdStartDate:string;
   fdEndDate:string;
   fdAchieve:string;
+  fdCreatorId:number;
+  fdCreatorName:string;
   fdSummaryMemoes:Array<MemoItem>;
   fdPlanMemoes:Array<MemoItem>;
 

@@ -1,3 +1,4 @@
+<ion-split-pane>
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -16,7 +17,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content main>
   <ion-list>
     <button ion-item *ngFor="let c of contracts" (click)="view(c)">
       <ion-avatar item-start>
@@ -36,3 +37,38 @@
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+
+  <ion-content *ngIf="isShowSearch">
+    <ion-list>
+      <ion-list-header>查询条件</ion-list-header>
+      <ion-item>
+        <ion-select [(ngModel)]="fdCriterial.fdOrder" placeholder="时间排序"  okText="确定" cancelText="取消" style="max-width: 100% !important;">
+          <ion-option value="+">时间升序</ion-option>
+          <ion-option value="-">时间降序</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="客户名称" [(ngModel)]="fdCriterial.fdName"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="isAdmin">
+        <ion-input placeholder="销售人员" [(ngModel)]="fdCriterial.fdSalerName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-datetime placeholder="起始日期" cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="fdCriterial.fdStartDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-datetime placeholder="截止日期" cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="fdCriterial.fdEndDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-buttons>
+          <button ion-button (click)="resetSearch()">
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+          <button ion-button (click)="search()">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-split-pane>

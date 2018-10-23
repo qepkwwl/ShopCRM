@@ -11,11 +11,14 @@ export class Contract extends BaseModel{
     super.getId();
     return ++Contract._id;
   }
-
+//是销售还是退货
+  fdIsSale:string;
   fdStartTime:string;
   fdCustomer:ContractCustomer;
   fdCustomerId:number;
   fdCustomerName:string;
+  fdCreatorId:number;
+  fdCreateTime:string;
   //合同总价
   fdTotal:number;
   fdProducts:Array<ContractProduct>

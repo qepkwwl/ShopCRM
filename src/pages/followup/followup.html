@@ -18,16 +18,16 @@
   </ion-header>
   <ion-content main>
     <ion-list>
-        <ion-item *ngFor="let c of followups">
+        <ion-item *ngFor="let c of followups"  (click)="toggleItem(c.id)">
           <div>
             <span class="fdName">{{c.fdCustomerName}}</span>
             <span class="fdTel">{{c.fdTime}}</span>
             <span class="fdCar">{{c.fdType}}</span>
           </div>
           <div>
-            <span class="fdBuyPurpose">{{c.fdContent}}</span>
+            <span class="fdBuyPurpose">{{c.fdGift}}</span>
           </div>
-          <div class="fdRemark">{{c.fdGift}}</div>
+          <div class="fdContent" [ngClass]="{'wrap':this.curItemId==c.id}">{{c.fdContent}}</div>
         </ion-item>
     </ion-list>
     <ion-infinite-scroll threshold="10%" enabled="hasMoreRecords" (ionInfinite)="doInfinite($event)">
@@ -46,6 +46,9 @@
        <ion-item>
          <ion-input placeholder="拜访内容" [(ngModel)]="fdCriterial.fdName"></ion-input>
        </ion-item>
+       <ion-item *ngIf="isAdmin">
+         <ion-input placeholder="销售人员" [(ngModel)]="fdCriterial.fdSalerName"></ion-input>
+       </ion-item>
        <button ion-item (click)="selectCustomer()">{{fdCriterial.fdCustomerName}}</button>
        <ion-item>
          <ion-datetime placeholder="起始日期" cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="fdCriterial.fdStartDate"></ion-datetime>
@@ -55,7 +58,7 @@
        </ion-item>
        <ion-item>
          <ion-buttons>
-           <button ion-button (click)="isShowSearch=!isShowSearch">
+           <button ion-button (click)="resetSearch()">
              <ion-icon name="close-circle"></ion-icon>
            </button>
            <button ion-button (click)="search()">

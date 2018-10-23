@@ -6,6 +6,7 @@ import {ProductService} from "../../_services/product.service";
 import {tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {AppService} from "../../_services/app.service";
+import {ContractEditPage} from "../contract/contract-edit.component";
 
 @Component({
   templateUrl:"product.html",
@@ -95,16 +96,33 @@ export  class ProductPage {
     this.indexPage=0;
     this.fdOrigin=this.navParams.get("fdOrigin");
     switch(this.fdOrigin){
-      case "contract":
-        let fdSelectedProducts=this.navParams.get("fdSelectedProducts");
-        for(let i=fdSelectedProducts.length-1;i>=0;i--){
-          this.selectedProducts.push(new Product(fdSelectedProducts[i]));
+      case "contract":{
+          let fdSelectedProducts=this.navParams.get("fdSelectedProducts");
+          for(let i=fdSelectedProducts.length-1;i>=0;i--){
+            this.selectedProducts.push(new Product(fdSelectedProducts[i]));
+          }
+        }
+        break;
+      case "contract-edit":{
+          let fdSelectedProducts=this.navParams.get("fdSelectedProducts");
+          for(let i=fdSelectedProducts.length-1;i>=0;i--){
+            this.selectedProducts.push(new Product(fdSelectedProducts[i]));
+          }
         }
         break;
     }
     this.loadData().subscribe();
   }
   ionViewWillLeave() {
-    this.event.publish(ContractAddPage.SELECTED_PRODUCT,this.selectedProducts);
+
+    this.fdOrigin=this.navParams.get("fdOrigin");
+    switch(this.fdOrigin){
+      case "contract":
+        this.event.publish(ContractAddPage.SELECTED_PRODUCT,this.selectedProducts);
+        break;
+      case "contract-edit":
+        this.event.publish(ContractEditPage.SELECTED_PRODUCT,this.selectedProducts);
+        break;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController} from "ionic-angular";
+import {NavController, ModalController} from "ionic-angular";
 import {transition, animate, state, trigger, style} from "@angular/animations";
 import {FollowupPage} from "../followup/followup";
 import {RedletterDayPage} from "../redletter-day/redletter";
@@ -11,6 +11,8 @@ import {MemoService} from "../../_services/memo.service";
 import {SystemSettingPage} from "../system/setting";
 import {TodoService} from "../../_services/todo.service";
 import {Todo} from "../../_models/todo";
+import {ContractArchivePage} from "./modal/contract-archive";
+import * as moment from "moment";
 
 @Component({
   selector: 'page-home',
@@ -30,7 +32,8 @@ export class HomePage {
   private fdFollowupTodoes:Array<Todo>=[];
   private fdPlans:Array<MemoItem>=[];
   private dayIndexWithShowed=true;
-  constructor(public nav: NavController,private todoService:TodoService,private memoService:MemoService,private userService:UserService) {
+  areaName:string;
+  constructor(public nav: NavController,private modal :ModalController,private todoService:TodoService,private memoService:MemoService,private userService:UserService) {
     setInterval(this.animationRedletterDaies,2000);
   }
   animationRedletterDaies= ()=> {
@@ -49,6 +52,7 @@ export class HomePage {
     this.dayIndexWithShowed=!this.dayIndexWithShowed;
   }
   ionViewWillEnter() {
+    this.areaName=this.userService.getArea();
     this.todoService.findAll("TODO_KEYDDAY_NOTIFY").pipe(
       tap(data=>{
         let records=data.content.map(item=>{
@@ -89,5 +93,14 @@ export class HomePage {
   }
   gotoSetting(){
     this.nav.push(SystemSettingPage);
+  }
+  showMonthAchieve(){
+
+    let achiveModal=this.modal.create(ContractArchivePage,{fdCriterial:{fdDesc:"月度计划",fdStartDate:moment().date(1).format("YYYY-MM-DD"),fdEndDate:moment().add(1,'months').date(0).format("YYYY-MM-DD")}});
+    achiveModal.present();
+  }
+  showYearAchieve(){
+    let achiveModal=this.modal.create(ContractArchivePage,{fdCriterial:{fdDesc:"年度计划",fdStartDate:moment().startOf('year').format('YYYY-MM-DD'),fdEndDate:moment().add(1,'months').date(0).format('YYYY-MM-DD')}});
+    achiveModal.present();
   }
 }

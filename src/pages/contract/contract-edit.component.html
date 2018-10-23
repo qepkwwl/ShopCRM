@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>新建合同</ion-title>
+    <ion-title>编辑合同</ion-title>
     <ion-buttons end>
       <button class="toolbar-button"  ion-button  (click)="save()">
         <ion-icon name="checkmark"></ion-icon>
@@ -17,7 +17,7 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary">合同类型</ion-label>
-            <ion-select [(ngModel)]="contract.fdIsSale"  (ionChange)="changeContractType()">
+            <ion-select [(ngModel)]="contract.fdIsSale" (ionChange)="changeContractType()">
               <ion-option value="true">销售</ion-option>
               <ion-option value="false">退货</ion-option>
             </ion-select>

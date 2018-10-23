@@ -18,6 +18,9 @@ export class UserService{
         let token = response.token;
         if (token) {
           localStorage.setItem('token', token);
+          localStorage.setItem('role', response.sysOrgPerson.fdRoleCode);
+          localStorage.setItem('area', response.sysOrgPerson.fdAreaName);
+          localStorage.setItem('userid', response.sysOrgPerson.id);
           return true;
         } else {
           return false;
@@ -37,6 +40,18 @@ export class UserService{
 
   getToken(): String {
     return localStorage.getItem('token');
+  }
+
+  getUserId(): number {
+    return parseInt(localStorage.getItem('userid'));
+  }
+
+  getArea(): String {
+    return localStorage.getItem('area');
+  }
+
+  getRole(): String {
+    return localStorage.getItem('role');
   }
 
   isLoggedIn(): boolean {

@@ -33,7 +33,12 @@ export  class ContractProductPage{
      this.toast.present();
      return;
    }
-    this.product.fdDiscount=parseFloat((this.product.fdRetailPrice/this.product.fdGardePrice).toFixed(2));
+   console.log(this.product.fdGardePrice);
+   if(this.product.fdGardePrice==0){
+     this.product.fdDiscount=0;
+   }else{
+     this.product.fdDiscount=parseFloat((this.product.fdRetailPrice/this.product.fdGardePrice).toFixed(2));
+   }
 
     if(/^\s*$/ig.test(this.product.fdSaleType+"")){
       this.toast.setMessage("请输入销售类型");

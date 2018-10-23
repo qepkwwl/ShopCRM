@@ -55,6 +55,8 @@ import {TodoService} from "../_services/todo.service";
 import {HotCodePush} from "@ionic-native/hot-code-push";
 import {ProductOpinionPage} from "../pages/contract/modal/product-opinion";
 import {AdPage} from "../pages/home/adpage";
+import {ContractArchivePage} from "../pages/home/modal/contract-archive";
+import {ContractEditPage} from "../pages/contract/contract-edit.component";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -87,6 +89,8 @@ const cloudSettings: CloudSettings = {
     PersonResetPage,
     SystemSettingPage,
     ContractViewPage,
+    ContractArchivePage,
+    ContractEditPage,
     ProductOpinionPage,
     AdPage
   ],
@@ -129,6 +133,8 @@ const cloudSettings: CloudSettings = {
     PersonResetPage,
     SystemSettingPage,
     ContractViewPage,
+    ContractArchivePage,
+    ContractEditPage,
     ProductOpinionPage,
     AdPage
   ],

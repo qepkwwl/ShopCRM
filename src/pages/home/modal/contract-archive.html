@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title >{{fdCriterial.fdDesc}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let c of contracts">
+      <ion-col col-4>{{c.fdTypeName}}</ion-col>
+      <ion-col col-4>{{c.fdTotal}}</ion-col>
+      <ion-col col-4 *ngIf="isAdmin">{{c.fdCreatorName}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

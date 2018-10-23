@@ -7,6 +7,7 @@ import {FollowupAddPage} from "./followup-add";
 import {tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {CustomerPage} from "../customer/customer";
+import {UserService} from "../../_services/user.service";
 @Component({
   templateUrl:"followup.html",
   selector:"page-followup"
@@ -17,19 +18,19 @@ export class FollowupPage{
  private isShowSearch:boolean;
   //事件的来源
   private fdOrigin:string;
-  //搜索的内容
-  private fdSearchValue:string='';
   //对应客户的ID
   private fdCurrentCustomerId:number=0;
   //当面页码
   private indexPage:number=0;
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
-
+  private curItemId:number=0;
+  private isAdmin:boolean=true;
   public static SELECTED_CUSTOMER:string="FollowupQuery.select.customer.completed";
 
   private fdCriterial:{fdDesc:string,fdOrder:string,fdName:string,fdCustomerId:number,fdCustomerName:string,fdStartDate:string,fdEndDate:string}
-  constructor(private nav:NavController,private event:Events,private navParams:NavParams,private followupService:FollowupService){
+  constructor(private nav:NavController,private event:Events,private navParams:NavParams,private followupService:FollowupService,private userService:UserService){
+    this.isAdmin=this.userService.getRole()==="ROLE_ADMIN";
     this.followups=[];
     this.fdCriterial={fdDesc:"拜访记录",fdOrder:"+",fdName:"",fdCustomerId:0,fdCustomerName:'指定客户',fdStartDate:"",fdEndDate:""};
     this.event.subscribe(FollowupPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
@@ -44,17 +45,28 @@ export class FollowupPage{
         this.fdCurrentCustomerId=fdCustomer.id;
         break;
       default:
+        this.loadData().subscribe();
         break;
     }
-    this.loadData().subscribe();
   }
-
+  toggleItem(itemId:number){
+    if(this.curItemId==itemId){
+      this.curItemId=0;
+    }else{
+      this.curItemId=itemId;
+    }
+  }
   search(){
     this.isShowSearch=false;
     this.indexPage=0;
     this.followups=[];
     this.buildDesc();
     this.loadData().subscribe();
+  }
+  resetSearch(){
+    this.isShowSearch=false;
+    this.resetQuery();
+    this.search();
   }
   //拼接出查询条件的字符串
   buildDesc(){
