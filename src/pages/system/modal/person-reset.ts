@@ -19,7 +19,7 @@ export  class PersonResetPage{
   save() {
     this.toast = this.toastCtrl.create({
       message:'',
-      duration:1000
+      duration:2000
     });
     if(!this.fdPassword){
       this.toast.setMessage("原密码必填");

@@ -11,10 +11,10 @@ export class CustomerService{
   constructor(private http:HttpClient,private appService:AppService){}
 
   public findAll(startTime:string,endTime:string,salerName:string,searchValue:string,order:string,indexPage:number):Observable<any>{
-    return this.http.get<any>(this.appService.baseUrl+'/bz/consumer/customer/data?size=10&sortby='+order+'fdCreateTime&salerName='+salerName+'&searchValue='+searchValue+'&startTime='+startTime+'&endTime='+endTime+'&start='+indexPage);
+    return this.http.get<any>(this.appService.baseUrl+'/bz/consumer/customer/data?size=10&sortby='+order+'fdPinyinShortName&salerName='+salerName+'&searchValue='+searchValue+'&startTime='+startTime+'&endTime='+endTime+'&start='+indexPage);
   }
   public save(form:Customer):Observable<boolean>{
-    form.id=0;
+    form.id=0
     return this.http.post<any>(this.appService.baseUrl+'/bz/consumer/customer/api/save',form.toFormData()).pipe(
       map(response=>response.fdCode=="OK")
     );

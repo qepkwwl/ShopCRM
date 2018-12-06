@@ -12,11 +12,11 @@ export class ContractService{
   constructor(private http:HttpClient,private appService:AppService){}
 
   public findAll(customerId:number,startTime:string,endTime:string,salerName:string,searchValue:string,order:string,indexPage:number):Observable<any>{
-    return this.http.get<any>(this.appService.baseUrl+'/bz/sale/contract/data?size=10&sortby='+order+'fdCreateTime&customerId='+(customerId||'')+'&salerName='+salerName+'&searchValue='+searchValue+'&startTime='+startTime+'&endTime='+endTime+'&start='+indexPage)
+    return this.http.get<any>(this.appService.baseUrl+'/bz/sale/contract/data?size=10&sortby='+order+'fdStartTime&customerId='+(customerId||'')+'&salerName='+salerName+'&searchValue='+searchValue+'&startTime='+startTime+'&endTime='+endTime+'&start='+indexPage)
   }
 
   public findPivot(startTime:string,endTime:string,indexPage:number):Observable<any>{
-    return this.http.get<any>(this.appService.baseUrl+'/bz/sale/contract/data?size=10&startTime='+startTime+'&endTime='+endTime+'&start='+indexPage)
+    return this.http.get<any>(this.appService.baseUrl+'/bz/sale/contract/api/pivot?size=10&start1='+startTime+'&end1='+endTime+'&start='+indexPage)
   }
 
   public save(form:Contract):Observable<boolean>{

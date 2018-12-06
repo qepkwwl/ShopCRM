@@ -93,6 +93,7 @@ export class ContractAddPage{
     this.contract.fdProducts=selectedProductIds.map((item,index)=>{
       let contractProduct= new ContractProduct(item);
       contractProduct.fdNum=1;
+      contractProduct.fdRetailPrice=contractProduct.fdGardePrice;
       return contractProduct;
     });
     this.updateContractTotal();

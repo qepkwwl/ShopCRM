@@ -57,6 +57,8 @@ import {ProductOpinionPage} from "../pages/contract/modal/product-opinion";
 import {AdPage} from "../pages/home/adpage";
 import {ContractArchivePage} from "../pages/home/modal/contract-archive";
 import {ContractEditPage} from "../pages/contract/contract-edit.component";
+import {ToggleonclickDirective} from "../_directive/ToggleOnClick";
+import {FollowupEditPage} from "../pages/followup/followup-edit";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -79,6 +81,7 @@ const cloudSettings: CloudSettings = {
     ContractProductPage,
     FollowupPage,
     FollowupAddPage,
+    FollowupEditPage,
     MemoPage,
     MemoAddPage,
     MemoItemPage,
@@ -92,7 +95,8 @@ const cloudSettings: CloudSettings = {
     ContractArchivePage,
     ContractEditPage,
     ProductOpinionPage,
-    AdPage
+    AdPage,
+    ToggleonclickDirective
   ],
   imports: [
     BrowserModule,
@@ -123,6 +127,7 @@ const cloudSettings: CloudSettings = {
     ContractProductPage,
     FollowupPage,
     FollowupAddPage,
+    FollowupEditPage,
     MemoPage,
     MemoAddPage,
     MemoItemPage,

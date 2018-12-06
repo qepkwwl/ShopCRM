@@ -9,7 +9,7 @@
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
       </button>
-      <button class="toolbar-button"  (click)="add($event)">
+      <button *ngIf="!isAdmin" class="toolbar-button"  (click)="add($event)">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -24,7 +24,7 @@
           <span class="fdStartDate">{{c.fdStartDate}}</span>
           <span >-</span>
           <span class="fdEndDate">{{c.fdEndDate}}</span>
-          <span *ngIf="isAdmin" class="fdEndDate">创建者：{{c.fdCreatorName}}</span>
+          <span class="fdEndDate"> By→{{c.fdCreatorName}}</span>
         </div>
         <div>
           <span class="subTitle">业绩：</span>

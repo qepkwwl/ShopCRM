@@ -7,12 +7,13 @@ import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {ContractViewPage} from "./contract-view.component";
 import {UserService} from "../../_services/user.service";
+import {BasePage} from "../base/BasePage";
 
 @Component({
   templateUrl:"contract.html",
   selector:"page-contract"
 })
-export  class ContractPage{
+export  class ContractPage extends  BasePage{
   //客户列表
   private contracts:Array<Contract>;
   //事件的来源
@@ -25,12 +26,11 @@ export  class ContractPage{
   private indexPage:number=0;
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
-  private isAdmin:boolean=true;
   private isShowSearch:boolean=false;
-  constructor(private nav:NavController,private navParams:NavParams,private contractService:ContractService,private userService:UserService){
+  constructor(private nav:NavController,private navParams:NavParams,private contractService:ContractService,userService:UserService){
+    super(userService);
     this.reset();
-    this.isAdmin=this.userService.getRole()==="ROLE_ADMIN";
-    this.fdCriterial={fdDesc:"合同",fdOrder:"+",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
+    this.fdCriterial={fdDesc:"合同",fdOrder:"-",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
   }
   reset(){
     this.contracts=[];
@@ -106,7 +106,7 @@ export  class ContractPage{
   }
 
   resetQuery(){
-    this.fdCriterial={fdDesc:"合同",fdOrder:"+",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
+    this.fdCriterial={fdDesc:"合同",fdOrder:"-",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
     this.search();
   }
   add(){

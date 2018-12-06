@@ -1,16 +1,14 @@
 <ion-split-pane>
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title *ngIf="!isShowSearch">合同</ion-title>
-    <ion-searchbar *ngIf="isShowSearch" (ionInput)="search($event)"></ion-searchbar>
+    <ion-navbar><ion-title>{{fdCriterial.fdDesc}}</ion-title>
     <ion-buttons end>
-      <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
-        <ion-icon class="big" name="search"></ion-icon>
+      <button *ngIf="fdCriterial.fdDesc!='合同'" class="toolbar-button" (click)="resetQuery()">
+        <ion-icon name="close"></ion-icon>
       </button>
-      <button class="toolbar-button"  (click)="add($event)">
+      <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button *ngIf="!isAdmin" class="toolbar-button"  (click)="add($event)">
         <ion-icon name="add"></ion-icon>
     </button>
     </ion-buttons>
@@ -25,6 +23,9 @@
       </ion-avatar>
       <div>
         <span class="fdName">{{c.fdCustomerName}}</span>
+      </div>
+      <div>
+        <span class="fdProducts">{{c.fdCreatorName}}</span>
         <span class="fdStartTime">{{c.fdStartTime}}</span>
         <span class="fdTotal">{{c.fdTotal}}</span>
       </div>

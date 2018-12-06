@@ -8,11 +8,15 @@ import {tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {CustomerPage} from "../customer/customer";
 import {UserService} from "../../_services/user.service";
+import {BasePage} from "../base/BasePage";
+import {FollowupEditPage} from "./followup-edit";
+import * as moment from "moment";
+
 @Component({
   templateUrl:"followup.html",
   selector:"page-followup"
 })
-export class FollowupPage{
+export class FollowupPage extends BasePage{
 
  private followups:Array<Followup>=[];
  private isShowSearch:boolean;
@@ -25,14 +29,13 @@ export class FollowupPage{
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
   private curItemId:number=0;
-  private isAdmin:boolean=true;
   public static SELECTED_CUSTOMER:string="FollowupQuery.select.customer.completed";
 
   private fdCriterial:{fdDesc:string,fdOrder:string,fdName:string,fdCustomerId:number,fdCustomerName:string,fdStartDate:string,fdEndDate:string}
-  constructor(private nav:NavController,private event:Events,private navParams:NavParams,private followupService:FollowupService,private userService:UserService){
-    this.isAdmin=this.userService.getRole()==="ROLE_ADMIN";
+  constructor(private nav:NavController,private event:Events,private navParams:NavParams,private followupService:FollowupService,userService:UserService){
+    super(userService);
     this.followups=[];
-    this.fdCriterial={fdDesc:"拜访记录",fdOrder:"+",fdName:"",fdCustomerId:0,fdCustomerName:'指定客户',fdStartDate:"",fdEndDate:""};
+    this.fdCriterial={fdDesc:"拜访记录",fdOrder:"-",fdName:"",fdCustomerId:0,fdCustomerName:'指定客户',fdStartDate:"",fdEndDate:""};
     this.event.subscribe(FollowupPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
   }
   ionViewWillEnter(){
@@ -94,8 +97,12 @@ export class FollowupPage{
           let followup=new Followup();
           followup.fdCustomerId=item.fdCustomerId;
           followup.fdCustomerName=item.fdCustomerName;
-          followup.fdDate=/(\d{2}:\d{2}):\d{2}$/ig.exec(item.fdTime)[1];
-          followup.fdTime=/^(\d{4}-\d{2}-\d{2})/ig.exec(item.fdTime)[1];
+          followup.fdType=item.fdType;
+          followup.fdCreatorId=item.fdCreatorId;
+          followup.fdCreatorName=item.fdCreatorName;
+          followup.fdCreateTime=item.fdCreateTime;
+          followup.fdTime=/(\d{2}:\d{2}):\d{2}$/ig.exec(item.fdTime)[1];
+          followup.fdDate=/^(\d{4}-\d{2}-\d{2})/ig.exec(item.fdTime)[1];
           followup.fdContent=item.fdContent;
           followup.fdGift=item.fdGift;
           return followup;
@@ -115,7 +122,7 @@ export class FollowupPage{
   }
 
   resetQuery(){
-    this.fdCriterial={fdDesc:"拜访记录",fdOrder:"+",fdName:"",fdCustomerId:0,fdCustomerName:'指定客户',fdStartDate:"",fdEndDate:""};
+    this.fdCriterial={fdDesc:"拜访记录",fdOrder:"-",fdName:"",fdCustomerId:0,fdCustomerName:'指定客户',fdStartDate:"",fdEndDate:""};
     this.search();
   }
   private afterSelectedCustomer=(c:Customer)=>{
@@ -126,5 +133,14 @@ export class FollowupPage{
   }
   selectCustomer(){
     this.nav.push(CustomerPage,{fdOrigin:'followup-query',fdCustomerId:this.fdCriterial.fdCustomerId});
+  }
+
+  selected(c){
+    var now=moment().format("YYYY-MM-DD");
+    if(!this.isAdmin&&c.fdCreateTime==now&&c.fdCreatorId==this.userService.getUserId()){
+      this.nav.push(FollowupEditPage,{fdOrigin:'followup',fdFollowup:c});
+    }else{
+      alert("当前记录不能被修改");
+    }
   }
 }

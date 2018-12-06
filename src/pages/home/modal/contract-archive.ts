@@ -36,7 +36,7 @@ export  class ContractArchivePage{
   loadData():Observable<any>{
     return this.contractService.findPivot(this.fdCriterial.fdStartDate,this.fdCriterial.fdEndDate,this.indexPage).pipe(
     tap(data=>{
-        let records=data.content.map(item=>{
+        let records=data.map(item=>{
           var c=new ContractsPivot(item);
           return c;
         });

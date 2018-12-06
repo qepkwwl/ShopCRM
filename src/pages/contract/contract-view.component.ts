@@ -5,18 +5,20 @@ import {ContractService} from "../../_services/contract.service";
 import {ContractEditPage} from "./contract-edit.component";
 import * as moment from "moment";
 import {UserService} from "../../_services/user.service";
+import {BasePage} from "../base/BasePage";
 
 @Component({
   templateUrl:"contract-view.component.html",
   selector:"page-contract-view"
 })
-export class ContractViewPage{
+export class ContractViewPage extends BasePage{
   //合同
   private contract:Contract;
   private loading:Loading;
   //是否允许编辑
   private  canEdit:boolean=false;
-  constructor(private nav:NavController,private navParams:NavParams,private loadingCtrl:LoadingController,private contractService:ContractService,private userService:UserService){
+  constructor(private nav:NavController,private navParams:NavParams,private loadingCtrl:LoadingController,private contractService:ContractService,userService:UserService){
+    super(userService);
     this.contract=new Contract();
     this.loading = this.loadingCtrl.create({
       content: '正在删除...'
@@ -27,7 +29,7 @@ export class ContractViewPage{
     let fdContract=this.navParams.get("fdContract");
     this.contract=new Contract(fdContract);
     var now=moment().format("YYYY-MM-DD");
-    this.canEdit=this.contract.fdCreateTime==now&&this.contract.fdCreatorId==this.userService.getUserId();
+    this.canEdit=!this.isAdmin&&this.contract.fdCreateTime==now&&this.contract.fdCreatorId==this.userService.getUserId();
   }
 
   delete(){

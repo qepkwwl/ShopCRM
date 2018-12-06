@@ -30,7 +30,7 @@
     <ion-card-content style="height: 4.4rem;overflow-y:hidden ">
     <ion-list style="position: relative"  [@openClose]="dayIndexWithShowed">
       <ion-item *ngFor="let p of fdKeyDayTodoes" >
-        <span>{{p.fdName}}</span>
+        <span>{{p.fdCreatorName}}-{{p.fdName}}</span>
       </ion-item>
     </ion-list>
     </ion-card-content>
@@ -45,7 +45,7 @@
     <ion-card-content style="height: 4.4rem;overflow-y:hidden ">
       <ion-list>
         <ion-item *ngFor="let p of fdFollowupTodoes" [@openClose]="dayIndexWithShowed">
-          <span>{{p.fdName}}</span>
+          <span>{{p.fdCreatorName}}-{{p.fdName}}</span>
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -57,7 +57,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let p of fdPlans">
-          <span>{{p.fdContent}}</span>
+          <span>{{p.fdCreatorName}}-{{p.fdContent}}</span>
         </ion-item>
       </ion-list>
     </ion-card-content>

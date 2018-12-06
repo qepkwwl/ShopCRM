@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title >拜访客户</ion-title>
+    <ion-buttons end>
+      <button class="toolbar-button"  ion-button  (click)="save()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <button ion-item (click)="selectCustomer()">
+        <ion-label color="primary">客户名称</ion-label>
+        <ion-label >{{followup.fdCustomerName}}</ion-label>
+      </button>
+    <ion-item>
+      <ion-label color="primary">拜访日期</ion-label>
+      <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="followup.fdDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">拜访形式</ion-label>
+      <ion-select okText="确定" cancelText="取消"[(ngModel)]="followup.fdType">
+        <ion-option value="{{p.fdName}}" *ngFor="let p of fdFollowTypes">{{p.fdName}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">拜访内容</ion-label>
+      <ion-input placeholder="拜访内容" [(ngModel)]="followup.fdContent"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">赠送礼物</ion-label>
+      <ion-input placeholder="赠送礼物" [(ngModel)]="followup.fdGift"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>

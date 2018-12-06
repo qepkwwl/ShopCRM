@@ -8,6 +8,9 @@ export class Followup extends BaseModel{
     super.getId();
     return ++Followup._id;
   }
+  fdCreatorId:number;
+  fdCreatorName:string;
+  fdCreateTime:string;
   //拜访时间
   fdCustomerId:number;
   fdCustomerName:string;

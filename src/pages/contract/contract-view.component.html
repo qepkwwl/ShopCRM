@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>合同信息</ion-title>
     <ion-buttons end>
-      <button class="toolbar-button"  ion-button  (click)="delete()">
+      <button *ngIf="canEdit" class="toolbar-button"  ion-button  (click)="delete()">
         <ion-icon name="remove"></ion-icon>
       </button>
       <button *ngIf="canEdit" class="toolbar-button"  (click)="edit($event)">

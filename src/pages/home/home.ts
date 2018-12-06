@@ -52,8 +52,11 @@ export class HomePage {
     this.dayIndexWithShowed=!this.dayIndexWithShowed;
   }
   ionViewWillEnter() {
+    this.fdKeyDayTodoes=[];
+    this.fdFollowupTodoes=[];
+    this.fdPlans=[];
     this.areaName=this.userService.getArea();
-    this.todoService.findAll("TODO_KEYDDAY_NOTIFY").pipe(
+    this.todoService.findAll("TODO_KEYDAY_NOTIFY").pipe(
       tap(data=>{
         let records=data.content.map(item=>{
           return new Todo(item);

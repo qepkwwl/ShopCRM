@@ -9,17 +9,20 @@ import {Followup} from "../../_models/followup";
 import {CustomerEditPage} from "./customer-edit";
 import {ContractProduct} from "../../_models/contractProduct";
 import {ProductOpinionPage} from "../contract/modal/product-opinion";
+import {UserService} from "../../_services/user.service";
+import {BasePage} from "../base/BasePage";
 
 @Component({
   templateUrl:"customer-view.html",
   selector:"page-customer-view"
 })
-export  class CustomerViewPage{
+export  class CustomerViewPage extends BasePage{
   private customer:Customer;
   private isShowCustomerInfo=false;
   private isShowContractInfo=false;
   private isShowFollowupInfo=false;
-  constructor(private nav:NavController,private modal:ModalController,private navParams:NavParams,private contractService:ContractService,private followupService:FollowupService){
+  constructor(private nav:NavController,private modal:ModalController,private navParams:NavParams,private contractService:ContractService,private followupService:FollowupService,userService:UserService){
+    super(userService);
     this.customer=new Customer();
   }
 
@@ -46,7 +49,6 @@ export  class CustomerViewPage{
   edit(){
     this.nav.push(CustomerEditPage,{fdCustomer:this.customer});
   }
-
   addOpinion(p:ContractProduct){
     let productModal=this.modal.create(ProductOpinionPage,{product:p});
     productModal.onDidDismiss(data=>{

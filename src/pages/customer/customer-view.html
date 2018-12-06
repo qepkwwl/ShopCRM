@@ -3,8 +3,8 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="!isShowSearch">查看客户</ion-title>
-    <ion-buttons end>
+    <ion-title>查看客户</ion-title>
+    <ion-buttons *ngIf="!isAdmin" end>
       <button class="toolbar-button"  (click)="edit($event)">
         <ion-icon name="create"></ion-icon>
       </button>
@@ -54,7 +54,7 @@
         </ion-item>
         <ion-item>
           <ion-label color="primary">其它说明</ion-label>
-          <ion-label>{{customer.fdMemo}}</ion-label>
+          <ion-label toggleonclick>{{customer.fdMemo}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label color="primary">客户爱好</ion-label>
@@ -78,7 +78,7 @@
         </ion-item>
         <ion-item>
           <ion-label color="primary">公司地址</ion-label>
-          <ion-label>{{customer.fdCompanyAddr}}</ion-label>
+          <ion-label toggleonclick>{{customer.fdCompanyAddr}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -101,24 +101,24 @@
                <span>总价</span>{{c.fdTotal}}</ion-col>
            </ion-row>
            <div *ngFor="let p of c.fdProducts">
-             <ion-row class="product-area row">
-               <ion-col class="lbl-prod-name col-10">{{p.fdName}}</ion-col>
-               <ion-col class="fdStartTime col-2">
+             <ion-row class="product-area row wrap">
+               <span class="lbl-prod-name">{{p.fdName}}</span>
+               <span class="fdStartTime col-2">
                  <span>数量</span>
                  {{p.fdNum}}
                  <span>单价</span>{{p.fdRetailPrice}}
                  <span>总价</span>{{p.fdTotal}}
-               </ion-col>
+               </span>
              </ion-row>
              <div class="opinion-area" *ngIf="p.fdOpinion&&p.fdOpinion.length>0">
                <span class="lbl-opinion">酒品反馈:</span>
                {{p.fdOpinion}}
              </div>
-             <ion-row>
+             <ion-row  *ngIf="!isAdmin">
                <ion-col offset-6 col-12>
-                 <button class="button-create-opinion" ion-button *ngIf="!p.fdOpinion||p.fdOpinion.length<=0" (click)="addOpinion(p)">
+                 <button class="button-create-opinion" ion-button (click)="addOpinion(p)">
                    <ion-icon name=""></ion-icon>
-                   增加酒品反馈
+                   酒品反馈
                  </button>
                </ion-col>
              </ion-row>

@@ -64,7 +64,10 @@ export class UserService{
     localStorage.removeItem('token');
   }
   resetPassword(fdPassword :string,fdNewPassword:string):Observable<any>{
-    return this.http.post<any>(this.appSerivce.baseUrl+'/sys/org/person/api/reset', JSON.stringify({fdPassword: fdPassword, fdNewPassword: fdNewPassword}), this.appSerivce.httpJsonOptions);
+    let formData=new FormData();
+    formData.append("fdPassword",fdPassword);
+    formData.append("fdNewPassword",fdNewPassword);
+    return this.http.post<any>(this.appSerivce.baseUrl+'/sys/org/person/api/reset', formData);
   }
   getVersion(): Observable<any> {
     return this.http.get<any>(this.appSerivce.baseUrl+'/sys/admin/system/version?p='+BasePage.DevicePlatform);

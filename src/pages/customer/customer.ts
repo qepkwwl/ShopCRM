@@ -14,12 +14,14 @@ import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {UserService} from "../../_services/user.service";
 import {ContractEditPage} from "../contract/contract-edit.component";
+import {BasePage} from "../base/BasePage";
+import {FollowupEditPage} from "../followup/followup-edit";
 
 @Component({
   templateUrl:"customer.html",
   selector:"page-customer"
 })
-export  class CustomerPage{
+export  class CustomerPage extends  BasePage{
   //是否单点时可以选中
   private canSelected:boolean=false;
   //事件的来源
@@ -34,12 +36,10 @@ export  class CustomerPage{
   private indexPage:number=0;
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
-  //服务器端是否还有更多数据
-  private isAdmin:boolean=true;
   private isShowSearch:boolean=false;
   private toast:Toast;
-  constructor(private toastCtrl:ToastController,private nav:NavController,private navParams:NavParams,private  event:Events,private callNumber: CallNumber,private customerService:CustomerService,private userService:UserService){
-    this.isAdmin=this.userService.getRole()==="ROLE_ADMIN";
+  constructor(private toastCtrl:ToastController,private nav:NavController,private navParams:NavParams,private  event:Events,private callNumber: CallNumber,private customerService:CustomerService, userService:UserService){
+    super(userService);
     this.fdCriterial={fdDesc:"客户",fdOrder:"+",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
   }
 
@@ -55,6 +55,7 @@ export  class CustomerPage{
         this.canSelected=true;
         break;
       case "followup"://新建回访选则客户时
+      case "followup-edit"://新建回访选则客户时
         this.canSelected=true;
         break;
       case "followup-query"://新建回访选则客户时
@@ -132,6 +133,14 @@ export  class CustomerPage{
           return ;
         }
         this.event.publish(FollowupAddPage.SELECTED_CUSTOMER,this.selectCustomer);
+        break;
+      case "followup-edit"://新建回访选则客户时
+        if(this.selectCustomer==null){
+          this.toast.setMessage("未选定客户");
+          this.toast.present();
+          return ;
+        }
+        this.event.publish(FollowupEditPage.SELECTED_CUSTOMER,this.selectCustomer);
         break;
       case "followup-query"://新建回访选则客户时
         if(this.selectCustomer==null){

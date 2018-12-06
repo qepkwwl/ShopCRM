@@ -8,6 +8,8 @@ export class Todo extends BaseModel{
     super.getId();
     return ++Todo._id;
   }
+  fdCreatorName:string;
+  fdCreateTime:string;
   //拜访时间
   fdModelId:string;
   fdModelName:string;

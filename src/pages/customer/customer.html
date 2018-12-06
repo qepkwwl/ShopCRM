@@ -9,7 +9,7 @@
       <button class="toolbar-button" (click)="isShowSearch=!isShowSearch">
         <ion-icon name="search"></ion-icon>
       </button>
-      <button class="toolbar-button"  (click)="add($event)">
+      <button *ngIf="!isAdmin" class="toolbar-button"  (click)="add($event)">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -26,6 +26,7 @@
       <div>
         <span class="fdName">{{c.fdName}}</span>
         <span class="fdTel">{{c.fdStationPhone}}</span>
+        <span class="fdTel"> By→{{c.fdCreatorName}}</span>
       </div>
       <div class="fdCompanyName">{{c.fdCompanyName}}</div>
       <div *ngIf="selectCustomer==c"  class="line-right" >
@@ -34,7 +35,7 @@
         </button>
       </div>
     </button>
-      <ion-item-options side="left">
+      <ion-item-options *ngIf="!isAdmin" side="left">
         <button ion-button color="primary" (click)="newFollowup(c)">
           <ion-icon name="text"></ion-icon>
           新建拜访
@@ -66,8 +67,8 @@
       <ion-list-header>查询条件</ion-list-header>
       <ion-item>
         <ion-select [(ngModel)]="fdCriterial.fdOrder" placeholder="时间排序"  okText="确定" cancelText="取消" style="max-width: 100% !important;">
-          <ion-option value="+">时间升序</ion-option>
-          <ion-option value="-">时间降序</ion-option>
+          <ion-option value="+">名称升序</ion-option>
+          <ion-option value="-">名称降序</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>

@@ -26,7 +26,7 @@ export class Contract extends BaseModel{
   //合同中的产品信息描述
   public fdProductsToString(){
     return this.fdProducts.map((item,index)=>{
-      return item.fdName+":"+item.fdNum+"件"+item.fdTotal+"元"
+      return item.fdName+":"+item.fdNum+"瓶,"+item.fdTotal+"元"
     }).join(";");
   }
 }

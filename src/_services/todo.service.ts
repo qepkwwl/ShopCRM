@@ -8,6 +8,6 @@ import {AppService} from "./app.service";
 export class TodoService{
   constructor(private http:HttpClient,private appService:AppService){}
   public findAll(fdType:string):Observable<any>{
-    return this.http.get(this.appService.baseUrl+'/sys/notify/todo/data?size=10&sortby=+fdValidTime&fdType='+fdType+'&start=0')
+    return this.http.get(this.appService.baseUrl+'/sys/notify/todo/data?size=10&sortby=-fdValidTime&fdType='+fdType+'&start=0')
   }
 }

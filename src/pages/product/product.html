@@ -21,10 +21,10 @@
     <button  ion-item detail-none *ngFor="let p of products"  (click)="selected(p)" >
       <ion-grid>
         <ion-row>
-          <ion-col col-4>
+          <ion-col col-2>
             <img class="product" [src]="p.fdImageUrl" />
           </ion-col>
-          <ion-col col-8>
+          <ion-col col-10>
               <div class="title" [innerText]="p.fdName"></div>
               <div class="detail">[{{p.fdProduceArea}}]{{p.fdSpecify}}</div>
               <div class="price">

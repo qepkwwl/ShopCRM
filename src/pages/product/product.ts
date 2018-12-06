@@ -37,7 +37,7 @@ export  class ProductPage {
     return trueOrigin;
   }
   search(ev: any){
-    this.fdSearchValue=ev.target.value;
+    this.fdSearchValue=ev.target.value||'';
     this.indexPage=0;
     this.products=[];
     this.loadData().subscribe();

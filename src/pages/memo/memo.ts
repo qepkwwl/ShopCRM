@@ -8,11 +8,12 @@ import {tap} from "rxjs/operators";
 import {MemoItem} from "../../_models/MemoItem";
 import * as moment from "moment";
 import {UserService} from "../../_services/user.service";
+import {BasePage} from "../base/BasePage";
 @Component({
   templateUrl:"memo.html",
   selector:"page-memo"
 })
-export  class MemoPage{
+export  class MemoPage extends BasePage{
   private memoes:Array<Memo>=[];
   //搜索的内容
   private fdSearchValue:string='';
@@ -21,9 +22,8 @@ export  class MemoPage{
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
   private todayMemo:Memo=null;
-  private isAdmin:boolean=true;
-  constructor(private nav:NavController,private memoService:MemoService,private userService:UserService){
-    this.isAdmin=this.userService.getRole()==="ROLE_ADMIN";
+  constructor(private nav:NavController,private memoService:MemoService,userService:UserService){
+    super(userService);
   }
   onNgInit(){
     this.memoes=[];

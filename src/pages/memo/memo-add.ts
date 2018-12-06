@@ -13,12 +13,14 @@ import {MemoItem} from "../../_models/MemoItem";
 import {MemoItemPage} from "./modal/memo-item";
 import {Component} from "@angular/core";
 import * as moment from "moment";
+import {UserService} from "../../_services/user.service";
+import {BasePage} from "../base/BasePage";
 
 @Component({
   templateUrl:"memo-add.html",
   selector:"page-memo-add"
 })
-export  class MemoAddPage{
+export  class MemoAddPage extends BasePage{
   private memo:Memo;
   //总结的标题
   private fdSummaryTitle:string;
@@ -30,7 +32,8 @@ export  class MemoAddPage{
   private fdOrigin:string;
   private loading:Loading;
   private toast:Toast;
-  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private modal:ModalController,private memoService:MemoService){
+  constructor(private nav:NavController,private loadingCtrl:LoadingController,private toastCtrl:ToastController,private navParams:NavParams,private modal:ModalController,private memoService:MemoService,userService:UserService){
+    super(userService);
     this.reset();
   }
   reset(){
@@ -55,6 +58,9 @@ export  class MemoAddPage{
     }
   }
   fdType_Changed(){
+    if(this.isAdmin){
+      return;
+    }
     switch (this.memo.fdType){
       case "日报":
         this.memo.fdStartDate=moment().format("YYYY-MM-DD");
@@ -113,9 +119,15 @@ export  class MemoAddPage{
     });
   }
   createSummaryMemo(){
+    if(this.isAdmin){
+      return;
+    }
     this.editSummaryMemo(new MemoItem(),'新增工作总结');
   }
   editSummaryMemo(p:MemoItem,title?:string){
+    if(this.isAdmin){
+      return;
+    }
     let memoItemModal=this.modal.create(MemoItemPage,{memoItem:p,fdTitle:title||'编辑工作总结'});
     memoItemModal.onDidDismiss(data=>{
       switch (data.result){
@@ -148,9 +160,15 @@ export  class MemoAddPage{
     memoItemModal.present();
   }
   createPlanMemo(){
+    if(this.isAdmin){
+        return;
+    }
     this.editPlanMemo(new MemoItem(),'新增工作计划');
   }
   editPlanMemo(p:MemoItem,title?:string){
+    if(this.isAdmin){
+      return;
+    }
     let memoItemModal=this.modal.create(MemoItemPage,{memoItem:p,fdTitle:title||'编辑工作计划'});
     memoItemModal.onDidDismiss(data=>{
 
@@ -183,4 +201,5 @@ export  class MemoAddPage{
     });
     memoItemModal.present();
   }
+
 }
