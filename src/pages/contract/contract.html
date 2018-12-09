@@ -1,4 +1,3 @@
-<ion-split-pane>
 <ion-header>
     <ion-navbar><ion-title>{{fdCriterial.fdDesc}}</ion-title>
     <ion-buttons end>
@@ -10,10 +9,11 @@
       </button>
       <button *ngIf="!isAdmin" class="toolbar-button"  (click)="add($event)">
         <ion-icon name="add"></ion-icon>
-    </button>
+       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+<ion-split-pane>
 
 <ion-content main>
   <ion-list>

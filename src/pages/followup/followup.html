@@ -1,5 +1,4 @@
 
-<ion-split-pane >
   <ion-header>
     <ion-navbar>
       <ion-title>{{fdCriterial.fdDesc}}</ion-title>
@@ -16,6 +15,7 @@
       </ion-buttons>
     </ion-navbar>
   </ion-header>
+  <ion-split-pane >
   <ion-content main>
     <ion-list>
         <ion-item *ngFor="let c of followups"  (click)="toggleItem(c.id)">

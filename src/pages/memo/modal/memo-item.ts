@@ -19,9 +19,6 @@ export  class MemoItemPage{
   }
   ionViewDidLoaded() {
 
-    setTimeout(() => {
-      this.fdContent.setFocus();
-    },150);
 
   }
   reset(){
