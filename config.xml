@@ -86,7 +86,7 @@
         <auto-download enabled="true" />
         <auto-install enabled="true" />
     </chcp>
-    <allow-navigation href="http://111.230.9.200:31284" />
+    <allow-navigation href="http://111.230.9.200:31285" />
     <plugin name="cordova-hot-code-push-plugin" spec="^1.5.3" />
     <engine name="android" spec="6.3.0" />
     <engine name="ios" spec="4.5.4" />

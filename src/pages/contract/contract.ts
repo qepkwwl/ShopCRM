@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, NavParams, InfiniteScroll} from "ionic-angular";
+import {NavController, NavParams, InfiniteScroll, ModalController} from "ionic-angular";
 import {ContractAddPage} from "./contract-add.component";
 import {Contract} from "../../_models/contract";
 import {ContractService} from "../../_services/contract.service";
@@ -8,6 +8,7 @@ import {tap} from "rxjs/operators";
 import {ContractViewPage} from "./contract-view.component";
 import {UserService} from "../../_services/user.service";
 import {BasePage} from "../base/BasePage";
+import {ContractSearchPage} from "./modal/contract-search";
 
 @Component({
   templateUrl:"contract.html",
@@ -26,8 +27,8 @@ export  class ContractPage extends  BasePage{
   private indexPage:number=0;
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
-  private isShowSearch:boolean=false;
-  constructor(private nav:NavController,private navParams:NavParams,private contractService:ContractService,userService:UserService){
+
+  constructor(private nav:NavController,private modal :ModalController,private navParams:NavParams,private contractService:ContractService,userService:UserService){
     super(userService);
     this.reset();
     this.fdCriterial={fdDesc:"合同",fdOrder:"-",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
@@ -35,17 +36,27 @@ export  class ContractPage extends  BasePage{
   reset(){
     this.contracts=[];
   }
-  search(){
-    this.isShowSearch=false;
+  resetQuery(){
+    this.fdCriterial={fdDesc:"合同",fdOrder:"-",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
     this.indexPage=0;
     this.contracts=[];
-    this.buildDesc();
     this.loadData().subscribe();
   }
-  resetSearch(){
-    this.isShowSearch=false;
-    this.resetQuery();
-    this.search();
+  search(){
+    let searchModal=this.modal.create(ContractSearchPage,{fdCriterial:this.fdCriterial});
+    searchModal.onDidDismiss(data=>{
+      switch (data.result){
+        case "search":
+          this.fdCriterial=data.fdCriterial;
+          this.indexPage=0;
+          this.contracts=[];
+          this.loadData().subscribe();
+          break;
+        case "back":
+          break;
+      }
+    });
+    searchModal.present();
   }
   loadData():Observable<any>{
     return this.contractService.findAll(this.fdCurrentCustomerId,this.fdCriterial.fdStartDate,this.fdCriterial.fdEndDate,this.fdCriterial.fdSalerName,this.fdCriterial.fdName,this.fdCriterial.fdOrder,this.indexPage).pipe(
@@ -83,31 +94,6 @@ export  class ContractPage extends  BasePage{
         break;
     }
     this.loadData().subscribe();
-  }
-
-  //拼接出查询条件的字符串
-  buildDesc(){
-    this.fdCriterial.fdDesc="";
-    if(!/^\s*$/.test(this.fdCriterial.fdName)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdName+" ";
-    }
-    if(!/^\s*$/.test(this.fdCriterial.fdSalerName)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdSalerName+" ";
-    }
-    if(!/^\s*$/.test(this.fdCriterial.fdStartDate)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdStartDate+" ";
-    }
-    if(!/^\s*$/.test(this.fdCriterial.fdEndDate)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdEndDate+" ";
-    }
-    if(/^\s*$/.test(this.fdCriterial.fdDesc)){
-      this.fdCriterial.fdDesc="合同";
-    }
-  }
-
-  resetQuery(){
-    this.fdCriterial={fdDesc:"合同",fdOrder:"-",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
-    this.search();
   }
   add(){
     this.nav.push(ContractAddPage);

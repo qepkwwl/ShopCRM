@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {Customer} from "../../_models/customer";
-import {NavController, Events, NavParams, InfiniteScroll, Toast, ToastController} from "ionic-angular";
+import {NavController, Events, NavParams, InfiniteScroll, Toast, ToastController, ModalController} from "ionic-angular";
 import {CustomerAddPage} from "./customer-add.component";
 import {ContractAddPage} from "../contract/contract-add.component";
 import {FollowupAddPage} from "../followup/followup-add";
@@ -16,6 +16,8 @@ import {UserService} from "../../_services/user.service";
 import {ContractEditPage} from "../contract/contract-edit.component";
 import {BasePage} from "../base/BasePage";
 import {FollowupEditPage} from "../followup/followup-edit";
+import {FollowupSearchPage} from "../followup/modal/followup-search";
+import {CustomerSearchPage} from "./modal/customer-search";
 
 @Component({
   templateUrl:"customer.html",
@@ -38,7 +40,7 @@ export  class CustomerPage extends  BasePage{
   private hasMoreRecords:boolean=true;
   private isShowSearch:boolean=false;
   private toast:Toast;
-  constructor(private toastCtrl:ToastController,private nav:NavController,private navParams:NavParams,private  event:Events,private callNumber: CallNumber,private customerService:CustomerService, userService:UserService){
+  constructor(private toastCtrl:ToastController,private modal:ModalController,private nav:NavController,private navParams:NavParams,private  event:Events,private callNumber: CallNumber,private customerService:CustomerService, userService:UserService){
     super(userService);
     this.fdCriterial={fdDesc:"客户",fdOrder:"+",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
   }
@@ -77,16 +79,21 @@ export  class CustomerPage extends  BasePage{
     }
   }
   search(){
-    this.isShowSearch=false;
-    this.indexPage=0;
-    this.customers=[];
-    this.buildDesc();
-    this.loadData().subscribe();
-  }
-  resetSearch(){
-    this.isShowSearch=false;
-    this.resetQuery();
-    this.search();
+
+    let searchModal=this.modal.create(CustomerSearchPage,{fdCriterial:this.fdCriterial});
+    searchModal.onDidDismiss(data=>{
+      switch (data.result){
+        case "search":
+          this.fdCriterial=data.fdCriterial;
+          this.indexPage=0;
+          this.customers=[];
+          this.loadData().subscribe();
+          break;
+        case "back":
+          break;
+      }
+    });
+    searchModal.present();
   }
   loadData():Observable<any>{
     return this.customerService.findAll(this.fdCriterial.fdStartDate,this.fdCriterial.fdEndDate,this.fdCriterial.fdSalerName,this.fdCriterial.fdName,this.fdCriterial.fdOrder,this.indexPage).pipe(
@@ -148,7 +155,7 @@ export  class CustomerPage extends  BasePage{
           this.toast.present();
           return ;
         }
-        this.event.publish(FollowupPage.SELECTED_CUSTOMER,this.selectCustomer);
+        this.event.publish(FollowupSearchPage.SELECTED_CUSTOMER,this.selectCustomer);
         break;
       case "redletterDay"://新建纪念日选则客户时
         if(this.selectCustomer==null){
@@ -163,30 +170,11 @@ export  class CustomerPage extends  BasePage{
 
     }
   }
-
-  //拼接出查询条件的字符串
-  buildDesc(){
-    this.fdCriterial.fdDesc="";
-    if(!/^\s*$/.test(this.fdCriterial.fdName)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdName+" ";
-    }
-    if(!/^\s*$/.test(this.fdCriterial.fdSalerName)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdSalerName+" ";
-    }
-    if(!/^\s*$/.test(this.fdCriterial.fdStartDate)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdStartDate+" ";
-    }
-    if(!/^\s*$/.test(this.fdCriterial.fdEndDate)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdEndDate+" ";
-    }
-    if(/^\s*$/.test(this.fdCriterial.fdDesc)){
-      this.fdCriterial.fdDesc="客户";
-    }
-  }
-
   resetQuery(){
     this.fdCriterial={fdDesc:"客户",fdOrder:"+",fdName:"",fdSalerName:'',fdStartDate:"",fdEndDate:""};
-    this.search();
+    this.indexPage=0;
+    this.customers=[];
+    this.loadData().subscribe();
   }
 
   newContract(c:Customer){

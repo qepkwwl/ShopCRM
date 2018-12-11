@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {FollowupService} from "../../_services/followup.service";
 import {Followup} from "../../_models/followup";
-import {NavParams, NavController, InfiniteScroll, Events} from "ionic-angular";
+import {NavParams, NavController, InfiniteScroll, Events, ModalController} from "ionic-angular";
 import {Customer} from "../../_models/customer";
 import {FollowupAddPage} from "./followup-add";
 import {tap} from "rxjs/operators";
@@ -11,6 +11,7 @@ import {UserService} from "../../_services/user.service";
 import {BasePage} from "../base/BasePage";
 import {FollowupEditPage} from "./followup-edit";
 import * as moment from "moment";
+import {FollowupSearchPage} from "./modal/followup-search";
 
 @Component({
   templateUrl:"followup.html",
@@ -29,14 +30,12 @@ export class FollowupPage extends BasePage{
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
   private curItemId:number=0;
-  public static SELECTED_CUSTOMER:string="FollowupQuery.select.customer.completed";
 
   private fdCriterial:{fdDesc:string,fdOrder:string,fdName:string,fdCustomerId:number,fdCustomerName:string,fdStartDate:string,fdEndDate:string}
-  constructor(private nav:NavController,private event:Events,private navParams:NavParams,private followupService:FollowupService,userService:UserService){
+  constructor(private nav:NavController,private modal:ModalController,private event:Events,private navParams:NavParams,private followupService:FollowupService,userService:UserService){
     super(userService);
     this.followups=[];
     this.fdCriterial={fdDesc:"拜访记录",fdOrder:"-",fdName:"",fdCustomerId:0,fdCustomerName:'指定客户',fdStartDate:"",fdEndDate:""};
-    this.event.subscribe(FollowupPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
   }
   ionViewWillEnter(){
     this.fdOrigin=this.navParams.get("fdOrigin");
@@ -60,35 +59,26 @@ export class FollowupPage extends BasePage{
     }
   }
   search(){
-    this.isShowSearch=false;
-    this.indexPage=0;
-    this.followups=[];
-    this.buildDesc();
-    this.loadData().subscribe();
+    let searchModal=this.modal.create(FollowupSearchPage,{fdCriterial:this.fdCriterial});
+    searchModal.onDidDismiss(data=>{
+      switch (data.result){
+        case "search":
+          this.fdCriterial=data.fdCriterial;
+          this.indexPage=0;
+          this.followups=[];
+          this.loadData().subscribe();
+          break;
+        case "back":
+          break;
+      }
+    });
+    searchModal.present();
   }
   resetSearch(){
-    this.isShowSearch=false;
-    this.resetQuery();
-    this.search();
-  }
-  //拼接出查询条件的字符串
-  buildDesc(){
-    this.fdCriterial.fdDesc="";
-    if(!/^\s*$/.test(this.fdCriterial.fdName)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdName+" ";
-    }
-    if(this.fdCriterial.fdCustomerId>0){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdCustomerName+" ";
-    }
-    if(!/^\s*$/.test(this.fdCriterial.fdStartDate)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdStartDate+" ";
-    }
-    if(!/^\s*$/.test(this.fdCriterial.fdEndDate)){
-      this.fdCriterial.fdDesc+=this.fdCriterial.fdEndDate+" ";
-    }
-    if(/^\s*$/.test(this.fdCriterial.fdDesc)){
-      this.fdCriterial.fdDesc="拜访记录";
-    }
+    this.indexPage=0;
+    this.followups=[];
+    this.fdCriterial={fdDesc:"拜访记录",fdOrder:"-",fdName:"",fdCustomerId:0,fdCustomerName:'指定客户',fdStartDate:"",fdEndDate:""};
+    this.loadData().subscribe();
   }
   loadData():Observable<any>{
     return this.followupService.findAll(this.fdCriterial.fdStartDate,this.fdCriterial.fdEndDate,this.fdCriterial.fdCustomerId,this.fdCriterial.fdName,this.fdCriterial.fdOrder,this.indexPage).pipe(
@@ -119,20 +109,6 @@ export class FollowupPage extends BasePage{
   }
   add(){
     this.nav.push(FollowupAddPage);
-  }
-
-  resetQuery(){
-    this.fdCriterial={fdDesc:"拜访记录",fdOrder:"-",fdName:"",fdCustomerId:0,fdCustomerName:'指定客户',fdStartDate:"",fdEndDate:""};
-    this.search();
-  }
-  private afterSelectedCustomer=(c:Customer)=>{
-    if(c){
-      this.fdCriterial.fdCustomerId=c.id;
-      this.fdCriterial.fdCustomerName=c.fdName;
-    }
-  }
-  selectCustomer(){
-    this.nav.push(CustomerPage,{fdOrigin:'followup-query',fdCustomerId:this.fdCriterial.fdCustomerId});
   }
 
   selected(c){

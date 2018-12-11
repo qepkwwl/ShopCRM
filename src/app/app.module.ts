@@ -59,6 +59,9 @@ import {ContractArchivePage} from "../pages/home/modal/contract-archive";
 import {ContractEditPage} from "../pages/contract/contract-edit.component";
 import {ToggleonclickDirective} from "../_directive/ToggleOnClick";
 import {FollowupEditPage} from "../pages/followup/followup-edit";
+import {ContractSearchPage} from "../pages/contract/modal/contract-search";
+import {CustomerSearchPage} from "../pages/customer/modal/customer-search";
+import {FollowupSearchPage} from "../pages/followup/modal/followup-search";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -77,11 +80,13 @@ const cloudSettings: CloudSettings = {
     ContractAddPage,
     CustomerAddPage,
     CustomerEditPage,
+    CustomerSearchPage,
     ProductPage,
     ContractProductPage,
     FollowupPage,
     FollowupAddPage,
     FollowupEditPage,
+    FollowupSearchPage,
     MemoPage,
     MemoAddPage,
     MemoItemPage,
@@ -94,6 +99,7 @@ const cloudSettings: CloudSettings = {
     ContractViewPage,
     ContractArchivePage,
     ContractEditPage,
+    ContractSearchPage,
     ProductOpinionPage,
     AdPage,
     ToggleonclickDirective
@@ -123,11 +129,13 @@ const cloudSettings: CloudSettings = {
     ContractAddPage,
     CustomerAddPage,
     CustomerEditPage,
+    CustomerSearchPage,
     ProductPage,
     ContractProductPage,
     FollowupPage,
     FollowupAddPage,
     FollowupEditPage,
+    FollowupSearchPage,
     MemoPage,
     MemoAddPage,
     MemoItemPage,
@@ -140,6 +148,7 @@ const cloudSettings: CloudSettings = {
     ContractViewPage,
     ContractArchivePage,
     ContractEditPage,
+    ContractSearchPage,
     ProductOpinionPage,
     AdPage
   ],

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title >客户查询</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">时间排序</ion-label>
+      <ion-select [(ngModel)]="fdCriterial.fdOrder" okText="确定" cancelText="取消" style="max-width: 100% !important;">
+        <ion-option value="+">时间升序</ion-option>
+        <ion-option value="-">时间降序</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">客户名称</ion-label>
+      <ion-input [(ngModel)]="fdCriterial.fdName"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isAdmin">
+      <ion-label color="primary">销售人员</ion-label>
+      <ion-input [(ngModel)]="fdCriterial.fdSalerName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">起始日期</ion-label>
+      <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="fdCriterial.fdStartDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">截止日期</ion-label>
+      <ion-datetime cancelText="取消" doneText="确定" dataformatas="YYYY-MM-dd" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="fdCriterial.fdEndDate"></ion-datetime>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-navbar text-center>
+    <button ion-button (click)="resetSearch()">
+      <ion-icon name="close-circle"></ion-icon>
+      取消
+    </button>
+    <button ion-button (click)="search()">
+      <ion-icon name="checkmark-circle"></ion-icon>
+      查询
+    </button>
+  </ion-navbar>
+</ion-footer>
