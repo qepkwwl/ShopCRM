@@ -82,6 +82,7 @@ export class HomePage {
       tap(data=>{
         if(data.content.length>0){
           let records=data.content[0].fdPlanMemoes.map(item=>{
+            item.fdContent=item.fdContent.replace(/\n/g,"<br />");
             return new MemoItem(item);
           });
           this.fdPlans=this.fdPlans.concat(records);

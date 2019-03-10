@@ -74,4 +74,13 @@ export class ContractService{
   public delete(contractId:number){
     return this.http.get(this.appService.baseUrl+'/bz/sale/contract/delete?id='+contractId,{responseType:'text'});
   }
+
+  public setProductRemark(form:ContractProduct){
+    let formData=new FormData();
+    formData.append('id',form.id+"");
+    formData.append('fdRemark',form.fdRemark);
+    return this.http.post<any>(this.appService.baseUrl+'/bz/sale/contractproduct/setProductRemark',formData).pipe(
+      map(response=>response.fdCode=="OK")
+    );
+  }
 }

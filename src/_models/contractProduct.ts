@@ -22,4 +22,5 @@ export class ContractProduct extends BaseModel{
   fdTotal:number;
   fdSaleType:string;
   fdOpinion:string;
+  fdRemark:string;
 }

@@ -57,7 +57,9 @@
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let p of fdPlans">
-          <span>{{p.fdCreatorName}}-{{p.fdContent}}</span>
+          <div class="wrap">{{p.fdCreatorName}}:
+            <div [innerHTML]="p.fdContent"></div>
+          </div>
         </ion-item>
       </ion-list>
     </ion-card-content>

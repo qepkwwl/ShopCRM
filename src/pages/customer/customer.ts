@@ -36,9 +36,10 @@ export  class CustomerPage extends  BasePage{
   private customers:Array<Customer>=[];
   //当面页码
   private indexPage:number=0;
+  //总页码
+  private totalPage:number=0;
   //服务器端是否还有更多数据
   private hasMoreRecords:boolean=true;
-  private isShowSearch:boolean=false;
   private toast:Toast;
   constructor(private toastCtrl:ToastController,private modal:ModalController,private nav:NavController,private navParams:NavParams,private  event:Events,private callNumber: CallNumber,private customerService:CustomerService, userService:UserService){
     super(userService);
@@ -102,11 +103,20 @@ export  class CustomerPage extends  BasePage{
         return new Customer(item);
       });
       this.customers=this.customers.concat(newCustomers);
-      this.indexPage++;
+      this.totalPage=data.totalPages;
+      if(this.indexPage<this.totalPage){
+        this.indexPage++;
+      }
       this.hasMoreRecords=data.totalPages>this.indexPage;
     }));
   }
   doInfinite(infiniteScroll:InfiniteScroll){
+    this.toast=this.toastCtrl.create({
+      message:this.indexPage+"/"+this.totalPage,
+      duration:1000,
+      position:'middle'
+    });
+    this.toast.present();
     this.loadData().subscribe(data=>{
       infiniteScroll.complete();
     });

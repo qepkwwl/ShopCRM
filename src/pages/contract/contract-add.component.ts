@@ -43,7 +43,7 @@ export class ContractAddPage{
     this.contract.fdProducts=[];
   }
   insertNewProduct(){
-    this.nav.push(ProductPage,{fdOrigin:'contract',fdSelectedProducts:this.contract.fdProducts});
+    this.nav.push(ProductPage,{fdOrigin:'contract',contract:this.contract});
   }
 
   ionViewWillEnter() {
@@ -89,13 +89,8 @@ export class ContractAddPage{
   selectCustomer(){
     this.nav.push(CustomerPage,{fdOrigin:'contract'});
   }
-  private afterSelectedProduct=(selectedProductIds:Array<Product>)=>{
-    this.contract.fdProducts=selectedProductIds.map((item,index)=>{
-      let contractProduct= new ContractProduct(item);
-      contractProduct.fdNum=1;
-      contractProduct.fdRetailPrice=contractProduct.fdGardePrice;
-      return contractProduct;
-    });
+  private afterSelectedProduct=(_contract:Contract)=>{
+    this.contract=_contract;
     this.updateContractTotal();
   }
   //更新合同总价

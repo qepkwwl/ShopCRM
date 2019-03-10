@@ -7,7 +7,7 @@ page-customer-view{
   //反馈区
   .opinion-area{
     margin-left: 0.4rem;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
   }
   .lbl-prod-name{
     color: #ffb411;
@@ -26,6 +26,7 @@ page-customer-view{
   }
   //新建酒口反馈的按钮
   .button-create-opinion{
-
+    border-radius: 30px;
+    height: 1.8rem;
   }
 }

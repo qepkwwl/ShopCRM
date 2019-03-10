@@ -7,6 +7,8 @@ import {tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {AppService} from "../../_services/app.service";
 import {ContractEditPage} from "../contract/contract-edit.component";
+import {Contract} from "../../_models/contract";
+import {ContractProduct} from "../../_models/contractProduct";
 
 @Component({
   templateUrl:"product.html",
@@ -19,9 +21,7 @@ export  class ProductPage {
   private fdSearchValue:string='';
   //商品列表
   private products:Array<Product>;
-  //商品列表
-  private selectedProducts:Array<Product>;
-
+  private contract:Contract;
   //当面页码
   private indexPage:number=0;
   //服务器端是否还有更多数据
@@ -51,8 +51,10 @@ export  class ProductPage {
         for(let i=newRecords.length-1;i>=0;i--){
           let p=newRecords[i];
           p.fdImageUrl=this.appService.baseUrl+"/bz/product/main/image/"+p.id+".jpg?version="+p.fdModifyTime;
-          for(let j=this.selectedProducts.length-1;j>=0;j--){
-            if(p.id==this.selectedProducts[j].id){
+          if(!this.contract)
+            this.contract=new Contract();
+          for(let j=this.contract.fdProducts.length-1;j>=0;j--){
+            if(p.id==this.contract.fdProducts[j].id){
               p.fdIsChecked=true;
               break;
             }
@@ -73,12 +75,15 @@ export  class ProductPage {
     if(this.fdOrigin=="contract"){
       p.fdIsChecked=!p.fdIsChecked;
       if(p.fdIsChecked){
-        this.selectedProducts.push(new Product(p));
+        let contractProduct=new ContractProduct(p);
+        contractProduct.fdNum=1;
+        contractProduct.fdRetailPrice=p.fdGardePrice;
+        this.contract.fdProducts.push(contractProduct);
       }else{
-        for(let i=this.selectedProducts.length-1;i>=0;i--){
-          let _p=this.selectedProducts[i];
+        for(let i=this.contract.fdProducts.length-1;i>=0;i--){
+          let _p=this.contract.fdProducts[i];
           if(_p.id==p.id){
-            this.selectedProducts.splice(i,1);
+            this.contract.fdProducts.splice(i,1);
           }
         }
       }
@@ -91,23 +96,16 @@ export  class ProductPage {
     this.loadData().subscribe();
   }
   ionViewWillEnter(){
-    this.selectedProducts=[];
     this.products=[];
     this.indexPage=0;
     this.fdOrigin=this.navParams.get("fdOrigin");
     switch(this.fdOrigin){
       case "contract":{
-          let fdSelectedProducts=this.navParams.get("fdSelectedProducts");
-          for(let i=fdSelectedProducts.length-1;i>=0;i--){
-            this.selectedProducts.push(new Product(fdSelectedProducts[i]));
-          }
+          this.contract=this.navParams.get("contract");
         }
         break;
       case "contract-edit":{
-          let fdSelectedProducts=this.navParams.get("fdSelectedProducts");
-          for(let i=fdSelectedProducts.length-1;i>=0;i--){
-            this.selectedProducts.push(new Product(fdSelectedProducts[i]));
-          }
+          this.contract=this.navParams.get("contract");
         }
         break;
     }
@@ -118,10 +116,10 @@ export  class ProductPage {
     this.fdOrigin=this.navParams.get("fdOrigin");
     switch(this.fdOrigin){
       case "contract":
-        this.event.publish(ContractAddPage.SELECTED_PRODUCT,this.selectedProducts);
+        this.event.publish(ContractAddPage.SELECTED_PRODUCT,this.contract);
         break;
       case "contract-edit":
-        this.event.publish(ContractEditPage.SELECTED_PRODUCT,this.selectedProducts);
+        this.event.publish(ContractEditPage.SELECTED_PRODUCT,this.contract);
         break;
     }
   }

@@ -1,11 +1,13 @@
 import {Component} from "@angular/core";
 import {Contract} from "../../_models/contract";
-import {NavParams, Loading, LoadingController, NavController} from "ionic-angular";
+import {NavParams, Loading, LoadingController, NavController, ModalController} from "ionic-angular";
 import {ContractService} from "../../_services/contract.service";
 import {ContractEditPage} from "./contract-edit.component";
 import * as moment from "moment";
 import {UserService} from "../../_services/user.service";
 import {BasePage} from "../base/BasePage";
+import {ContractProduct} from "../../_models/contractProduct";
+import {ProductMemoPage} from "./modal/product-memo";
 
 @Component({
   templateUrl:"contract-view.component.html",
@@ -17,7 +19,7 @@ export class ContractViewPage extends BasePage{
   private loading:Loading;
   //是否允许编辑
   private  canEdit:boolean=false;
-  constructor(private nav:NavController,private navParams:NavParams,private loadingCtrl:LoadingController,private contractService:ContractService,userService:UserService){
+  constructor(private nav:NavController,private navParams:NavParams,private modal:ModalController,private loadingCtrl:LoadingController,private contractService:ContractService,userService:UserService){
     super(userService);
     this.contract=new Contract();
     this.loading = this.loadingCtrl.create({
@@ -49,6 +51,35 @@ export class ContractViewPage extends BasePage{
 
   edit(){
     this.nav.push(ContractEditPage,{fdContract:this.contract});
+  }
+
+
+  editMemo(p:ContractProduct){
+    let productModal=this.modal.create(ProductMemoPage,{product:p});
+    productModal.onDidDismiss(data=>{
+      switch (data.result){
+        case "save":
+          this.contract.fdProducts.forEach((item,index)=>{
+            var product=data.product;
+            if(item.id==product.id){
+              this.contractService.setProductRemark(product).subscribe(data=>{
+                if(data){
+                  item.fdRemark=product.fdRemark;
+                }else{
+                  alert("备注写入失败");
+                }
+              });
+              return false;
+            }
+          });
+          break;
+        case "back":
+          break;
+        case "delete":
+          break;
+      }
+    });
+    productModal.present();
   }
 }
 

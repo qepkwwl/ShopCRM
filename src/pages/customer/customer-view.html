@@ -5,6 +5,9 @@
     </button>
     <ion-title>查看客户</ion-title>
     <ion-buttons *ngIf="!isAdmin" end>
+      <button *ngIf="canDelete()" class="toolbar-button"  (click)="delete($event)">
+        <ion-icon name="remove"></ion-icon>
+      </button>
       <button class="toolbar-button"  (click)="edit($event)">
         <ion-icon name="create"></ion-icon>
       </button>
@@ -110,7 +113,7 @@
                  <span>总价</span>{{p.fdTotal}}
                </span>
              </ion-row>
-             <div class="opinion-area" *ngIf="p.fdOpinion&&p.fdOpinion.length>0">
+             <div class="opinion-area wrap" *ngIf="p.fdOpinion&&p.fdOpinion.length>0">
                <span class="lbl-opinion">酒品反馈:</span>
                {{p.fdOpinion}}
              </div>

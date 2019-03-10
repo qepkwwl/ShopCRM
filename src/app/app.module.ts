@@ -62,6 +62,7 @@ import {FollowupEditPage} from "../pages/followup/followup-edit";
 import {ContractSearchPage} from "../pages/contract/modal/contract-search";
 import {CustomerSearchPage} from "../pages/customer/modal/customer-search";
 import {FollowupSearchPage} from "../pages/followup/modal/followup-search";
+import {ProductMemoPage} from "../pages/contract/modal/product-memo";
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -97,6 +98,7 @@ const cloudSettings: CloudSettings = {
     PersonResetPage,
     SystemSettingPage,
     ContractViewPage,
+    ProductMemoPage,
     ContractArchivePage,
     ContractEditPage,
     ContractSearchPage,
@@ -146,6 +148,7 @@ const cloudSettings: CloudSettings = {
     PersonResetPage,
     SystemSettingPage,
     ContractViewPage,
+    ProductMemoPage,
     ContractArchivePage,
     ContractEditPage,
     ContractSearchPage,

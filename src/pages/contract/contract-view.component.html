@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content>
     <ion-card>
-      <ion-card-header>基本信息</ion-card-header>
+      <ion-card-header>基本信息<ion-badge item-end>{{contract.fdTotal}}</ion-badge></ion-card-header>
       <ion-card-content>
         <ion-list>
           <ion-item>
@@ -32,7 +32,7 @@
       </ion-card-content>
     </ion-card>
   <ion-card>
-    <ion-card-header>产品信息</ion-card-header>
+    <ion-card-header>产品信息<ion-badge item-end>{{contract.fdTotal}}</ion-badge></ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-item class="contract-detail" *ngFor="let p of contract.fdProducts" >
@@ -49,6 +49,9 @@
             折扣：{{p.fdDiscount}}
             销售类型：{{p.fdSaleType=='undefined'?'':p.fdSaleType}}
           </p>
+          <div class="memo wrap" (click)="editMemo(p)">
+            备注：{{p.fdRemark}}
+          </div>
         </ion-item>
       </ion-list>
     </ion-card-content>

@@ -11,7 +11,7 @@ export class CustomerService{
   constructor(private http:HttpClient,private appService:AppService){}
 
   public findAll(startTime:string,endTime:string,salerName:string,searchValue:string,order:string,indexPage:number):Observable<any>{
-    return this.http.get<any>(this.appService.baseUrl+'/bz/consumer/customer/data?size=10&sortby='+order+'fdPinyinShortName&salerName='+salerName+'&searchValue='+searchValue+'&startTime='+startTime+'&endTime='+endTime+'&start='+indexPage);
+    return this.http.get<any>(this.appService.baseUrl+'/bz/consumer/customer/data?fdStatus=ENABLED&size=10&sortby='+order+'fdPinyinShortName&salerName='+salerName+'&searchValue='+searchValue+'&startTime='+startTime+'&endTime='+endTime+'&start='+indexPage);
   }
   public save(form:Customer):Observable<boolean>{
     form.id=0
@@ -23,5 +23,12 @@ export class CustomerService{
     return this.http.post<any>(this.appService.baseUrl+'/bz/consumer/customer/api/update',form.toFormData()).pipe(
       map(response=>response.fdCode=="OK")
     );
+  }
+
+  public delete(customerId:number):Observable<boolean>{
+    let form=new FormData();
+    return this.http.post<any>(this.appService.baseUrl+'/bz/consumer/customer/api/status?status=DISABLED&id='+customerId,form).pipe(
+        map(response=>response.fdCode=="OK")
+      );
   }
 }
