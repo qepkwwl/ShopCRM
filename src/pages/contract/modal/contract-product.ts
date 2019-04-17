@@ -33,7 +33,6 @@ export  class ContractProductPage{
      this.toast.present();
      return;
    }
-   console.log(this.product.fdGardePrice);
    if(this.product.fdGardePrice==0){
      this.product.fdDiscount=0;
    }else{

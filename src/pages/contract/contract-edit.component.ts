@@ -34,21 +34,25 @@ export class ContractEditPage{
     this.reset();
     this.event.subscribe(ContractEditPage.SELECTED_PRODUCT,this.afterSelectedProduct)
     this.event.subscribe(ContractEditPage.SELECTED_CUSTOMER,this.afterSelectedCustomer);
-    this.loading = this.loadingCtrl.create({
-      content: '正在提交...'
-    });
   }
   reset(){
     this.contract=new Contract({fdCustomer:new ContractCustomer({fdName:'选择客户'})});
     this.contract.fdProducts=[];
   }
   insertNewProduct(){
-    this.nav.push(ProductPage,{fdOrigin:'contract-edit',fdContract:this.contract});
+    this.nav.push(ProductPage,{fdOrigin:'contract-edit',contract:this.contract});
   }
 
   ionViewWillEnter() {
-    this.contract = this.navParams.get("fdContract");
-    this.updateContractTotal();
+      this.fdOrigin = localStorage.getItem("fdOrigin");
+      switch (this.fdOrigin){
+        case "viewContract"://指定客户来新建合同时
+          this.contract = this.navParams.get("fdContract");
+          this.updateContractTotal();
+          break;
+        default:
+          break;
+      }
   }
   editProduct(p:ContractProduct){
     let productModal=this.modal.create(ContractProductPage,{product:p});
@@ -130,6 +134,9 @@ export class ContractEditPage{
         return;
       }
     }
+    this.loading = this.loadingCtrl.create({
+      content: '正在提交...'
+    });
     this.loading.present();
     this.contractService.update(this.contract).subscribe(result=>{
       if(result){

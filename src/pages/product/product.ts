@@ -72,11 +72,14 @@ export  class ProductPage {
   }
   //鼠标点击时选中
   selected(p){
-    if(this.fdOrigin=="contract"){
+    if(this.fdOrigin=="contract"||this.fdOrigin=="contract-edit"){
       p.fdIsChecked=!p.fdIsChecked;
       if(p.fdIsChecked){
         let contractProduct=new ContractProduct(p);
+        console.log(p);
+        console.log(contractProduct);
         contractProduct.fdNum=1;
+        contractProduct.fdDiscount=1;
         contractProduct.fdRetailPrice=p.fdGardePrice;
         this.contract.fdProducts.push(contractProduct);
       }else{
@@ -112,7 +115,7 @@ export  class ProductPage {
     this.loadData().subscribe();
   }
   ionViewWillLeave() {
-
+    localStorage.setItem("fdOrigin","product");
     this.fdOrigin=this.navParams.get("fdOrigin");
     switch(this.fdOrigin){
       case "contract":

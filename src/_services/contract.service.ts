@@ -46,12 +46,9 @@ export class ContractService{
     formData.append('fdCustomerId',form.fdCustomerId+"");
     formData.append('fdName',form.fdCustomerName);
     form.fdProducts.forEach((p,i)=>{
-      if(p.id>99999){
-        formData.append(`fdProducts[${i}].id`,p.id+"");
-      }
       formData.append(`fdProducts[${i}].fdName`,p.fdName);
       formData.append(`fdProducts[${i}].fdNum`,p.fdNum+"");
-      formData.append(`fdProducts[${i}].fdProductId`,p.fdProductId+"");
+      formData.append(`fdProducts[${i}].fdProductId`,(p.fdProductId||p.id)+"");
       formData.append(`fdProducts[${i}].fdRetailPrice`,p.fdRetailPrice+"");
       formData.append(`fdProducts[${i}].fdDiscount`,p.fdDiscount+"");
       formData.append(`fdProducts[${i}].fdGardePrice`,p.fdGardePrice+"");

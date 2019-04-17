@@ -128,6 +128,7 @@ export  class CustomerPage extends  BasePage{
     });
     switch (this.fdOrigin){
       case "contract-edit"://新建合同选则客户时
+        localStorage.setItem("fdOrigin","customer");
         if(this.selectCustomer==null){
           this.toast.setMessage("未选定客户");
           this.toast.present();

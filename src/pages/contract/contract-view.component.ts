@@ -50,7 +50,8 @@ export class ContractViewPage extends BasePage{
   }
 
   edit(){
-    this.nav.push(ContractEditPage,{fdContract:this.contract});
+    localStorage.setItem("fdOrigin","viewContract");
+    this.nav.push(ContractEditPage,{fdOrigin:"viewContract",fdContract:this.contract});
   }
 
 
